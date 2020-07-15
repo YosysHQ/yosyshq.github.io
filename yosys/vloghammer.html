@@ -1,0 +1,343 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: VlogHammer</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav0" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav1" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+
+<h1>VlogHammer</h1>
+
+<p>VlogHammer is a Verilog regression tester used to verify the correctness of
+Yosys's Verilog frontend. At the moment VlogHammer only tests combinatorial
+circuits described using Verilog expressions.</p>
+
+<p>VlogHammer also exposed a couple of bugs in other programs. Here is a
+list of currently open bugs found using VlogHammer:</p>
+
+<p><table style="margin-left: 2em; font-size: small;">
+<tr><td width="120"><strong>Bug ID</strong></td><td width="120"><strong>Last checked</strong></td><td><strong>Title</strong></td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_001_quartus.html">issue_001_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Quartus handling of constant first argument in Verilog ?: operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_002_quartus.html">issue_002_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Quartus Verilog bug in handling $signed in an unsigned expression</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_003_quartus.html">issue_003_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Quartus Verilog bug in signdness handling of 2nd shift operand</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_016_quartus.html">issue_016_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Bug in Quartus signed/unsigned handling in power operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_021_quartus.html">issue_021_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Quartus hangs on power operations with large exponents</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_021_vivado.html">issue_021_vivado</a></td><td valign="top">Vivado 2018.3</td><td valign="top">Vivado hangs on power operations with large exponents</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_026_quartus.html">issue_026_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Incorrect bit-extension of undef const in ?: operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_029_quartus.html">issue_029_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Handling of large constant RHS in shift operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_031_quartus.html">issue_031_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Invalid optimization of or-reduce with undef bits</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_040_verilator.html">issue_040_verilator</a></td><td valign="top">Verilator 3_906</td><td valign="top">Verilator uses undeclared helper function for power op > 64 bits</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_042_quartus.html">issue_042_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Invalid optimization of reduce expression with undef bits</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_044_quartus.html">issue_044_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Ignored width extension for constant ?: condition</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_057_quartus.html">issue_057_quartus</a></td><td valign="top">Quartus 17.0</td><td valign="top">Quartus handling of partly out-of-bounds parts select</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_057_verilator.html">issue_057_verilator</a></td><td valign="top">Verilator 3_906</td><td valign="top">Incorrect results with partially out-of-bounds part select</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_057_vivado.html">issue_057_vivado</a></td><td valign="top">Vivado 2018.3</td><td valign="top">Vivado handling of partly out-of-bounds parts select</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_058_vivado.html">issue_058_vivado</a></td><td valign="top">Vivado 2018.3</td><td valign="top">Strange Vivado bug involving seemingly unrelated expressions</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_059_vivado.html">issue_059_vivado</a></td><td valign="top">Vivado 2018.3</td><td valign="top">Vivado hangs forever on modulo with undefined (X) value</td></tr>
+</table></p>
+
+<p>And here is a list of now closed bugs found using VlogHammer:</p>
+
+<p><table style="margin-left: 2em; font-size: small;">
+<tr><td width="120"><strong>Bug ID</strong></td><td width="120"><strong>Fixed in</strong></td><td><strong>Title</strong></td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_000_verific.html">issue_000_verific</a></td><td valign="top">Verific 463_32_140722</td><td valign="top">Verific sign handling bug in {N{...}} Verilog operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_002_verilator.html">issue_002_verilator</a></td><td valign="top">Verilator GIT 14fcfd8</td><td valign="top">Verilator bug in handling $signed in an unsigned expression</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_003_verilator.html">issue_003_verilator</a></td><td valign="top">Verilator GIT b631b59</td><td valign="top">Verilator bug with shift, expression width and signedness</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_004_vivado.html">issue_004_vivado</a></td><td valign="top">Vivado 2015.1</td><td valign="top">Strange output-const-zero bug with Vivado + >>> + signedness</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_005_verilator.html">issue_005_verilator</a></td><td valign="top">Verilator GIT 5c39420</td><td valign="top">Verilator bug in extending $signed</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_008_verilator.html">issue_008_verilator</a></td><td valign="top">Verilator GIT fb4928b</td><td valign="top">Strange Verilator behavior with power, signdness and more</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_010_vivado.html">issue_010_vivado</a></td><td valign="top">Vivado 2015.1</td><td valign="top">Vivado creates netlist with inputs shorted together</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_011_icarus.html">issue_011_icarus</a></td><td valign="top">Icarus GIT d1c9dd5</td><td valign="top">Icarus Verilog vvp asserts on reduce of one-bit .arith/sub</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_012_icarus.html">issue_012_icarus</a></td><td valign="top">Icarus GIT 68f8de2</td><td valign="top">Icarus Verilog undef propagation bug in power operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_013_icarus.html">issue_013_icarus</a></td><td valign="top">Icarus GIT ac3aee0</td><td valign="top">Icarus Verilog signedness handling in binary bitwise operations of constants</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_014_vivado.html">issue_014_vivado</a></td><td valign="top">Vivado 2014.2</td><td valign="top">Vivado GDpGen::implementDivMod(DFNode*, bool): Assertion `TBD' failed.</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_015_vivado.html">issue_015_vivado</a></td><td valign="top">Vivado 2014.2</td><td valign="top">Vivado bug in undef handling for relational operators</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_016_verilator.html">issue_016_verilator</a></td><td valign="top">Verilator GIT ff19dd9</td><td valign="top">Bug in Verilator signed/unsigned handling in power operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_017_xsim.html">issue_017_xsim</a></td><td valign="top">XSim 2015.1</td><td valign="top">Bug in XSIM when combining reduce op and $signed/$unsigned</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_019_xsim.html">issue_019_xsim</a></td><td valign="top">XSim 2015.1</td><td valign="top">XSim implements 0 ** -1 incorrectly</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_020_xsim.html">issue_020_xsim</a></td><td valign="top">XSim 2014.1</td><td valign="top">XSim fails to recognize signed expression with shift in localparam</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_021_icarus.html">issue_021_icarus</a></td><td valign="top">Icarus GIT 66bdbb7</td><td valign="top">Icarus Verilog efficiency of verinum and vpp_net pow() functions</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_021_verific.html">issue_021_verific</a></td><td valign="top">Verific 463_32_140722</td><td valign="top">Verific hangs on power operations with large exponents</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_021_xsim.html">issue_021_xsim</a></td><td valign="top">XSim 2017.2</td><td valign="top">XSim hangs on power operations with large exponents</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_022_icarus.html">issue_022_icarus</a></td><td valign="top">Icarus GIT ecce1d2</td><td valign="top">Icarus Verilog: internal error: lval-rval width mismatch</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_023_icarus.html">issue_023_icarus</a></td><td valign="top">Icarus GIT 5dcd2e8</td><td valign="top">Icarus Verilog creates huge in-memory arrays for shifts with large rhs</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_024_icarus.html">issue_024_icarus</a></td><td valign="top">Icarus GIT 5a06602</td><td valign="top">Icarus Verilog bug in processing "1'b1 >= |1'bx"</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_025_icarus.html">issue_025_icarus</a></td><td valign="top">Icarus GIT a3450bf</td><td valign="top">Icarus does undef propagation of const adds incorrectly</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_026_vivado.html">issue_026_vivado</a></td><td valign="top">Vivado 2018.3</td><td valign="top">Incorrect bit-extension of undef const in ?: operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_028_icarus.html">issue_028_icarus</a></td><td valign="top">Icarus GIT ed2e339</td><td valign="top">Icarus does undef propagation of const multiplies incorrectly</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_029_icarus.html">issue_029_icarus</a></td><td valign="top">Icarus GIT 020e280</td><td valign="top">Icarus only using the lowest 32 bits of right shift operand</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_029_verific.html">issue_029_verific</a></td><td valign="top">Verific 463_32_140722</td><td valign="top">Verific only using the lowest 32 bits of right shift operand</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_029_xsim.html">issue_029_xsim</a></td><td valign="top">XSim 2017.2</td><td valign="top">Handling of large RHS in shift operator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_032_icarus.html">issue_032_icarus</a></td><td valign="top">Icarus GIT bc9382e</td><td valign="top">Icarus confused about signed/unsigned in strange ?: example</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_033_verific.html">issue_033_verific</a></td><td valign="top">Verific 482_32_150519</td><td valign="top">Verific incorrectly const folds a == 1'bx</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_034_verilator.html">issue_034_verilator</a></td><td valign="top">Verilator GIT d04eb97</td><td valign="top">Verilator thinks ~|a and ~(|a) are the same thing</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_035_verilator.html">issue_035_verilator</a></td><td valign="top">Verilator GIT adb39ce</td><td valign="top">Verilator bug in signed/unsigned expression eval</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_037_verilator.html">issue_037_verilator</a></td><td valign="top">Verilator GIT a985a1f</td><td valign="top">Verilator bug with signedness and arithmetic shift</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_038_verilator.html">issue_038_verilator</a></td><td valign="top">Verilator GIT 4a58e85</td><td valign="top">Verilator bug in signdness of {..}</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_039_verilator.html">issue_039_verilator</a></td><td valign="top">Verilator GIT 621c515</td><td valign="top">Verilator Internal Error for shift by undef value</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_041_verilator.html">issue_041_verilator</a></td><td valign="top">Verilator GIT 6ce2a52</td><td valign="top">Yet another Verilator shift bug</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_042_verilator.html">issue_042_verilator</a></td><td valign="top">Verilator GIT 5f5a3db</td><td valign="top">Bug in evaluating (defined) expression with undef bits</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_043_verilator.html">issue_043_verilator</a></td><td valign="top">Verilator GIT d7e4bc1</td><td valign="top">Segfault in code generated by Verilator</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_045_verilator.html">issue_045_verilator</a></td><td valign="top">Verilator GIT 06744b6</td><td valign="top">Verilator internal fault related to huge shifts</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_046_verilator.html">issue_046_verilator</a></td><td valign="top">Verilator GIT 06744b6</td><td valign="top">Verilator bug in sign extending special boolean expression</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_048_icarus.html">issue_048_icarus</a></td><td valign="top">Icarus GIT b7b77b2</td><td valign="top">Another strange icarus expression eval bug (large shifts)</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_049_verilator.html">issue_049_verilator</a></td><td valign="top">Verilator GIT f705f9b</td><td valign="top">Another Verilator Internal Error for shift by undef value</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_050_verilator.html">issue_050_verilator</a></td><td valign="top">Verilator GIT f705f9b</td><td valign="top">Verilator returns incorrect expression result</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_051_verilator.html">issue_051_verilator</a></td><td valign="top">Verilator GIT e8edbad</td><td valign="top">Another Verilotor bug with large shifts</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_052_verilator.html">issue_052_verilator</a></td><td valign="top">Verilator GIT e8edbad</td><td valign="top">Strange Verilator "Unsupported" Error</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_053_verilator.html">issue_053_verilator</a></td><td valign="top">Verilator GIT e8edbad</td><td valign="top">Incorrect results with XNOR/shift expression</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_054_verific.html">issue_054_verific</a></td><td valign="top">Verific 482_32_150519</td><td valign="top">Verific sign handling in {N{...}} and {...} again</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_055_verific.html">issue_055_verific</a></td><td valign="top">Verific 482_32_150519</td><td valign="top">Verific uses incorrect width for self-determined division</td></tr>
+<tr><td valign="top"><a href="vloghammer_bugs/issue_056_verific.html">issue_056_verific</a></td><td valign="top">Verific 482_32_150519</td><td valign="top">Strange Verific bug with replicate and xor-reduce</td></tr>
+</table></p>
+
+<p>The latest publicly released VlogHammer report can be viewed <a
+href="files/vloghammer_report.html">here</a> (use of Google Chrome or Mozilla
+Firefox is highly recommended). The text below describes what VlogHammer does
+and how to interpret the report. So keep reading! Alternatively watch <a
+href="http://www.youtube.com/watch?v=CFR-TP5nukc">the screencast</a> for a
+quick overview.</p>
+
+<p>VlogHammer compares the implementation generated by Yosys with the
+implementations generated by the following proprietary free-to-use tools:</p>
+
+<ul>
+<li>Xilinx Vivado WebPack</li>
+<li>Xilinx ISE (XST) WebPack</li>
+<li>Altera Quartus Web Edition</li>
+</ul>
+
+<p>In addition the behavior of the generated circuits is compared of the behavior
+described in the original Verilog code, as interpreted by the following
+Verilog Simulators:</p>
+
+<ul>
+<li>Xilinx Isim (bundled with Xilinx ISE)</li>
+<li>Xilinx XSim (bundled with Xilinx Vivado)</li>
+<li>Mentor Modelsim (bundled with Altera Quartus II)</li>
+<li>Icarus Verilog (free software)</li>
+</ul>
+
+<p>I have found bugs in Yosys and all of the above tools (with the exception of
+Modelsim) using VlogHammer. The bugs in Yosys have been fixed and I share
+my results in the hope that it will help the vendors of the other tools to
+fix the bugs in their programs.</p>
+
+<p>The VlogHammer source code can be found on GitHub: <a
+href="https://github.com/cliffordwolf/VlogHammer">https://github.com/cliffordwolf/VlogHammer</a></p>
+
+<p>The name VlogHammer is inspired by the MC Hammer project from the AArch64
+LLVM target. They got the cooler name but we got better google results. :)</p> 
+
+<h2>Scope of Tests</h2>
+
+<p>VlogHammer is using many auto-generated test cases and a few hand-written test
+cases. The tests do not use behavioral modeling at the moment and concentrate
+on correct interpretation of Verilog expressions. Our experience with VlogHammer
+shows that while synthesis of Verilog expressions is not particular hard to do,
+it is hard-to-do-right for all corner cases. Thus we exposed bugs in Yosys as
+well as all three 3rd party synthesis tools under test.</p>
+
+<p>While the 3rd party tools are only used for simple logic synthesis, Yosys is used
+in various ways within VlogHammer, intensively testing the following sub-systems
+within Yosys:</p>
+
+<ul>
+<li>The Verilog frontend, especially
+<ul>
+<li>The Verilog to RTL netlist generator and</li>
+<li>the Verilog AST const-folder.</li>
+</ul>
+<li>The const evaluator for Yosys's coarse- and fine-grain internal representation</li>
+<li>The standard synthesis pipeline in Yosys (excluding sequential optimizations such as FSM extraction)</li>
+<li>The built-in SAT solver and the SAT models for all internal cell types.</li>
+</ul>
+
+<h2>Procedure</h2>
+
+The following procedure is used in VlogHammer
+
+<dl>
+<dt><b>Test case generation</b></dt>
+<dd>The auto-generated test cases are generated using file names following the
+pattern <tt>rtl/<i>&lt;category&gt;</i>_<i>&lt;id&gt;</i>.v</tt> and the
+hand-written tests are copied to the <tt>rtl/</tt> directory. This is usually
+done as a separate step, allowing for individual selection of test cases
+by modifying the <tt>rtl/</tt> directory. As a full run of VlogHammer may
+take a couple of days of CPU time, manually selecting individual tests is
+recommended for most situations. All further steps are conveniently wrapped
+using the <tt>make world</tt> command.</dd>
+<p/>
+<dt><b>Synthesis</b></dt>
+<dd>Yosys and the 3rd party synthesis tools are used to create Verilog netlists
+for the RTL input. This step creates <tt>syn_<i>&lt;tool&gt;</i>/</tt> directories
+with one netlist file per test case.</dd>
+<p/>
+<dt><b>Checking</b></dt>
+<dd>The Yosys SAT solver is used to verify the synthesis results against the
+Yosys coarse-grain RTL representation of the original Verilog input. Synthesizeable
+models of the xilinx and Altera technology cells are used to create SAT
+models for the outputs of the 3rd party tools. Test cases where any of this
+verifications fail are marked for report generation. This step creates the
+<tt>check_<i>&lt;tool&gt;</i>/</tt> and <tt>cache_<i>&lt;tool&gt;</i>/</tt>
+directories.</dd>
+<p/>
+<dt><b>Report Generation</b></dt>
+<dd>For each test case that resulted in an error in the <i>Checking</i> step,
+a detailed report is generated. The following steps are performed during this
+report generation:
+<ul style="margin:0px">
+<li>Formal verification of all synthesis results and the Yosys RTL
+representation against each other.</li>
+<li>Simulation of synthesis results and original Verilog using the counter-examples
+from the previous step as well as random bit patterns as test vectors.</li>
+<li>Simulation using the Yosys internal const evaluation framework using the same
+test vectors. Cross-verification of this results with the forward-solutions from the
+SAT models for the same input.</li>
+<li>Generation of HTML reports with the results of this tests.</li>
+</ul></dd>
+<p/>
+<dt><b>Summary Report</b></dt>
+<dd>All individual reports are bundled in a single large HTML file that can
+easily be distributed and browsed on a per-tool basis. The latter is especially
+useful as the target audience of this reports is primarily interested in
+the test cases that cause problems with their own tool.</dd>
+</dl>
+
+<h2>How to read VlogHammer reports</h2>
+
+<p>The VlogHammer report is released as single interactive HTML page. It has a (top)
+navigation bar that allows browsing the individual reports, narrowing the reports
+to those that only concern an individual tool, and provides a drop-down menu for
+directly going to the individual report for a test case.</p>
+
+<p>The report for an individual test case consists of 4 parts:</p>
+
+<ol>
+<li>Informal messages, such as the list of synthesis and simulation programs
+that VlogHammer thinks have troubles with the test case. Note that the Yosys
+synthesis features are listed as "yosys" and the constant evaluation and SAT
+solving capabilities are listed as "yosim", although there is no actual
+software package that is distributed under the name "yosim".</li>
+<li>A table summarising the VlogHammer results for this test case.</li>
+<li>The Verilog source-code for the test case and a test bench that also
+contains the test vectors used. Note that this is not the actual test bench
+used by VlogHammer but a simpler stripped-down version of it.</li>
+<li>A list of test patterns that produced interesting results, each listing the
+input values and the consolidated output values for the different
+<tt><i>&lt;simulator&gt;</i>.<i>&lt;synthesizer&gt;</i></tt> combinations. The
+<i>&lt;synthesizer&gt;</i> name <tt>rtl</tt> refers to the original Verilog source
+code fed into the simulator.</li>
+</ol>
+
+<p>The most interesting-looking part of the report is the table. It looks like this:</p>
+
+<img class="show" src="images/vloghammer_table.png" />
+
+<p>In this example Altera Quartus II produces incorrect synthesis results and
+Xilinx ISIM produces incorrect simulation results. Modelsim on the other hand
+simulates the RTL correctly. So a good starting point for fixing this bug is by
+reproducing the bug using Modelsim as known-good reference and the provided
+test case and test bench.  In case of the incorrect synthesis this can be done
+by trying to verify the synthesis results using Modelsim. In case of the ISIM
+bug by comparing ISIM and Modelsim output.</p>
+
+<p>The table can be divided into four regions of interest. The upper-left area
+contains results from the SAT checks that compare the different synthesis outputs:</p>
+
+<img class="show" src="images/vloghammer_tableA.png" />
+
+<p>This is of course always a symmetrical matrix and all entries on the main
+diagonal are always "PASS" as a logic netlist is always formally equivalent to
+itself. This area can contain false-negatives when undefined behavior (such as
+results from division by zero) is implemented differently by the different tools.</p>
+
+<p>The line below that matrix contains the results of SAT checking the synthesis
+outputs from the different tools against the Yosys RTL representation:</p>
+
+<img class="show" src="images/vloghammer_tableC.png" />
+
+<p>This line should not contain false negatives, as the RTL SAT models in Yosys do
+support modeling of undefined behavior (aka. <tt>x</tt>-bits) and only cases where
+defined behavior is implemented differently are used to indicate a "FAIL" here.</p>
+
+<p>The lower right line contains checksums of simulation results for the
+different simulation tools for the original Verilog code of the test case and
+the auto-generated test vectors:</p>
+
+<img class="show" src="images/vloghammer_tableD.png" />
+
+<p>Here we see that ISIM creates a different output for the original Verilog test
+case than Modelsim and the Yosys internal const evaluator ("yosim"). Note that
+there is no column for Icarus Verilog in this case as Icarus Verilog crashed
+for this particular test case. This results are also used by VlogHammer to extract
+<tt>x</tt>-bits for the results for each individual test vector. The output of
+the synthesized modules is then treated as <tt>x</tt> for the bits that have been
+<tt>x</tt> in the RTL simulation of this individual test vector, so that the
+implementation of undefined behavior in the different synthesizers does not
+effect the checksums.</p>
+
+<p>Finally the upper right region contains the checksums for the testbench outputs
+for the synthesized modules:</p>
+
+<img class="show" src="images/vloghammer_tableB.png" />
+
+<p>If a column in this region is different from the other columns, it is because the
+simulator returned a different pattern for the <tt>x</tt>-bits during simulation of the
+original Verilog code. It is almost certain that two simulators do not return different
+data bits for the same synthesized module.</p>
+
+<p>In the right region it is possible to get false-positives, because the SAT
+solver could have generated a test pattern for undefined behavior and thus
+missed the opportunity to create a test pattern for a real problem (and also
+because of hash collisions, but this is very unlikely). However, false negatives
+are not possible here. So we know for certain that there is a bug in at least
+two tools here, and it is very likely that this two tools are Quartus II
+and Xilinx ISIM.</p>
+
+<p>The latest publicly released VlogHammer report can be viewed <a
+href="files/vloghammer_report.html">here</a>. Use of Google Chrome or Mozilla
+Firefox is highly recommended, as the HTML file uses some JavaScript and is not
+tested with other browsers.</p>
+
+<h2>Disclaimer and additional remarks</h2>
+
+<p>The test case discussed above is an example based on a screenshot taken in one
+point in time with one version of the tools discussed. It is the authors hope
+that in the future all bugs revealed by VlogHammer will be fixed. So it is possible
+that by the time you read this, the tools discussed here do not suffer of any
+bug that can be found by VlogHammer.</p>
+
+<p>In fairness I have to add that I have found more bugs in Yosys using VlogHammer
+than in any of the other tools. Now Yosys performs perfect in-sample. It is
+likely that there are bugs in Yosys that are exposed by other regressions
+tests. If anyone with access to different test cases is reading this: I would
+be delighted to gain access to those test cases.</p>
+
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>
+

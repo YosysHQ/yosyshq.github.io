@@ -1,0 +1,186 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: VlogHammer</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav0" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav1" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+
+<h1>YosysJS</h1>
+
+<p>YosysJS is a JavaScript port of Yosys done with <a href="http://emscripten.org/">Emscripten</a>.
+It is primarily ment for building educational web applications. YosysJS is under development. A
+preview can be found <a href="nogit/YosysJS/snapshot/">here</a>.</p>
+
+<h2>API Reference</h2>
+
+<p>Include <tt>yosysjs.js</tt> (not <tt>yosys.js</tt>!) in your HTML file:<pre>
+&#60;script type&#61;&#34;text&#47;javascript&#34; src&#61;&#34;<i>path_to_yosysjs</i>/yosysjs&#46;js&#34;&#62;&#60;&#47;script&#62;
+</pre></p>
+
+<p>Then initialize YosysJS:<pre>
+// needed for YosysJS.dot_to_svg() and YosysJS.dot_into_svg()
+YosysJS.load_viz();
+
+// create a Yosys instance
+var ys = YosysJS.create();
+</pre></p>
+
+<p>The created Yosys instance will reside in a hidden <tt>&lt;iframe&gt;</tt> in your page. You
+can pass the id of an iframe element or the DOM element itself as first parameter. Then
+this iframe will be used instead. You can also pass a <tt>&lt;textarea&gt;</tt> (id or
+DOM object). Then the textarea will be replaced by an iframe (with the same CSS style) and
+the value of the textarea (the text in it) will be executed as Yosys script.</p>
+
+<p>There is also an optional 2nd parameter to <tt>YosysJS.create()</tt>, a callback function
+that is called as soon as the Yosys instance has been initialized. Set the first parameter
+to to an empty string if you want to use the callback function but don't want
+to specify an existing DOM element for the iframe.<pre>
+&lt;iframe id="ys_iframe" style="width: 100%;"&gt;&lt;/iframe&gt;
+
+...
+
+var ys = YosysJS.create('ys_iframe', function() { console.log("ready."); });
+</pre></p>
+
+<p>Next you need to configure the new Yosys instance. Set the following member variables to
+configure the object (the values below reflect the default settings):<pre>
+// Print all Yosys output messages to the iframe
+ys.verbose = false;
+
+// Print all Yosys output messages to the JavaScript console
+ys.logprint = false;
+
+// Echo back commands
+ys.echo = false;
+</pre></p>
+
+<p>The virtual filesystem seen by Yosys can be accessed using the following methods:<pre>
+// Create/write files
+ys.write_file(filename, text);
+
+// Read files
+text = ys.read_file(filename);
+
+// Read directory listing
+listing = ys.read_dir('.');
+</pre></p>
+
+<p>And most importantly executing Yosys commands:<pre>
+output_text = ys.run(command_string);
+</pre></p>
+
+<p>Creating SVG text from a DOT file (the Yosys <tt>show</tt> command per default
+writes to <tt>show.dot</tt> in YosysJS):<pre>
+ys.run('show');
+dot_text = ys.read_file('show.dot');
+svg_text = YosysJS.dot_to_svg(dot_text);
+</pre></p>
+
+<p>Writing SVG directly into a <tt>&lt;svg&gt;</tt> element:<pre>
+YosysJS.dot_into_svg(dot_text, svg_element_or_id);
+</pre></p>
+
+<h2>WebWorker API Reference</h2>
+
+<p>The <tt>YosysJS.create()</tt>-based API described above creates a Yosys instance within
+the browser window main javascript thread. This means that whenever Yosys is running, the
+browser window becomes unresponsive. The following alternative API creates a Yosys instance
+within a separate WebWorker thread.</p>
+
+<p>Creating a Yosys instance within a WebWorker:<pre>
+function create_worker_callback() { ... }
+var ys = YosysJS.create_worker(create_worker_callback);
+</pre></p>
+
+<p>Running a command in the Yosys WebWorker:<pre>
+function run_callback(output_text, error_message() { ... }
+ys.run(command_text, run_callback);
+</pre></p>
+
+<p>Accessing the virtual filesystem:<pre>
+function write_file_callback() { ... }
+ys.write_file(file_name, text_content, write_file_callback);
+
+function read_file_callback(text_content) { ... }
+ys.read_file(file_name, read_file_callback);
+
+function read_dir_callback(file_list) { ... }
+ys.read_dir(dir_name, read_dir_callback);
+
+function remove_file_callback() { ... }
+ys.remove_file(file_name, remove_file_callback);
+</pre></p>
+
+<p>Switching Yosys into verbose mode (i.e. write all messages to JavaScript console):<pre>
+function verbose_callback() { ... }
+ys.verbose(true, verbose_callback); // enable verbose mode
+ys.verbose(false, verbose_callback); // disable verbose mode (default)
+</pre></p>
+
+<p>All callback arguments are optional. Requests are processes in-order. I.e.
+it is possible to issue a sequence of commands and only use a callback on the
+last command in the sequence. For example:<pre>
+ys.write_file("input.v", verilog_input_text);
+ys.run("design -reset; read_verilog input.v; synth; write_verilog output.v");
+ys.read_file("output.v", (function(text){ console.log("Output: ", text); }));
+</pre></p>
+
+<h2>Building YosysJS</h2>
+
+<p>The following is a step-by-step guide for building Emscripten and YosysJS. First
+create a build directory:<pre>
+mkdir yosysjs_build
+cd yosysjs_build
+</pre></p>
+
+<p>Optional: Remove dot-files from other/previous emsdk install:<pre>
+rm -rf ~/.emscripten*
+</pre></p>
+
+<p>Then download and build Emscripten:<pre>
+wget https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz
+tar xvzf emsdk-portable.tar.gz
+cd emsdk-portable
+./emsdk install latest
+./emsdk activate latest
+./emsdk_env.sh
+cd ..
+</pre></p>
+
+<p>Finally download Yosys and build YosysJS:<pre>
+git clone https://github.com/YosysHQ/yosys.git
+cd yosys
+source ../emsdk-portable/emsdk_set_env.sh
+make config-emcc
+make
+ls -l yosysjs-*
+</pre></p>
+
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>
+

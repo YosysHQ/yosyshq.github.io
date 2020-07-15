@@ -1,0 +1,164 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Screenshots</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav0" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav1" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+
+<h1>Screenshots</h1>
+
+This page contains examples of simple Yosys Synthesis Scripts and screenshots
+of the "show" commands output for the synthesised designs. (The "show" command
+is using <a href="http://www.graphviz.org/">GraphViz</a> to generate schematics.)
+
+<h2>Simple RTL Netlist</h2>
+
+<a href="images/show_rtl.png" target="_blank"><img class="show" src="images/show_rtl.png" alt="[Screenshot]" border="0"/></a>
+
+<pre># read design
+read_verilog counter.v
+hierarchy -check
+
+# high-level synthesis
+proc; opt; fsm; opt; memory; opt
+</pre>
+<div class="file"><a href="files/show_rtl.ys">show_rtl.ys</a></div>
+
+<pre>module counter (clk, rst, en, count);
+
+   input clk, rst, en;
+   output reg [3:0] count;
+   
+   always @(posedge clk)
+      if (rst)
+         count <= 4'd0;
+      else if (en)
+         count <= count + 4'd1;
+
+endmodule
+</pre>
+<div class="file"><a href="files/counter.v">counter.v</a></div>
+
+<h2>CMOS Gate-Level Netlist</h2>
+
+<a href="images/show_cmos.png" target="_blank"><img class="show" src="images/show_cmos.png" alt="[Screenshot]" border="0"/></a>
+
+<pre># read design
+read_verilog counter.v
+hierarchy -check
+
+# high-level synthesis
+proc; opt; fsm; opt; memory; opt
+
+# low-level synthesis
+techmap; opt
+
+# map to target architecture
+dfflibmap -liberty cmos_cells.lib
+abc -liberty cmos_cells.lib
+
+# split larger signals
+splitnets -ports; opt
+</pre>
+<div class="file"><a href="files/show_cmos.ys">show_cmos.ys</a></div>
+
+<pre>library(demo) {
+  cell(NOT) {
+    area: 3;
+    pin(A) { direction: input; }
+    pin(Y) { direction: output;
+              function: "A'"; }
+  }
+  cell(BUF) {
+    area: 6;
+    pin(A) { direction: input; }
+    pin(Y) { direction: output;
+              function: "A"; }
+  }
+  cell(NAND) {
+    area: 4;
+    pin(A) { direction: input; }
+    pin(B) { direction: input; }
+    pin(Y) { direction: output;
+             function: "(A*B)'"; }
+  }
+  cell(NOR) {
+    area: 4;
+    pin(A) { direction: input; }
+    pin(B) { direction: input; }
+    pin(Y) { direction: output;
+             function: "(A+B)'"; }
+  }
+  cell(DFF) {
+    area: 18;
+    ff(IQ, IQN) { clocked_on: C;
+                  next_state: D; }
+    pin(C) { direction: input;
+                 clock: true; }
+    pin(D) { direction: input; }
+    pin(Q) { direction: output;
+              function: "IQ"; }
+  }
+}
+</pre>
+<div class="file"><a href="files/cmos_cells.lib">cmos_cells.lib</a></div>
+
+<h2>Coarse-Grain Netlist</h2>
+
+<a href="images/show_coarse.png" target="_blank"><img class="show" src="images/show_coarse.png" alt="[Screenshot]" border="0"/></a>
+
+<pre># read design
+read_verilog counter.v
+hierarchy -check
+
+# high-level synthesis
+proc; opt; fsm; opt; memory; opt
+
+# mapping coarse-grain cells
+extract -map coarse_cells.v
+</pre>
+<div class="file"><a href="files/show_coarse.ys">show_coarse.ys</a></div>
+
+<pre>module MACRO_INC(in, out);
+  input [3:0] in;
+  output [3:0] out;
+  assign out = in + 4'd1;
+endmodule
+
+module MACRO_DFF(clk, rst, en, d, q);
+  input clk, rst, en;
+  input [3:0] d;
+  output reg [3:0] q;
+  always @(posedge clk)
+    q <= rst ? 4'd0 : en ? d : q;
+endmodule
+</pre>
+<div class="file"><a href="files/coarse_cells.v">coarse_cells.v</a></div>
+
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

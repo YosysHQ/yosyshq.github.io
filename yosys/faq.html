@@ -1,0 +1,116 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Frequently Asked Questions</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav0" href="documentation.html">Documentation</a>
+  <a class="nav1" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+
+<h1>Frequently Asked Questions</h1>
+
+<h2>1. How to report bugs and request support?</h2>
+
+<p>If possible, do not mail the author directly with bug reports or support
+questions. Instead, post them on <a
+href="https://github.com/cliffordwolf/yosys/issues/new">GitHub</a>, <a
+href="http://www.reddit.com/r/yosys/">Yosys Subreddit</a>, or <a
+href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>, so
+others can profit from your question and the posted answers as well.</p>
+
+<p>A good bug report contains a <a href="http://stackoverflow.com/help/mcve">minimal,
+complete, and verifiable code example</a> that demonstrates the
+problem you are running into. Complete means not just a code snippet, but an
+entire top verilog module that can be synthesized. Also include the yosys
+script or command line. If your problem is with one of the flows (e.g.  the
+open source IceStorm flow), also include scripts or command line for the other
+tools in the flow and auxiliary files needed to reporduce the problem (such as
+placement constraint files used for place and route). It should be possible to
+reproduce the problem you are seeing within seconds using the information you
+provided! Every file of line of code someone trying to reproduce your problem
+has to write themself will increase the effort someome has to put into
+reproducing your problem and at the same time will decrease the chances of
+your problem being reproduced correctly!</p>
+
+<p><b>Always consider that someone reading your bug report only
+has the information you provided.</b> Before clicking the send button on your bug
+report and/or support request, double check that you have provided all the
+information necessary to easily and quickly reproduce the problem you are seeing.</p>
+
+<h2>2. What synthesis targets are supported by Yosys?</h2>
+
+<p>Yosys is retargetable and adding support for additional targets is not very
+hard. At the moment, Yosys ships with support for ASIC synthesis (from liberty
+cell library files), iCE40 FPGAs, Xilinx 7-Series FPGAs, Silego GreenPAK4 devices,
+and Gowinsemi GW1N/GW2A FPGAs.</p>
+
+<p>Note that in all this cases Yosys only performs synthesis. For a complete
+open source ASIC flow using Yosys see <a href="http://opencircuitdesign.com/qflow/">Qflow</a>,
+for a complete open source iCE40 flow see <a
+href="http://www.clifford.at/icestorm/">Project IceStorm</a>. Yosys
+Xilinx 7-Series synthesis output can be placed and routed with Xilinx Vivado.</p>
+
+<h2>3. Does Yosys support timing driven synthesis?</h2>
+
+<p>In general no.</p>
+
+<p>For ASIC synthesis there is timing driven logic optimization
+and technology mapping available via ABC: See options <tt>-constr</tt> and
+<tt>-D</tt> to the <tt>abc</tt> command (<tt>help abc</tt>). This options
+will also make ABC generate a post-synthesis timing report.</p>
+
+<p>For iCE40 synthesis there is timing analysis available via the <tt>icetime</tt>
+program that is bundled with the IceStorm tools.</p>
+
+<h2>4. Does Yosys support multi-output cells (e.g. full adders)?</h2>
+
+<p>Multi-output logic cells are simply ignored by ABC at the moment. However,
+it is possible to write dedicated mapping rules for things like adders, that
+simply map arithmetic operations in the design to e.g. full-adder cells. See
+e.g. inference of <tt>SB_CARRY+SB_LUT</tt> blocks for arithmetic operations in
+the iCE40 flow.</p>
+
+<p>There is limited support for FFs with non-inverted and inverted outputs in
+Yosys and there are plans to further improve support for this cells in the near
+future.</p>
+
+<h2>5. The Verilog front-end does not create nice errors for invalid code!</h2>
+
+<p>Not really a question, but yes, this is correct. The focus so far for
+development of the Yosys Verilog front-end was on features and processing valid
+input, not good error reporting for invalid code. In some cases it will even
+accept invalid code! Use a simulatior (such as <a
+href="http://iverilog.icarus.com/">Icarus Verilog</a> or <a
+href="http://www.veripool.org/wiki/verilator">Verilator</a>) to check your code
+for syntax errors and similar problems. Verilator even has a
+<tt>--lint-only</tt> mode for just checking code without compiling it.</p>
+
+<p>On a side note: I usually get this question from people who do not simulate
+their designs. Don't be this person! Regardless of what tools you are using,
+you should always simulate your designs first before going into synthesis!</p>
+
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

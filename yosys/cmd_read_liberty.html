@@ -1,0 +1,64 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: read_liberty</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>read_liberty - read cells from liberty file</h1>
+<pre>
+    read_liberty [filename]
+
+Read cells from liberty file as modules into current design.
+
+    -lib
+        only create empty blackbox modules
+
+    -nooverwrite
+        ignore re-definitions of modules. (the default behavior is to
+        create an error message if the existing module is not a blackbox
+        module, and overwrite the existing module if it is  a blackbox module.)
+
+    -overwrite
+        overwrite existing modules with the same name
+
+    -ignore_miss_func
+        ignore cells with missing function specification of outputs
+
+    -ignore_miss_dir
+        ignore cells with a missing or invalid direction
+        specification on a pin
+
+    -ignore_miss_data_latch
+        ignore latches with missing data and/or enable pins
+
+    -setattr &lt;attribute_name&gt;
+        set the specified attribute (to the value 1) on all loaded modules
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

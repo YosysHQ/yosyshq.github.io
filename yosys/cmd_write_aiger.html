@@ -1,0 +1,69 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: write_aiger</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>write_aiger - write design to AIGER file</h1>
+<pre>
+    write_aiger [options] [filename]
+
+Write the current design to an AIGER file. The design must be flattened and
+must not contain any cell types except $_AND_, $_NOT_, simple FF types,
+$assert and $assume cells, and $initstate cells.
+
+$assert and $assume cells are converted to AIGER bad state properties and
+invariant constraints.
+
+    -ascii
+        write ASCII version of AGIER format
+
+    -zinit
+        convert FFs to zero-initialized FFs, adding additional inputs for
+        uninitialized FFs.
+
+    -miter
+        design outputs are AIGER bad state properties
+
+    -symbols
+        include a symbol table in the generated AIGER file
+
+    -map &lt;filename&gt;
+        write an extra file with port and latch symbols
+
+    -vmap &lt;filename&gt;
+        like -map, but more verbose
+
+    -I, -O, -B
+        If the design contains no input/output/assert then create one
+        dummy input/output/bad_state pin to make the tools reading the
+        AIGER file happy.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

@@ -1,0 +1,121 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: memory_bram</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>memory_bram - map memories to block rams</h1>
+<pre>
+    memory_bram -rules &lt;rule_file&gt; [selection]
+
+This pass converts the multi-port $mem memory cells into block ram instances.
+The given rules file describes the available resources and how they should be
+used.
+
+The rules file contains a set of block ram description and a sequence of match
+rules. A block ram description looks like this:
+
+    bram RAMB1024X32     # name of BRAM cell
+      init 1             # set to '1' if BRAM can be initialized
+      abits 10           # number of address bits
+      dbits 32           # number of data bits
+      groups 2           # number of port groups
+      ports  1 1         # number of ports in each group
+      wrmode 1 0         # set to '1' if this groups is write ports
+      enable 4 1         # number of enable bits
+      transp 0 2         # transparent (for read ports)
+      clocks 1 2         # clock configuration
+      clkpol 2 2         # clock polarity configuration
+    endbram
+
+For the option 'transp' the value 0 means non-transparent, 1 means transparent
+and a value greater than 1 means configurable. All groups with the same
+value greater than 1 share the same configuration bit.
+
+For the option 'clocks' the value 0 means non-clocked, and a value greater
+than 0 means clocked. All groups with the same value share the same clock
+signal.
+
+For the option 'clkpol' the value 0 means negative edge, 1 means positive edge
+and a value greater than 1 means configurable. All groups with the same value
+greater than 1 share the same configuration bit.
+
+Using the same bram name in different bram blocks will create different variants
+of the bram. Verilog configuration parameters for the bram are created as needed.
+
+It is also possible to create variants by repeating statements in the bram block
+and appending '@&lt;label&gt;' to the individual statements.
+
+A match rule looks like this:
+
+    match RAMB1024X32
+      max waste 16384    # only use this bram if &lt;= 16k ram bits are unused
+      min efficiency 80  # only use this bram if efficiency is at least 80%
+    endmatch
+
+It is possible to match against the following values with min/max rules:
+
+    words  ........  number of words in memory in design
+    abits  ........  number of address bits on memory in design
+    dbits  ........  number of data bits on memory in design
+    wports  .......  number of write ports on memory in design
+    rports  .......  number of read ports on memory in design
+    ports  ........  number of ports on memory in design
+    bits  .........  number of bits in memory in design
+    dups ..........  number of duplications for more read ports
+
+    awaste  .......  number of unused address slots for this match
+    dwaste  .......  number of unused data bits for this match
+    bwaste  .......  number of unused bram bits for this match
+    waste  ........  total number of unused bram bits (bwaste*dups)
+    efficiency  ...  total percentage of used and non-duplicated bits
+
+    acells  .......  number of cells in 'address-direction'
+    dcells  .......  number of cells in 'data-direction'
+    cells  ........  total number of cells (acells*dcells*dups)
+
+The interface for the created bram instances is derived from the bram
+description. Use 'techmap' to convert the created bram instances into
+instances of the actual bram cells of your target architecture.
+
+A match containing the command 'or_next_if_better' is only used if it
+has a higher efficiency than the next match (and the one after that if
+the next also has 'or_next_if_better' set, and so forth).
+
+A match containing the command 'make_transp' will add external circuitry
+to simulate 'transparent read', if necessary.
+
+A match containing the command 'make_outreg' will add external flip-flops
+to implement synchronous read ports, if necessary.
+
+A match containing the command 'shuffle_enable A' will re-organize
+the data bits to accommodate the enable pattern of port A.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

@@ -1,0 +1,59 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: muxcover</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>muxcover - cover trees of MUX cells with wider MUXes</h1>
+<pre>
+    muxcover [options] [selection]
+
+Cover trees of $_MUX_ cells with $_MUX{4,8,16}_ cells
+
+    -mux4[=cost], -mux8[=cost], -mux16[=cost]
+        Use the specified types of MUXes (with optional integer costs). If none
+        of these options are given, the effect is the same as if all of them are.
+        Default costs: $_MUX_ = 100, $_MUX4_ = 220,
+                       $_MUX8_ = 460, $_MUX16_ = 940
+
+    -dmux=cost
+        Use the specified cost for $_MUX_ cells used in decoders.
+        Default cost: 90
+
+    -nodecode
+        Do not insert decoder logic. This reduces the number of possible
+        substitutions, but guarantees that the resulting circuit is not
+        less efficient than the original circuit.
+
+    -nopartial
+        Do not consider mappings that use $_MUX&lt;N&gt;_ to select from less
+        than &lt;N&gt; different signals.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

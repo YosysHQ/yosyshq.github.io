@@ -1,0 +1,68 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: chformal</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>chformal - change formal constraints of the design</h1>
+<pre>
+    chformal [types] [mode] [options] [selection]
+
+Make changes to the formal constraints of the design. The [types] options
+the type of constraint to operate on. If none of the following options are given,
+the command will operate on all constraint types:
+
+    -assert       $assert cells, representing assert(...) constraints
+    -assume       $assume cells, representing assume(...) constraints
+    -live         $live cells, representing assert(s_eventually ...)
+    -fair         $fair cells, representing assume(s_eventually ...)
+    -cover        $cover cells, representing cover() statements
+
+Exactly one of the following modes must be specified:
+
+    -remove
+        remove the cells and thus constraints from the design
+
+    -early
+        bypass FFs that only delay the activation of a constraint
+
+    -delay &lt;N&gt;
+        delay activation of the constraint by &lt;N&gt; clock cycles
+
+    -skip &lt;N&gt;
+        ignore activation of the constraint in the first &lt;N&gt; clock cycles
+
+    -assert2assume
+    -assume2assert
+    -live2fair
+    -fair2live
+        change the roles of cells as indicated. these options can be combined
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

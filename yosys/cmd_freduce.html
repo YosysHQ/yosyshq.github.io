@@ -1,0 +1,62 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: freduce</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>freduce - perform functional reduction</h1>
+<pre>
+    freduce [options] [selection]
+
+This pass performs functional reduction in the circuit. I.e. if two nodes are
+equivalent, they are merged to one node and one of the redundant drivers is
+disconnected. A subsequent call to 'clean' will remove the redundant drivers.
+
+    -v, -vv
+        enable verbose or very verbose output
+
+    -inv
+        enable explicit handling of inverted signals
+
+    -stop &lt;n&gt;
+        stop after &lt;n&gt; reduction operations. this is mostly used for
+        debugging the freduce command itself.
+
+    -dump &lt;prefix&gt;
+        dump the design to &lt;prefix&gt;_&lt;module&gt;_&lt;num&gt;.il after each reduction
+        operation. this is mostly used for debugging the freduce command.
+
+This pass is undef-aware, i.e. it considers don't-care values for detecting
+equivalent nodes.
+
+All selected wires are considered for rewiring. The selected cells cover the
+circuit that is analyzed.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

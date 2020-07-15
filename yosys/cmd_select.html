@@ -1,0 +1,248 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: select</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>select - modify and view the list of selected objects</h1>
+<pre>
+    select [ -add | -del | -set &lt;name&gt; ] {-read &lt;filename&gt; | &lt;selection&gt;}
+    select [ &lt;assert_option&gt; ] {-read &lt;filename&gt; | &lt;selection&gt;}
+    select [ -list | -write &lt;filename&gt; | -count | -clear ]
+    select -module &lt;modname&gt;
+
+Most commands use the list of currently selected objects to determine which part
+of the design to operate on. This command can be used to modify and view this
+list of selected objects.
+
+Note that many commands support an optional [selection] argument that can be
+used to override the global selection for the command. The syntax of this
+optional argument is identical to the syntax of the &lt;selection&gt; argument
+described here.
+
+    -add, -del
+        add or remove the given objects to the current selection.
+        without this options the current selection is replaced.
+
+    -set &lt;name&gt;
+        do not modify the current selection. instead save the new selection
+        under the given name (see @&lt;name&gt; below). to save the current selection,
+        use "select -set &lt;name&gt; %"
+
+    -assert-none
+        do not modify the current selection. instead assert that the given
+        selection is empty. i.e. produce an error if any object matching the
+        selection is found.
+
+    -assert-any
+        do not modify the current selection. instead assert that the given
+        selection is non-empty. i.e. produce an error if no object matching
+        the selection is found.
+
+    -assert-count N
+        do not modify the current selection. instead assert that the given
+        selection contains exactly N objects.
+
+    -assert-max N
+        do not modify the current selection. instead assert that the given
+        selection contains less than or exactly N objects.
+
+    -assert-min N
+        do not modify the current selection. instead assert that the given
+        selection contains at least N objects.
+
+    -list
+        list all objects in the current selection
+
+    -write &lt;filename&gt;
+        like -list but write the output to the specified file
+
+    -read &lt;filename&gt;
+        read the specified file (written by -write)
+
+    -count
+        count all objects in the current selection
+
+    -clear
+        clear the current selection. this effectively selects the whole
+        design. it also resets the selected module (see -module). use the
+        command 'select *' to select everything but stay in the current module.
+
+    -none
+        create an empty selection. the current module is unchanged.
+
+    -module &lt;modname&gt;
+        limit the current scope to the specified module.
+        the difference between this and simply selecting the module
+        is that all object names are interpreted relative to this
+        module after this command until the selection is cleared again.
+
+When this command is called without an argument, the current selection
+is displayed in a compact form (i.e. only the module name when a whole module
+is selected).
+
+The &lt;selection&gt; argument itself is a series of commands for a simple stack
+machine. Each element on the stack represents a set of selected objects.
+After this commands have been executed, the union of all remaining sets
+on the stack is computed and used as selection for the command.
+
+Pushing (selecting) object when not in -module mode:
+
+    &lt;mod_pattern&gt;
+        select the specified module(s)
+
+    &lt;mod_pattern&gt;/&lt;obj_pattern&gt;
+        select the specified object(s) from the module(s)
+
+Pushing (selecting) object when in -module mode:
+
+    &lt;obj_pattern&gt;
+        select the specified object(s) from the current module
+
+A &lt;mod_pattern&gt; can be a module name, wildcard expression (*, ?, [..])
+matching module names, or one of the following:
+
+    A:&lt;pattern&gt;, A:&lt;pattern&gt;=&lt;pattern&gt;
+        all modules with an attribute matching the given pattern
+        in addition to = also &lt;, &lt;=, &gt;=, and &gt; are supported
+
+An &lt;obj_pattern&gt; can be an object name, wildcard expression, or one of
+the following:
+
+    w:&lt;pattern&gt;
+        all wires with a name matching the given wildcard pattern
+
+    i:&lt;pattern&gt;, o:&lt;pattern&gt;, x:&lt;pattern&gt;
+        all inputs (i:), outputs (o:) or any ports (x:) with matching names
+
+    s:&lt;size&gt;, s:&lt;min&gt;:&lt;max&gt;
+        all wires with a matching width
+
+    m:&lt;pattern&gt;
+        all memories with a name matching the given pattern
+
+    c:&lt;pattern&gt;
+        all cells with a name matching the given pattern
+
+    t:&lt;pattern&gt;
+        all cells with a type matching the given pattern
+
+    p:&lt;pattern&gt;
+        all processes with a name matching the given pattern
+
+    a:&lt;pattern&gt;
+        all objects with an attribute name matching the given pattern
+
+    a:&lt;pattern&gt;=&lt;pattern&gt;
+        all objects with a matching attribute name-value-pair.
+        in addition to = also &lt;, &lt;=, &gt;=, and &gt; are supported
+
+    r:&lt;pattern&gt;, r:&lt;pattern&gt;=&lt;pattern&gt;
+        cells with matching parameters. also with &lt;, &lt;=, &gt;= and &gt;.
+
+    n:&lt;pattern&gt;
+        all objects with a name matching the given pattern
+        (i.e. 'n:' is optional as it is the default matching rule)
+
+    @&lt;name&gt;
+        push the selection saved prior with 'select -set &lt;name&gt; ...'
+
+The following actions can be performed on the top sets on the stack:
+
+    %
+        push a copy of the current selection to the stack
+
+    %%
+        replace the stack with a union of all elements on it
+
+    %n
+        replace top set with its invert
+
+    %u
+        replace the two top sets on the stack with their union
+
+    %i
+        replace the two top sets on the stack with their intersection
+
+    %d
+        pop the top set from the stack and subtract it from the new top
+
+    %D
+        like %d but swap the roles of two top sets on the stack
+
+    %c
+        create a copy of the top set from the stack and push it
+
+    %x[&lt;num1&gt;|*][.&lt;num2&gt;][:&lt;rule&gt;[:&lt;rule&gt;..]]
+        expand top set &lt;num1&gt; num times according to the specified rules.
+        (i.e. select all cells connected to selected wires and select all
+        wires connected to selected cells) The rules specify which cell
+        ports to use for this. the syntax for a rule is a '-' for exclusion
+        and a '+' for inclusion, followed by an optional comma separated
+        list of cell types followed by an optional comma separated list of
+        cell ports in square brackets. a rule can also be just a cell or wire
+        name that limits the expansion (is included but does not go beyond).
+        select at most &lt;num2&gt; objects. a warning message is printed when this
+        limit is reached. When '*' is used instead of &lt;num1&gt; then the process
+        is repeated until no further object are selected.
+
+    %ci[&lt;num1&gt;|*][.&lt;num2&gt;][:&lt;rule&gt;[:&lt;rule&gt;..]]
+    %co[&lt;num1&gt;|*][.&lt;num2&gt;][:&lt;rule&gt;[:&lt;rule&gt;..]]
+        similar to %x, but only select input (%ci) or output cones (%co)
+
+    %xe[...] %cie[...] %coe
+        like %x, %ci, and %co but only consider combinatorial cells
+
+    %a
+        expand top set by selecting all wires that are (at least in part)
+        aliases for selected wires.
+
+    %s
+        expand top set by adding all modules that implement cells in selected
+        modules
+
+    %m
+        expand top set by selecting all modules that contain selected objects
+
+    %M
+        select modules that implement selected cells
+
+    %C
+        select cells that implement selected modules
+
+    %R[&lt;num&gt;]
+        select &lt;num&gt; random objects from top selection (default 1)
+
+Example: the following command selects all wires that are connected to a
+'GATE' input of a 'SWITCH' cell:
+
+    select */t:SWITCH %x:+[GATE] */t:SWITCH %d
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

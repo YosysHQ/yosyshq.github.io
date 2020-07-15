@@ -1,0 +1,52 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: extract_reduce</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>extract_reduce - converts gate chains into $reduce_* cells</h1>
+<pre>
+    extract_reduce [options] [selection]
+
+converts gate chains into $reduce_* cells
+
+This command finds chains of $_AND_, $_OR_, and $_XOR_ cells and replaces them
+with their corresponding $reduce_* cells. Because this command only operates on
+these cell types, it is recommended to map the design to only these cell types
+using the `abc -g` command. Note that, in some cases, it may be more effective
+to map the design to only $_AND_ cells, run extract_reduce, map the remaining
+parts of the design to AND/OR/XOR cells, and run extract_reduce a second time.
+
+    -allow-off-chain
+        Allows matching of cells that have loads outside the chain. These cells
+        will be replicated and folded into the $reduce_* cell, but the original
+        cell will remain, driving its original loads.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

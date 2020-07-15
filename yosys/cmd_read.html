@@ -1,0 +1,72 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: read</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>read - load HDL designs</h1>
+<pre>
+    read {-vlog95|-vlog2k|-sv2005|-sv2009|-sv2012|-sv|-formal} &lt;verilog-file&gt;..
+
+Load the specified Verilog/SystemVerilog files. (Full SystemVerilog support
+is only available via Verific.)
+
+Additional -D&lt;macro&gt;[=&lt;value&gt;] options may be added after the option indicating
+the language version (and before file names) to set additional verilog defines.
+
+
+    read {-vhdl87|-vhdl93|-vhdl2k|-vhdl2008|-vhdl} &lt;vhdl-file&gt;..
+
+Load the specified VHDL files. (Requires Verific.)
+
+
+    read -define &lt;macro&gt;[=&lt;value&gt;]..
+
+Set global Verilog/SystemVerilog defines.
+
+
+    read -undef &lt;macro&gt;..
+
+Unset global Verilog/SystemVerilog defines.
+
+
+    read -incdir &lt;directory&gt;
+
+Add directory to global Verilog/SystemVerilog include directories.
+
+
+    read -verific
+    read -noverific
+
+Subsequent calls to 'read' will either use or not use Verific. Calling 'read'
+with -verific will result in an error on Yosys binaries that are built without
+Verific support. The default is to use Verific if it is available.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

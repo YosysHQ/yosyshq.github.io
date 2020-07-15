@@ -1,0 +1,78 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: bugpoint</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>bugpoint - minimize testcases</h1>
+<pre>
+    bugpoint [options]
+
+This command minimizes testcases that crash Yosys. It removes an arbitrary part
+of the design and recursively invokes Yosys with a given script, repeating these
+steps while it can find a smaller design that still causes a crash. Once this
+command finishes, it replaces the current design with the smallest testcase it
+was able to produce.
+
+It is possible to specify the kinds of design part that will be removed. If none
+are specified, all parts of design will be removed.
+
+    -yosys &lt;filename&gt;
+        use this Yosys binary. if not specified, `yosys` is used.
+
+    -script &lt;filename&gt;
+        use this script to crash Yosys. required.
+
+    -grep &lt;string&gt;
+        only consider crashes that place this string in the log file.
+
+    -fast
+        run `clean -purge` after each minimization step. converges faster, but
+        produces larger testcases, and may fail to produce any testcase at all if
+        the crash is related to dangling wires.
+
+    -clean
+        run `clean -purge` before checking testcase and after finishing. produces
+        smaller and more useful testcases, but may fail to produce any testcase
+        at all if the crash is related to dangling wires.
+
+    -modules
+        try to remove modules.
+
+    -ports
+        try to remove module ports.
+
+    -cells
+        try to remove cells.
+
+    -connections
+        try to reconnect ports to 'x.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

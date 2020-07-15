@@ -1,0 +1,54 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: wreduce</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>wreduce - reduce the word size of operations if possible</h1>
+<pre>
+    wreduce [options] [selection]
+
+This command reduces the word size of operations. For example it will replace
+the 32 bit adders in the following code with adders of more appropriate widths:
+
+    module test(input [3:0] a, b, c, output [7:0] y);
+        assign y = a + b + c + 1;
+    endmodule
+
+Options:
+
+    -memx
+        Do not change the width of memory address ports. Use this options in
+        flows that use the 'memory_memx' pass.
+
+    -keepdc
+        Do not optimize explicit don't-care values.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

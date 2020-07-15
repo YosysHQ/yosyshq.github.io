@@ -1,0 +1,66 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: attrmap</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>attrmap - renaming attributes</h1>
+<pre>
+    attrmap [options] [selection]
+
+This command renames attributes and/or mapps key/value pairs to
+other key/value pairs.
+
+    -tocase &lt;name&gt;
+        Match attribute names case-insensitively and set it to the specified
+        name.
+
+    -rename &lt;old_name&gt; &lt;new_name&gt;
+        Rename attributes as specified
+
+    -map &lt;old_name&gt;=&lt;old_value&gt; &lt;new_name&gt;=&lt;new_value&gt;
+        Map key/value pairs as indicated.
+
+    -imap &lt;old_name&gt;=&lt;old_value&gt; &lt;new_name&gt;=&lt;new_value&gt;
+        Like -map, but use case-insensitive match for &lt;old_value&gt; when
+        it is a string value.
+
+    -remove &lt;name&gt;=&lt;value&gt;
+        Remove attributes matching this pattern.
+
+    -modattr
+        Operate on module attributes instead of attributes on wires and cells.
+
+For example, mapping Xilinx-style "keep" attributes to Yosys-style:
+
+    attrmap -tocase keep -imap keep="true" keep=1 \
+            -imap keep="false" keep=0 -remove keep=0
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

@@ -1,0 +1,128 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: synth_gowin</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>synth_gowin - synthesis for Gowin FPGAs</h1>
+<pre>
+    synth_gowin [options]
+
+This command runs synthesis for Gowin FPGAs. This work is experimental.
+
+    -top &lt;module&gt;
+        use the specified module as top module (default='top')
+
+    -vout &lt;file&gt;
+        write the design to the specified Verilog netlist file. writing of an
+        output file is omitted if this parameter is not specified.
+
+    -run &lt;from_label&gt;:&lt;to_label&gt;
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+    -nodffe
+        do not use flipflops with CE in output netlist
+
+    -nobram
+        do not use BRAM cells in output netlist
+
+    -nodram
+        do not use distributed RAM cells in output netlist
+
+    -noflatten
+        do not flatten design before synthesis
+
+    -retime
+        run 'abc' with -dff option
+
+
+The following commands are executed by this synthesis command:
+
+    begin:
+        read_verilog -lib +/gowin/cells_sim.v
+        hierarchy -check -top &lt;top&gt;
+
+    flatten:    (unless -noflatten)
+        proc
+        flatten
+        tribuf -logic
+        deminout
+
+    coarse:
+        synth -run coarse
+
+    bram:    (skip if -nobram)
+        memory_bram -rules +/gowin/bram.txt
+        techmap -map +/gowin/brams_map.v -map +/gowin/cells_sim.v
+
+    dram:    (skip if -nodram)
+        memory_bram -rules +/gowin/dram.txt
+        techmap -map +/gowin/drams_map.v
+        determine_init
+
+    fine:
+        opt -fast -mux_undef -undriven -fine
+        memory_map
+        opt -undriven -fine
+        techmap -map +/techmap.v -map +/gowin/arith_map.v
+        techmap -map +/techmap.v
+        abc -dff    (only if -retime)
+
+    map_ffs:
+        dffsr2dff
+        dff2dffs
+        opt_clean
+        dff2dffe -direct-match $_DFF_* -direct-match $__DFFS_*
+        techmap -map +/gowin/cells_map.v
+        opt_expr -mux_undef
+        simplemap
+
+    map_luts:
+        abc -lut 4
+        clean
+
+    map_cells:
+        techmap -map +/gowin/cells_map.v
+        hilomap -hicell VCC V -locell GND G
+        iopadmap -bits -inpad IBUF O:I -outpad OBUF I:O    (unless -noiopads)
+        dffinit  -ff DFF Q INIT
+        clean
+
+    check:
+        hierarchy -check
+        stat
+        check -noinit
+
+    vout:
+        write_verilog -nodec -attr2comment -defparam -renameprefix gen &lt;file-name&gt;
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

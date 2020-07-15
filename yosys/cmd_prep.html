@@ -1,0 +1,99 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: prep</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>prep - generic synthesis script</h1>
+<pre>
+    prep [options]
+
+This command runs a conservative RTL synthesis. A typical application for this
+is the preparation stage of a verification flow. This command does not operate
+on partly selected designs.
+
+    -top &lt;module&gt;
+        use the specified module as top module (default='top')
+
+    -auto-top
+        automatically determine the top of the design hierarchy
+
+    -flatten
+        flatten the design before synthesis. this will pass '-auto-top' to
+        'hierarchy' if no top module is specified.
+
+    -ifx
+        passed to 'proc'. uses verilog simulation behavior for verilog if/case
+        undef handling. this also prevents 'wreduce' from being run.
+
+    -memx
+        simulate verilog simulation behavior for out-of-bounds memory accesses
+        using the 'memory_memx' pass.
+
+    -nomem
+        do not run any of the memory_* passes
+
+    -rdff
+        do not pass -nordff to 'memory_dff'. This enables merging of FFs into
+        memory read ports.
+
+    -nokeepdc
+        do not call opt_* with -keepdc
+
+    -run &lt;from_label&gt;[:&lt;to_label&gt;]
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+
+The following commands are executed by this synthesis command:
+
+    begin:
+        hierarchy -check [-top &lt;top&gt; | -auto-top]
+
+    coarse:
+        proc [-ifx]
+        flatten    (if -flatten)
+        opt_expr -keepdc
+        opt_clean
+        check
+        opt -keepdc
+        wreduce -keepdc [-memx]
+        memory_dff [-nordff]
+        memory_memx    (if -memx)
+        opt_clean
+        memory_collect
+        opt -keepdc -fast
+
+    check:
+        stat
+        check
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

@@ -1,0 +1,67 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: opt</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>opt - perform simple optimizations</h1>
+<pre>
+    opt [options] [selection]
+
+This pass calls all the other opt_* passes in a useful order. This performs
+a series of trivial optimizations and cleanups. This pass executes the other
+passes in the following order:
+
+    opt_expr [-mux_undef] [-mux_bool] [-undriven] [-clkinv] [-fine] [-full] [-keepdc]
+    opt_merge [-share_all] -nomux
+
+    do
+        opt_muxtree
+        opt_reduce [-fine] [-full]
+        opt_merge [-share_all]
+        opt_rmdff [-keepdc]
+        opt_clean [-purge]
+        opt_expr [-mux_undef] [-mux_bool] [-undriven] [-clkinv] [-fine] [-full] [-keepdc]
+    while &lt;changed design&gt;
+
+When called with -fast the following script is used instead:
+
+    do
+        opt_expr [-mux_undef] [-mux_bool] [-undriven] [-clkinv] [-fine] [-full] [-keepdc]
+        opt_merge [-share_all]
+        opt_rmdff [-keepdc]
+        opt_clean [-purge]
+    while &lt;changed design in opt_rmdff&gt;
+
+Note: Options in square brackets (such as [-keepdc]) are passed through to
+the opt_* commands when given to 'opt'.
+
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

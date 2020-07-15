@@ -1,0 +1,133 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: synth_intel</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>synth_intel - synthesis for Intel (Altera) FPGAs.</h1>
+<pre>
+    synth_intel [options]
+
+This command runs synthesis for Intel FPGAs.
+
+    -family &lt; max10 | a10gx | cyclone10 | cyclonev | cycloneiv | cycloneive&gt;
+        generate the synthesis netlist for the specified family.
+        MAX10 is the default target if not family argument specified.
+        For Cyclone GX devices, use cycloneiv argument; For Cyclone E, use cycloneive.
+        Cyclone V and Arria 10 GX devices are experimental, use it with a10gx argument.
+
+    -top &lt;module&gt;
+        use the specified module as top module (default='top')
+
+    -vqm &lt;file&gt;
+        write the design to the specified Verilog Quartus Mapping File. Writing of an
+        output file is omitted if this parameter is not specified.
+
+    -vpr &lt;file&gt;
+        write BLIF files for VPR flow experiments. The synthesized BLIF output file is not
+        compatible with the Quartus flow. Writing of an
+        output file is omitted if this parameter is not specified.
+
+    -run &lt;from_label&gt;:&lt;to_label&gt;
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+    -noiopads
+        do not use altsyncram cells in output netlist
+
+    -nobram
+        do not use altsyncram cells in output netlist
+
+    -noflatten
+        do not flatten design before synthesis
+
+    -retime
+        run 'abc' with -dff option
+
+The following commands are executed by this synthesis command:
+
+    begin:
+
+    family:
+        read_verilog -sv -lib +/intel/max10/cells_sim.v
+        read_verilog -sv -lib +/intel/common/m9k_bb.v
+        read_verilog -sv -lib +/intel/common/altpll_bb.v
+        hierarchy -check -top &lt;top&gt;
+
+    flatten:    (unless -noflatten)
+        proc
+        flatten
+        tribuf -logic
+        deminout
+
+    coarse:
+        synth -run coarse
+
+    bram:    (skip if -nobram)
+        memory_bram -rules +/intel/common/brams.txt
+        techmap -map +/intel/common/brams_map.v
+
+    fine:
+        opt -fast -mux_undef -undriven -fine -full
+        memory_map
+        opt -undriven -fine
+        dffsr2dff
+        dff2dffe -direct-match $_DFF_*
+        opt -fine
+        techmap -map +/techmap.v
+        opt -full
+        clean -purge
+        setundef -undriven -zero
+        abc -markgroups -dff    (only if -retime)
+
+    map_luts:
+        abc -lut 4
+        clean
+
+    map_cells:
+        iopadmap -bits -outpad $__outpad I:O -inpad $__inpad O:I    (unless -noiopads)
+        techmap -map +/intel/max10/cells_map.v
+        dffinit -highlow -ff dffeas q power_up
+        clean -purge
+
+    check:
+        hierarchy -check
+        stat
+        check -noinit
+
+    vqm:
+        write_verilog -attr2comment -defparam -nohex -decimal -renameprefix syn_ &lt;file-name&gt;
+
+    vpr:
+        opt_clean -purge
+        write_blif &lt;file-name&gt;
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

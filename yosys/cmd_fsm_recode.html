@@ -1,0 +1,55 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: fsm_recode</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>fsm_recode - recoding finite state machines</h1>
+<pre>
+    fsm_recode [options] [selection]
+
+This pass reassign the state encodings for FSM cells. At the moment only
+one-hot encoding and binary encoding is supported.
+    -encoding &lt;type&gt;
+        specify the encoding scheme used for FSMs without the
+        'fsm_encoding' attribute or with the attribute set to `auto'.
+
+    -fm_set_fsm_file &lt;file&gt;
+        generate a file containing the mapping from old to new FSM encoding
+        in form of Synopsys Formality set_fsm_* commands.
+
+    -encfile &lt;file&gt;
+        write the mappings from old to new FSM encoding to a file in the
+        following format:
+
+            .fsm &lt;module_name&gt; &lt;state_signal&gt;
+            .map &lt;old_bitpattern&gt; &lt;new_bitpattern&gt;
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

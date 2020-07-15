@@ -1,0 +1,60 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: dffinit</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>dffinit - set INIT param on FF cells</h1>
+<pre>
+    dffinit [options] [selection]
+
+This pass sets an FF cell parameter to the the initial value of the net it
+drives. (This is primarily used in FPGA flows.)
+
+    -ff &lt;cell_name&gt; &lt;output_port&gt; &lt;init_param&gt;
+        operate on the specified cell type. this option can be used
+        multiple times.
+
+    -highlow
+        use the string values "high" and "low" to represent a single-bit
+        initial value of 1 or 0. (multi-bit values are not supported in this
+        mode.)
+
+    -strinit &lt;string for high&gt; &lt;string for low&gt; 
+        use string values in the command line to represent a single-bit
+        initial value of 1 or 0. (multi-bit values are not supported in this
+        mode.)
+
+    -noreinit
+        fail if the FF cell has already a defined initial value set in other
+        passes and the initial value of the net it drives is not equal to
+        the already defined initial value.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

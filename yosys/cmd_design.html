@@ -1,0 +1,90 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: design</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>design - save, restore and reset current design</h1>
+<pre>
+    design -reset
+
+Clear the current design.
+
+
+    design -save &lt;name&gt;
+
+Save the current design under the given name.
+
+
+    design -stash &lt;name&gt;
+
+Save the current design under the given name and then clear the current design.
+
+
+    design -push
+
+Push the current design to the stack and then clear the current design.
+
+
+    design -pop
+
+Reset the current design and pop the last design from the stack.
+
+
+    design -load &lt;name&gt;
+
+Reset the current design and load the design previously saved under the given
+name.
+
+
+    design -copy-from &lt;name&gt; [-as &lt;new_mod_name&gt;] &lt;selection&gt;
+
+Copy modules from the specified design into the current one. The selection is
+evaluated in the other design.
+
+
+    design -copy-to &lt;name&gt; [-as &lt;new_mod_name&gt;] [selection]
+
+Copy modules from the current design into the specified one.
+
+
+    design -import &lt;name&gt; [-as &lt;new_top_name&gt;] [selection]
+
+Import the specified design into the current design. The source design must
+either have a selected top module or the selection must contain exactly one
+module that is then used as top module for this command.
+
+
+    design -reset-vlog
+
+The Verilog front-end remembers defined macros and top-level declarations
+between calls to 'read_verilog'. This command resets this memory.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

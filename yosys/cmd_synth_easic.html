@@ -1,0 +1,98 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: synth_easic</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>synth_easic - synthesis for eASIC platform</h1>
+<pre>
+    synth_easic [options]
+
+This command runs synthesis for eASIC platform.
+
+    -top &lt;module&gt;
+        use the specified module as top module
+
+    -vlog &lt;file&gt;
+        write the design to the specified structural Verilog file. writing of
+        an output file is omitted if this parameter is not specified.
+
+    -etools &lt;path&gt;
+        set path to the eTools installation. (default=/opt/eTools)
+
+    -run &lt;from_label&gt;:&lt;to_label&gt;
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+    -noflatten
+        do not flatten design before synthesis
+
+    -retime
+        run 'abc' with -dff option
+
+
+The following commands are executed by this synthesis command:
+
+    begin:
+        read_liberty -lib &lt;etools_phys_clk_lib&gt;
+        read_liberty -lib &lt;etools_logic_lut_lib&gt;
+        hierarchy -check -top &lt;top&gt;
+
+    flatten:    (unless -noflatten)
+        proc
+        flatten
+
+    coarse:
+        synth -run coarse
+
+    fine:
+        opt -fast -mux_undef -undriven -fine
+        memory_map
+        opt -undriven -fine
+        techmap
+        opt -fast
+        abc -dff     (only if -retime)
+        opt_clean    (only if -retime)
+
+    map:
+        dfflibmap -liberty &lt;etools_phys_clk_lib&gt;
+        abc -liberty &lt;etools_logic_lut_lib&gt;
+        opt_clean
+
+    check:
+        hierarchy -check
+        stat
+        check -noinit
+
+    vlog:
+        write_verilog -noexpr -attr2comment &lt;file-name&gt;
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

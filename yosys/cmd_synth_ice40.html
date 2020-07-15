@@ -1,0 +1,184 @@
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: synth_ice40</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="navX" href="http://www.reddit.com/r/yosys/">Reddit</a>
+  <a class="navX" href="http://webchat.freenode.net/?channels=yosys">IRC (Freenode)</a>
+  <a class="navX" href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>
+  <a class="navX" href="https://github.com/cliffordwolf/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>synth_ice40 - synthesis for iCE40 FPGAs</h1>
+<pre>
+    synth_ice40 [options]
+
+This command runs synthesis for iCE40 FPGAs.
+
+    -top &lt;module&gt;
+        use the specified module as top module
+
+    -blif &lt;file&gt;
+        write the design to the specified BLIF file. writing of an output file
+        is omitted if this parameter is not specified.
+
+    -edif &lt;file&gt;
+        write the design to the specified EDIF file. writing of an output file
+        is omitted if this parameter is not specified.
+
+    -json &lt;file&gt;
+        write the design to the specified JSON file. writing of an output file
+        is omitted if this parameter is not specified.
+
+    -run &lt;from_label&gt;:&lt;to_label&gt;
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+    -noflatten
+        do not flatten design before synthesis
+
+    -retime
+        run 'abc' with -dff option
+
+    -relut
+        combine LUTs after synthesis
+
+    -nocarry
+        do not use SB_CARRY cells in output netlist
+
+    -nodffe
+        do not use SB_DFFE* cells in output netlist
+
+    -dffe_min_ce_use &lt;min_ce_use&gt;
+        do not use SB_DFFE* cells if the resulting CE line would go to less
+        than min_ce_use SB_DFFE*in output netlist
+
+    -nobram
+        do not use SB_RAM40_4K* cells in output netlist
+
+    -dsp
+        use iCE40 UltraPlus DSP cells for large arithmetic
+
+    -noabc
+        use built-in Yosys LUT techmapping instead of abc
+
+    -abc2
+        run two passes of 'abc' for slightly improved logic density
+
+    -vpr
+        generate an output netlist (and BLIF file) suitable for VPR
+        (this feature is experimental and incomplete)
+
+
+The following commands are executed by this synthesis command:
+
+    begin:
+        read_verilog -lib +/ice40/cells_sim.v
+        hierarchy -check -top &lt;top&gt;
+        proc
+
+    flatten:    (unless -noflatten)
+        flatten
+        tribuf -logic
+        deminout
+
+    coarse:
+        opt_expr
+        opt_clean
+        check
+        opt
+        wreduce
+        peepopt
+        opt_clean
+        share
+        techmap -map +/cmp2lut.v -D LUT_WIDTH=4
+        opt_expr
+        opt_clean
+        ice40_dsp    (if -dsp)
+        alumacc
+        opt
+        fsm
+        opt -fast
+        memory -nomap
+        opt_clean
+
+    bram:    (skip if -nobram)
+        memory_bram -rules +/ice40/brams.txt
+        techmap -map +/ice40/brams_map.v
+        ice40_braminit
+
+    map:
+        opt -fast -mux_undef -undriven -fine
+        memory_map
+        opt -undriven -fine
+
+    map_gates:
+        techmap -map +/techmap.v -map +/ice40/arith_map.v
+        abc -dff    (only if -retime)
+        ice40_opt
+
+    map_ffs:
+        dffsr2dff
+        dff2dffe -direct-match $_DFF_*
+        techmap -D NO_LUT -map +/ice40/cells_map.v
+        opt_expr -mux_undef
+        simplemap
+        ice40_ffinit
+        ice40_ffssr
+        ice40_opt -full
+
+    map_luts:
+        abc          (only if -abc2)
+        ice40_opt    (only if -abc2)
+        techmap -map +/ice40/latches_map.v
+        simplemap                                   (only if -noabc)
+        techmap -map +/gate2lut.v -D LUT_WIDTH=4    (only if -noabc)
+        abc -dress -lut 4    (skip if -noabc)
+        clean
+        ice40_unlut                                (only if -relut)
+        opt_lut -dlogic SB_CARRY:I0=1:I1=2:CI=3    (only if -relut)
+
+    map_cells:
+        techmap -map +/ice40/cells_map.v    (with -D NO_LUT in vpr mode)
+        clean
+
+    check:
+        hierarchy -check
+        stat
+        check -noinit
+
+    blif:
+        opt_clean -purge                                     (vpr mode)
+        write_blif -attr -cname -conn -param &lt;file-name&gt;     (vpr mode)
+        write_blif -gates -attr -param &lt;file-name&gt;           (non-vpr mode)
+
+    edif:
+        write_edif &lt;file-name&gt;
+
+    json:
+        write_json &lt;file-name&gt;
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>
