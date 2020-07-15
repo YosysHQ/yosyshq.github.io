@@ -1,0 +1,12 @@
+@cmd_header onehot@
+<h1>onehot - optimize $eq cells for onehot signals</h1>
+<pre>
+    onehot [options] [selection]
+
+This pass optimizes $eq cells that compare one-hot signals against constants
+
+    -v, -vv
+        verbose output
+
+</pre>
+@footer@

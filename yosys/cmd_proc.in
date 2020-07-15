@@ -1,0 +1,30 @@
+@cmd_header proc@
+<h1>proc - translate processes to netlists</h1>
+<pre>
+    proc [options] [selection]
+
+This pass calls all the other proc_* passes in the most common order.
+
+    proc_clean
+    proc_rmdead
+    proc_init
+    proc_arst
+    proc_mux
+    proc_dlatch
+    proc_dff
+    proc_clean
+
+This replaces the processes in the design with multiplexers,
+flip-flops and latches.
+
+The following options are supported:
+
+    -global_arst [!]&lt;netname&gt;
+        This option is passed through to proc_arst.
+
+    -ifx
+        This option is passed through to proc_mux. proc_rmdead is not
+        executed in -ifx mode.
+
+</pre>
+@footer@

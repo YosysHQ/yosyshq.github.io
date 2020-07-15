@@ -1,0 +1,11 @@
+@cmd_header clk2fflogic@
+<h1>clk2fflogic - convert clocked FFs to generic $ff cells</h1>
+<pre>
+    clk2fflogic [options] [selection]
+
+This command replaces clocked flip-flops with generic $ff cells that use the
+implicit global clock. This is useful for formal verification of designs with
+multiple clocks.
+
+</pre>
+@footer@

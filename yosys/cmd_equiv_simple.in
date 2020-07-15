@@ -1,0 +1,25 @@
+@cmd_header equiv_simple@
+<h1>equiv_simple - try proving simple $equiv instances</h1>
+<pre>
+    equiv_simple [options] [selection]
+
+This command tries to prove $equiv cells using a simple direct SAT approach.
+
+    -v
+        verbose output
+
+    -undef
+        enable modelling of undef states
+
+    -short
+        create shorter input cones that stop at shared nodes. This yields
+        simpler SAT problems but sometimes fails to prove equivalence.
+
+    -nogroup
+        disabling grouping of $equiv cells by output wire
+
+    -seq &lt;N&gt;
+        the max. number of time steps to be considered (default = 1)
+
+</pre>
+@footer@

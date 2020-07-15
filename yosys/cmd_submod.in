@@ -1,0 +1,28 @@
+@cmd_header submod@
+<h1>submod - moving part of a module to a new submodule</h1>
+<pre>
+    submod [-copy] [selection]
+
+This pass identifies all cells with the 'submod' attribute and moves them to
+a newly created module. The value of the attribute is used as name for the
+cell that replaces the group of cells with the same attribute value.
+
+This pass can be used to create a design hierarchy in flat design. This can
+be useful for analyzing or reverse-engineering a design.
+
+This pass only operates on completely selected modules with no processes
+or memories.
+
+
+    submod -name &lt;name&gt; [-copy] [selection]
+
+As above, but don't use the 'submod' attribute but instead use the selection.
+Only objects from one module might be selected. The value of the -name option
+is used as the value of the 'submod' attribute above.
+
+By default the cells are 'moved' from the source module and the source module
+will use an instance of the new module after this command is finished. Call
+with -copy to not modify the source module.
+
+</pre>
+@footer@

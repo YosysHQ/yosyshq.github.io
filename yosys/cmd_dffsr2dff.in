@@ -1,0 +1,10 @@
+@cmd_header dffsr2dff@
+<h1>dffsr2dff - convert DFFSR cells to simpler FF cell types</h1>
+<pre>
+    dffsr2dff [options] [selection]
+
+This pass converts DFFSR cells ($dffsr, $_DFFSR_???_) and ADFF cells ($adff,
+$_DFF_???_) to simpler FF cell types when any of the set/reset inputs is unused.
+
+</pre>
+@footer@

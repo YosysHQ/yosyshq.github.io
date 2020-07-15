@@ -1,0 +1,10 @@
+@cmd_header memory_nordff@
+<h1>memory_nordff - extract read port FFs from memories</h1>
+<pre>
+    memory_nordff [options] [selection]
+
+This pass extracts FFs from memory read ports. This results in a netlist
+similar to what one would get from calling memory_dff with -nordff.
+
+</pre>
+@footer@

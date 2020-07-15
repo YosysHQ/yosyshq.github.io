@@ -1,0 +1,29 @@
+@cmd_header dffinit@
+<h1>dffinit - set INIT param on FF cells</h1>
+<pre>
+    dffinit [options] [selection]
+
+This pass sets an FF cell parameter to the the initial value of the net it
+drives. (This is primarily used in FPGA flows.)
+
+    -ff &lt;cell_name&gt; &lt;output_port&gt; &lt;init_param&gt;
+        operate on the specified cell type. this option can be used
+        multiple times.
+
+    -highlow
+        use the string values "high" and "low" to represent a single-bit
+        initial value of 1 or 0. (multi-bit values are not supported in this
+        mode.)
+
+    -strinit &lt;string for high&gt; &lt;string for low&gt; 
+        use string values in the command line to represent a single-bit
+        initial value of 1 or 0. (multi-bit values are not supported in this
+        mode.)
+
+    -noreinit
+        fail if the FF cell has already a defined initial value set in other
+        passes and the initial value of the net it drives is not equal to
+        the already defined initial value.
+
+</pre>
+@footer@

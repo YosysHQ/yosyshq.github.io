@@ -1,0 +1,15 @@
+@cmd_header read_aiger@
+<h1>read_aiger - read AIGER file</h1>
+<pre>
+    read_aiger [options] [filename]
+
+Load module from an AIGER file into the current design.
+
+    -module_name &lt;module_name&gt;
+        Name of module to be created (default: &lt;filename&gt;)
+
+    -clk_name &lt;wire_name&gt;
+        AIGER latches to be transformed into posedge DFFs clocked by wire of        this name (default: clk)
+
+</pre>
+@footer@

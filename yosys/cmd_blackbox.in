@@ -1,0 +1,10 @@
+@cmd_header blackbox@
+<h1>blackbox - convert modules into blackbox modules</h1>
+<pre>
+    blackbox [options] [selection]
+
+Convert modules into blackbox modules (remove contents and set the blackbox
+module attribute).
+
+</pre>
+@footer@

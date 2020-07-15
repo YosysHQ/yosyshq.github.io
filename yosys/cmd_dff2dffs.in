@@ -1,0 +1,10 @@
+@cmd_header dff2dffs@
+<h1>dff2dffs - process sync set/reset with SR over CE priority</h1>
+<pre>
+    dff2dffs [options] [selection]
+
+Merge synchronous set/reset $_MUX_ cells to create $__DFFS_[NP][NP][01], to be run before
+dff2dffe for SR over CE priority.
+
+</pre>
+@footer@

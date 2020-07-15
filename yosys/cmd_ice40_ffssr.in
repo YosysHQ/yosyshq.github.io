@@ -1,0 +1,9 @@
+@cmd_header ice40_ffssr@
+<h1>ice40_ffssr - iCE40: merge synchronous set/reset into FF cells</h1>
+<pre>
+    ice40_ffssr [options] [selection]
+
+Merge synchronous set/reset $_MUX_ cells into iCE40 FFs.
+
+</pre>
+@footer@

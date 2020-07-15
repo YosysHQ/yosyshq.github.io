@@ -1,0 +1,116 @@
+@cmd_header synth_xilinx@
+<h1>synth_xilinx - synthesis for Xilinx FPGAs</h1>
+<pre>
+    synth_xilinx [options]
+
+This command runs synthesis for Xilinx FPGAs. This command does not operate on
+partly selected designs. At the moment this command creates netlists that are
+compatible with 7-Series Xilinx devices.
+
+    -top &lt;module&gt;
+        use the specified module as top module
+
+    -family {xcup|xcu|xc7|xc6s}
+        run synthesis for the specified Xilinx architecture
+        generate the synthesis netlist for the specified family.
+        default: xc7
+
+    -edif &lt;file&gt;
+        write the design to the specified edif file. writing of an output file
+        is omitted if this parameter is not specified.
+
+    -blif &lt;file&gt;
+        write the design to the specified BLIF file. writing of an output file
+        is omitted if this parameter is not specified.
+
+    -vpr
+        generate an output netlist (and BLIF file) suitable for VPR
+        (this feature is experimental and incomplete)
+
+    -nobram
+        disable inference of block rams
+
+    -nodram
+        disable inference of distributed rams
+
+    -nosrl
+        disable inference of shift registers
+
+    -nocarry
+        do not use XORCY/MUXCY/CARRY4 cells in output netlist
+
+    -nowidelut
+        do not use MUXF[78] resources to implement LUTs larger than LUT6s
+
+    -run &lt;from_label&gt;:&lt;to_label&gt;
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+    -flatten
+        flatten design before synthesis
+
+    -retime
+        run 'abc' with -dff option
+
+
+The following commands are executed by this synthesis command:
+
+    begin:
+        read_verilog -lib +/xilinx/cells_sim.v
+        read_verilog -lib +/xilinx/cells_xtra.v
+        read_verilog -lib +/xilinx/brams_bb.v    (skip if '-nobram')
+        hierarchy -check -auto-top
+
+    flatten:    (with '-flatten' only)
+        proc
+        flatten
+
+    coarse:
+        synth -run coarse
+
+    bram:    (skip if '-nobram')
+        memory_bram -rules +/xilinx/brams.txt
+        techmap -map +/xilinx/brams_map.v
+
+    dram:    (skip if '-nodram')
+        memory_bram -rules +/xilinx/drams.txt
+        techmap -map +/xilinx/drams_map.v
+
+    fine:
+        pmux2shiftx    (skip if '-nosrl')
+        opt -fast -full
+        memory_map
+        dffsr2dff
+        dff2dffe
+        opt -full
+        simplemap t:$dff t:$dffe    (skip if '-nosrl')
+        shregmap -tech xilinx -minlen 3    (skip if '-nosrl')
+        techmap -map +/techmap.v [-map +/xilinx/arith_map.v]    (skip if '-nocarry')
+        opt -fast
+
+    map_cells:
+        techmap -map +/techmap.v -map +/xilinx/cells_map.v
+        clean
+
+    map_luts:
+        abc -luts 2:2,3,6:5[,10,20] [-dff]    (skip if 'nowidelut', only for '-retime')
+        clean
+        shregmap -minlen 3 -init -params -enpol any_or_none    (skip if '-nosrl')
+        techmap -map +/xilinx/lut_map.v -map +/xilinx/ff_map.v -map +/xilinx/cells_map.v
+        dffinit -ff FDRE Q INIT -ff FDCE Q INIT -ff FDPE Q INIT -ff FDSE Q INIT -ff FDRE_1 Q INIT -ff FDCE_1 Q INIT -ff FDPE_1 Q INIT -ff FDSE_1 Q INIT
+        clean
+
+    check:
+        hierarchy -check
+        stat -tech xilinx
+        check -noinit
+
+    edif:
+        write_edif -pvector bra 
+
+    blif:
+        write_blif 
+
+</pre>
+@footer@

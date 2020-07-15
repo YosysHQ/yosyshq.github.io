@@ -1,0 +1,15 @@
+@cmd_header clean@
+<h1>clean - remove unused cells and wires</h1>
+<pre>
+    clean [options] [selection]
+
+This is identical to 'opt_clean', but less verbose.
+
+When commands are separated using the ';;' token, this command will be executed
+between the commands.
+
+When commands are separated using the ';;;' token, this command will be executed
+in -purge mode between the commands.
+
+</pre>
+@footer@

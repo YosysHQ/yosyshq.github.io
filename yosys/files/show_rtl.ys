@@ -1,0 +1,6 @@
+# read design
+read_verilog counter.v
+hierarchy -check
+
+# high-level synthesis
+proc; opt; fsm; opt; memory; opt

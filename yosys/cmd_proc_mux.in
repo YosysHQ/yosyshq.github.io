@@ -1,0 +1,14 @@
+@cmd_header proc_mux@
+<h1>proc_mux - convert decision trees to multiplexers</h1>
+<pre>
+    proc_mux [options] [selection]
+
+This pass converts the decision trees in processes (originating from if-else
+and case statements) to trees of multiplexer cells.
+
+    -ifx
+        Use Verilog simulation behavior with respect to undef values in
+        'case' expressions and 'if' conditions.
+
+</pre>
+@footer@

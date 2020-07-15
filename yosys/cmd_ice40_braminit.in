@@ -1,0 +1,10 @@
+@cmd_header ice40_braminit@
+<h1>ice40_braminit - iCE40: perform SB_RAM40_4K initialization from file</h1>
+<pre>
+    ice40_braminit
+
+This command processes all SB_RAM40_4K blocks with a non-empty INIT_FILE
+parameter and converts it into the required INIT_x attributes
+
+</pre>
+@footer@

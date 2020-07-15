@@ -1,0 +1,10 @@
+@cmd_header rmports@
+<h1>rmports - remove module ports with no connections</h1>
+<pre>
+    rmports [selection]
+
+This pass identifies ports in the selected modules which are not used or
+driven and removes them.
+
+</pre>
+@footer@

@@ -1,0 +1,86 @@
+@cmd_header synth_anlogic@
+<h1>synth_anlogic - synthesis for Anlogic FPGAs</h1>
+<pre>
+    synth_anlogic [options]
+
+This command runs synthesis for Anlogic FPGAs.
+
+    -top &lt;module&gt;
+        use the specified module as top module
+
+    -edif &lt;file&gt;
+        write the design to the specified EDIF file. writing of an output file
+        is omitted if this parameter is not specified.
+
+    -json &lt;file&gt;
+        write the design to the specified JSON file. writing of an output file
+        is omitted if this parameter is not specified.
+
+    -run &lt;from_label&gt;:&lt;to_label&gt;
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+    -noflatten
+        do not flatten design before synthesis
+
+    -retime
+        run 'abc' with -dff option
+
+
+The following commands are executed by this synthesis command:
+
+    begin:
+        read_verilog -lib +/anlogic/cells_sim.v +/anlogic/eagle_bb.v
+        hierarchy -check -top &lt;top&gt;
+
+    flatten:    (unless -noflatten)
+        proc
+        flatten
+        tribuf -logic
+        deminout
+
+    coarse:
+        synth -run coarse
+
+    dram:
+        memory_bram -rules +/anlogic/drams.txt
+        techmap -map +/anlogic/drams_map.v
+        anlogic_determine_init
+
+    fine:
+        opt -fast -mux_undef -undriven -fine
+        memory_map
+        opt -undriven -fine
+        techmap -map +/techmap.v -map +/anlogic/arith_map.v
+        abc -dff    (only if -retime)
+
+    map_ffs:
+        dffsr2dff
+        techmap -D NO_LUT -map +/anlogic/cells_map.v
+        dffinit -strinit SET RESET -ff AL_MAP_SEQ q REGSET -noreinit
+        opt_expr -mux_undef
+        simplemap
+
+    map_luts:
+        abc -lut 4:6
+        clean
+
+    map_cells:
+        techmap -map +/anlogic/cells_map.v
+        clean
+        anlogic_eqn
+
+    check:
+        hierarchy -check
+        stat
+        check -noinit
+
+    edif:
+        write_edif &lt;file-name&gt;
+
+    json:
+        write_json &lt;file-name&gt;
+
+</pre>
+@footer@

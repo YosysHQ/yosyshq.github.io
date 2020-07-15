@@ -1,0 +1,10 @@
+@cmd_header alumacc@
+<h1>alumacc - extract ALU and MACC cells</h1>
+<pre>
+    alumacc [selection]
+
+This pass translates arithmetic operations like $add, $mul, $lt, etc. to $alu
+and $macc cells.
+
+</pre>
+@footer@

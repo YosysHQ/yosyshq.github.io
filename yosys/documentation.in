@@ -1,0 +1,70 @@
+@header Documentation@
+
+<h1>Documentation</h1>
+
+<p>This page has links to all the documentaton resources
+available for Yosys.</p>
+
+<h2>Yosys Manual</h2>
+
+<p>A quick first-steps tutorial can be found in the <a
+href="https://github.com/cliffordwolf/yosys/blob/master/README.md">README file</a>.</p>
+
+<p>The Yosys manual can be downloaded <a href="files/yosys_manual.pdf">here</a> (PDF).</p>
+
+<h2>Support</h2>
+
+The best places to ask questions are the <a
+href="http://www.reddit.com/r/yosys/">Yosys Subreddit</a>, <a
+href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a> and
+<a href="http://webchat.freenode.net/?channels=yosys">#yosys on freenode</a>.
+
+The best place to report a bug is on <a
+href="https://github.com/cliffordwolf/yosys/issues/new">GitHub</a>.
+
+<h2>Presentation Slides</h2>
+
+<p><a href="files/yosys_presentation.pdf">This presentation slides</a> cover a wide range of topics related to Yosys. (The LaTeX source is part of the Yosys source distribution. Fell free to adapt the slides as needed.)</p>
+
+<h2>Application Notes</h2>
+
+<ul class="list">
+<li><a href="files/yosys_appnote_010_verilog_to_blif.pdf">Yosys AppNote 010<a>: Converting Verilog to BLIF</li>
+<li><a href="files/yosys_appnote_011_design_investigation.pdf">Yosys AppNote 011<a>: Interactive Design Investigation</li>
+<li><a href="files/yosys_appnote_012_verilog_to_btor.pdf">Yosys AppNote 012<a>: Converting Verilog to BTOR</li>
+</ul>
+
+<h2>Papers and other Publications</h2>
+
+<p><i>This section is under construction.</i></p>
+
+<ul class="list"><li>
+Clifford Wolf, Johann Glaser. Yosys - A Free Verilog Synthesis Suite.
+In <i>Proceedings of Austrochip 2013</i>.
+[<a href="files/yosys-austrochip2013.pdf">download pdf</a>]
+</li><li>
+Johann Glaser and Clifford Wolf. Methodology and Example-Driven Interconnect
+Synthesis for Designing Heterogeneous Coarse-Grain Reconfigurable
+Architectures. In Jan Haase, editor, <i>Models, Methods, and Tools for
+Complex Chip Design. Lecture Notes in Electrical Engineering. Volume 265,
+2014, pp 201-221. Springer, 2013.</i>
+[<a href="files/intersynth-yosys-springer2013.pdf">download pdf</a>]
+</li></ul>
+
+In papers and reports, please refer to Yosys as follows: <b>Clifford Wolf.
+Yosys Open SYnthesis Suite. http://www.clifford.at/yosys/</b>, e.g. using the
+following BibTeX code:
+
+<pre class="small">@MISC{Yosys,
+	author = {Clifford Wolf},
+	title = {Yosys Open SYnthesis Suite},
+	howpublished = "\url{http://www.clifford.at/yosys/}"
+}</pre>
+
+<h2>Command Reference</h2>
+
+<ul class="cmds">
+@cmd_index@
+</ul>
+
+@footer@

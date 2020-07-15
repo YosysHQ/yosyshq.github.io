@@ -1,0 +1,13 @@
+@cmd_header ltp@
+<h1>ltp - print longest topological path</h1>
+<pre>
+    ltp [options] [selection]
+
+This command prints the longest topological path in the design. (Only considers
+paths within a single module, so the design must be flattened.)
+
+    -noff
+        automatically exclude FF cell types
+
+</pre>
+@footer@

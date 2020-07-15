@@ -1,0 +1,13 @@
+@cmd_header aigmap@
+<h1>aigmap - map logic to and-inverter-graph circuit</h1>
+<pre>
+    aigmap [options] [selection]
+
+Replace all logic cells with circuits made of only $_AND_ and
+$_NOT_ cells.
+
+    -nand
+        Enable creation of $_NAND_ cells
+
+</pre>
+@footer@

@@ -1,0 +1,16 @@
+@cmd_header equiv_remove@
+<h1>equiv_remove - remove $equiv cells</h1>
+<pre>
+    equiv_remove [options] [selection]
+
+This command removes the selected $equiv cells. If neither -gold nor -gate is
+used then only proven cells are removed.
+
+    -gold
+        keep gold circuit
+
+    -gate
+        keep gate circuit
+
+</pre>
+@footer@

@@ -1,0 +1,16 @@
+@cmd_header verilog_defines@
+<h1>verilog_defines - define and undefine verilog defines</h1>
+<pre>
+    verilog_defines [options]
+
+Define and undefine verilog preprocessor macros.
+
+    -Dname[=definition]
+        define the preprocessor symbol 'name' and set its optional value
+        'definition'
+
+    -Uname[=definition]
+        undefine the preprocessor symbol 'name'
+
+</pre>
+@footer@

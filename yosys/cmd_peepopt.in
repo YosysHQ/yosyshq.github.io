@@ -1,0 +1,9 @@
+@cmd_header peepopt@
+<h1>peepopt - collection of peephole optimizers</h1>
+<pre>
+    peepopt [options] [selection]
+
+This pass applies a collection of peephole optimizers to the current design.
+
+</pre>
+@footer@

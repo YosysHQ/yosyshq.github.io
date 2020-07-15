@@ -1,0 +1,17 @@
+@cmd_header script@
+<h1>script - execute commands from script file</h1>
+<pre>
+    script &lt;filename&gt; [&lt;from_label&gt;:&lt;to_label&gt;]
+
+This command executes the yosys commands in the specified file.
+
+The 2nd argument can be used to only execute the section of the
+file between the specified labels. An empty from label is synonymous
+for the beginning of the file and an empty to label is synonymous
+for the end of the file.
+
+If only one label is specified (without ':') then only the block
+marked with that label (until the next label) is executed.
+
+</pre>
+@footer@

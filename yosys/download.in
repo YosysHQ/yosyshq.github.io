@@ -1,0 +1,64 @@
+@header Download@
+
+<h1>Download / Install</h1>
+
+<p><b>Note:</b> At the moment Yosys is mostly tested on Linux. Expect some
+difficulties when building on other platforms.</p>
+
+<p>Download the Yosys 0.9 release source code from GitHub:</p>
+
+<ul>
+<li><a href="https://github.com/cliffordwolf/yosys/releases/tag/yosys-0.9">Release Notes</a></li>
+<li><a href="https://github.com/cliffordwolf/yosys/archive/yosys-0.9.zip">yosys-0.9.zip</a></li>
+<li><a href="https://github.com/cliffordwolf/yosys/archive/yosys-0.9.tar.gz">yosys-0.9.tar.gz</a></li>
+</ul>
+
+<h2>Installing on Ubuntu</h2>
+
+<a href="https://launchpad.net/~saltmakrell">Ruben Undheim</a> maintains a PPA
+with Yosys Ubuntu packages. Use the following commands to install pre-compiled
+Yosys binaries on Ubuntu:
+
+<pre>sudo add-apt-repository ppa:saltmakrell/ppa
+sudo apt-get update                                                                                                                                                                                              
+sudo apt-get install yosys</pre>
+
+His PPA only provides updated packages for the latest
+Ubuntu desktop LTS version - trusty (14.04 LTS). As of vivid (15.04), yosys
+will be available in the standard package repository for Ubuntu.
+
+<h2>Yosys on MS Windows</h2>
+
+There are two versions of Yosys for Win32. First there is the "official binary release"
+of Yosys for Win32 which is cross-compiled using <a href="http://mxe.cc/">MXE</a>:
+
+<ul><li><a href="nogit/win32/yosys-win32-mxebin-0.9.zip">yosys-win32-mxebin-0.9.zip</a></ul>
+
+And then there is a source code export for VisualStudio for users who want to do
+Yosys C++ development on Windows:
+
+<ul><li><a href="nogit/win32/yosys-win32-vcxsrc-0.9.zip">yosys-win32-vcxsrc-0.9.zip</a></li></ul>
+
+<h2>Building Development Sources</h2>
+
+Clone source code from GIT repository:
+
+<pre>git clone https://github.com/cliffordwolf/yosys.git</pre>
+
+Configure build and/or change build settings in Makefile:
+
+<pre>make config-clang
+vi Makefile
+vi Makefile.conf</pre>
+
+Build, test and install:
+
+<pre>make
+make test
+sudo make install</pre>
+
+See the <a
+href="https://github.com/cliffordwolf/yosys/blob/master/README.md">README</a> file
+for detailed build instructions.
+
+@footer@

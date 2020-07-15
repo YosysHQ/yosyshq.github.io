@@ -1,0 +1,89 @@
+@cmd_header synth@
+<h1>synth - generic synthesis script</h1>
+<pre>
+    synth [options]
+
+This command runs the default synthesis script. This command does not operate
+on partly selected designs.
+
+    -top &lt;module&gt;
+        use the specified module as top module (default='top')
+
+    -auto-top
+        automatically determine the top of the design hierarchy
+
+    -flatten
+        flatten the design before synthesis. this will pass '-auto-top' to
+        'hierarchy' if no top module is specified.
+
+    -encfile &lt;file&gt;
+        passed to 'fsm_recode' via 'fsm'
+
+    -lut &lt;k&gt;
+        perform synthesis for a k-LUT architecture.
+
+    -nofsm
+        do not run FSM optimization
+
+    -noabc
+        do not run abc (as if yosys was compiled without ABC support)
+
+    -noalumacc
+        do not run 'alumacc' pass. i.e. keep arithmetic operators in
+        their direct form ($add, $sub, etc.).
+
+    -nordff
+        passed to 'memory'. prohibits merging of FFs into memory read ports
+
+    -noshare
+        do not run SAT-based resource sharing
+
+    -run &lt;from_label&gt;[:&lt;to_label&gt;]
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+
+The following commands are executed by this synthesis command:
+
+    begin:
+        hierarchy -check [-top &lt;top&gt; | -auto-top]
+
+    coarse:
+        proc
+        flatten      (if -flatten)
+        opt_expr
+        opt_clean
+        check
+        opt
+        wreduce
+        peepopt
+        opt_clean
+        techmap -map +/cmp2lut.v     (if -lut)
+        alumacc      (unless -noalumacc)
+        share        (unless -noshare)
+        opt
+        fsm          (unless -nofsm)
+        opt -fast
+        memory -nomap
+        opt_clean
+
+    fine:
+        opt -fast -full
+        memory_map
+        opt -full
+        techmap
+        techmap -map +/gate2lut.v    (if -noabc and -lut)
+        clean; opt_lut               (if -noabc and -lut)
+        opt -fast
+        abc -fast           (unless -noabc, unless -lut)
+        abc -fast -lut k    (unless -noabc, if -lut)
+        opt -fast           (unless -noabc)
+
+    check:
+        hierarchy -check
+        stat
+        check
+
+</pre>
+@footer@

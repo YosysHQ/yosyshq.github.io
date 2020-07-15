@@ -1,0 +1,48 @@
+@cmd_header rename@
+<h1>rename - rename object in the design</h1>
+<pre>
+    rename old_name new_name
+
+Rename the specified object. Note that selection patterns are not supported
+by this command.
+
+
+
+    rename -output old_name new_name
+
+Like above, but also make the wire an output. This will fail if the object is
+not a wire.
+
+
+    rename -src [selection]
+
+Assign names auto-generated from the src attribute to all selected wires and
+cells with private names.
+
+
+    rename -wire [selection]
+
+Assign auto-generated names based on the wires they drive to all selected
+cells with private names. Ignores cells driving privatly named wires.
+
+
+    rename -enumerate [-pattern &lt;pattern&gt;] [selection]
+
+Assign short auto-generated names to all selected wires and cells with private
+names. The -pattern option can be used to set the pattern for the new names.
+The character % in the pattern is replaced with a integer number. The default
+pattern is '_%_'.
+
+
+    rename -hide [selection]
+
+Assign private names (the ones with $-prefix) to all selected wires and cells
+with public names. This ignores all selected ports.
+
+
+    rename -top new_name
+
+Rename top module.
+
+</pre>
+@footer@

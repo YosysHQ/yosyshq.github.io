@@ -1,0 +1,60 @@
+@cmd_header test_cell@
+<h1>test_cell - automatically test the implementation of a cell type</h1>
+<pre>
+    test_cell [options] {cell-types}
+
+Tests the internal implementation of the given cell type (for example '$add')
+by comparing SAT solver, EVAL and TECHMAP implementations of the cell types..
+
+Run with 'all' instead of a cell type to run the test on all supported
+cell types. Use for example 'all /$add' for all cell types except $add.
+
+    -n {integer}
+        create this number of cell instances and test them (default = 100).
+
+    -s {positive_integer}
+        use this value as rng seed value (default = unix time).
+
+    -f {ilang_file}
+        don't generate circuits. instead load the specified ilang file.
+
+    -w {filename_prefix}
+        don't test anything. just generate the circuits and write them
+        to ilang files with the specified prefix
+
+    -map {filename}
+        pass this option to techmap.
+
+    -simlib
+        use "techmap -D SIMLIB_NOCHECKS -map +/simlib.v -max_iter 2 -autoproc"
+
+    -aigmap
+        instead of calling "techmap", call "aigmap"
+
+    -muxdiv
+        when creating test benches with dividers, create an additional mux
+        to mask out the division-by-zero case
+
+    -script {script_file}
+        instead of calling "techmap", call "script {script_file}".
+
+    -const
+        set some input bits to random constant values
+
+    -nosat
+        do not check SAT model or run SAT equivalence checking
+
+    -noeval
+        do not check const-eval models
+
+    -edges
+        test cell edges db creator against sat-based implementation
+
+    -v
+        print additional debug information to the console
+
+    -vlog {filename}
+        create a Verilog test bench to test simlib and write_verilog
+
+</pre>
+@footer@

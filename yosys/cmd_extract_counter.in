@@ -1,0 +1,19 @@
+@cmd_header extract_counter@
+<h1>extract_counter - Extract GreenPak4 counter cells</h1>
+<pre>
+    extract_counter [options] [selection]
+
+This pass converts non-resettable or async resettable down counters to
+counter cells. Use a target-specific 'techmap' map file to convert those cells
+to the actual target cells.
+
+    -maxwidth N
+        Only extract counters up to N bits wide
+
+    -pout X,Y,...
+        Only allow parallel output from the counter to the listed cell types
+        (if not specified, parallel outputs are not restricted)
+
+
+</pre>
+@footer@

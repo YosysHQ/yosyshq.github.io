@@ -1,0 +1,9 @@
+@cmd_header determine_init@
+<h1>determine_init - Determine the init value of cells</h1>
+<pre>
+    determine_init [selection]
+
+Determine the init value of cells that doesn't allow unknown init value.
+
+</pre>
+@footer@

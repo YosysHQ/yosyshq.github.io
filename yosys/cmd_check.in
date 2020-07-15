@@ -1,0 +1,24 @@
+@cmd_header check@
+<h1>check - check for obvious problems in the design</h1>
+<pre>
+    check [options] [selection]
+
+This pass identifies the following problems in the current design:
+
+ - combinatorial loops
+
+ - two or more conflicting drivers for one wire
+
+ - used wires that do not have a driver
+
+When called with -noinit then this command also checks for wires which have
+the 'init' attribute set.
+
+When called with -initdrv then this command also checks for wires which have
+the 'init' attribute set and aren't driven by a FF cell type.
+
+When called with -assert then the command will produce an error if any
+problems are found in the current design.
+
+</pre>
+@footer@

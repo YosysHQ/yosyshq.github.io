@@ -1,0 +1,13 @@
+@cmd_header insbuf@
+<h1>insbuf - insert buffer cells for connected wires</h1>
+<pre>
+    insbuf [options] [selection]
+
+Insert buffer cells into the design for directly connected wires.
+
+    -buf &lt;celltype&gt; &lt;in-portname&gt; &lt;out-portname&gt;
+        Use the given cell type instead of $_BUF_. (Notice that the next
+        call to "clean" will remove all $_BUF_ in the design.)
+
+</pre>
+@footer@

@@ -1,0 +1,16 @@
+@cmd_header torder@
+<h1>torder - print cells in topological order</h1>
+<pre>
+    torder [options] [selection]
+
+This command prints the selected cells in topological order.
+
+    -stop &lt;cell_type&gt; &lt;cell_port&gt;
+        do not use the specified cell port in topological sorting
+
+    -noautostop
+        by default Q outputs of internal FF cells and memory read port outputs
+        are not used in topological sorting. this option deactivates that.
+
+</pre>
+@footer@

@@ -1,0 +1,10 @@
+@cmd_header edgetypes@
+<h1>edgetypes - list all types of edges in selection</h1>
+<pre>
+    edgetypes [options] [selection]
+
+This command lists all unique types of 'edges' found in the selection. An 'edge'
+is a 4-tuple of source and sink cell type and port name.
+
+</pre>
+@footer@

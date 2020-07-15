@@ -1,0 +1,26 @@
+@cmd_header memory_share@
+<h1>memory_share - consolidate memory ports</h1>
+<pre>
+    memory_share [selection]
+
+This pass merges share-able memory ports into single memory ports.
+
+The following methods are used to consolidate the number of memory ports:
+
+  - When write ports are connected to async read ports accessing the same
+    address, then this feedback path is converted to a write port with
+    byte/part enable signals.
+
+  - When multiple write ports access the same address then this is converted
+    to a single write port with a more complex data and/or enable logic path.
+
+  - When multiple write ports are never accessed at the same time (a SAT
+    solver is used to determine this), then the ports are merged into a single
+    write port.
+
+Note that in addition to the algorithms implemented in this pass, the $memrd
+and $memwr cells are also subject to generic resource sharing passes (and other
+optimizations) such as "share" and "opt_merge".
+
+</pre>
+@footer@

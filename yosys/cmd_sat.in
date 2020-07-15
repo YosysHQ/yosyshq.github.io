@@ -1,0 +1,167 @@
+@cmd_header sat@
+<h1>sat - solve a SAT problem in the circuit</h1>
+<pre>
+    sat [options] [selection]
+
+This command solves a SAT problem defined over the currently selected circuit
+and additional constraints passed as parameters.
+
+    -all
+        show all solutions to the problem (this can grow exponentially, use
+        -max &lt;N&gt; instead to get &lt;N&gt; solutions)
+
+    -max &lt;N&gt;
+        like -all, but limit number of solutions to &lt;N&gt;
+
+    -enable_undef
+        enable modeling of undef value (aka 'x-bits')
+        this option is implied by -set-def, -set-undef et. cetera
+
+    -max_undef
+        maximize the number of undef bits in solutions, giving a better
+        picture of which input bits are actually vital to the solution.
+
+    -set &lt;signal&gt; &lt;value&gt;
+        set the specified signal to the specified value.
+
+    -set-def &lt;signal&gt;
+        add a constraint that all bits of the given signal must be defined
+
+    -set-any-undef &lt;signal&gt;
+        add a constraint that at least one bit of the given signal is undefined
+
+    -set-all-undef &lt;signal&gt;
+        add a constraint that all bits of the given signal are undefined
+
+    -set-def-inputs
+        add -set-def constraints for all module inputs
+
+    -show &lt;signal&gt;
+        show the model for the specified signal. if no -show option is
+        passed then a set of signals to be shown is automatically selected.
+
+    -show-inputs, -show-outputs, -show-ports
+        add all module (input/output) ports to the list of shown signals
+
+    -show-regs, -show-public, -show-all
+        show all registers, show signals with 'public' names, show all signals
+
+    -ignore_div_by_zero
+        ignore all solutions that involve a division by zero
+
+    -ignore_unknown_cells
+        ignore all cells that can not be matched to a SAT model
+
+The following options can be used to set up a sequential problem:
+
+    -seq &lt;N&gt;
+        set up a sequential problem with &lt;N&gt; time steps. The steps will
+        be numbered from 1 to N.
+
+        note: for large &lt;N&gt; it can be significantly faster to use
+        -tempinduct-baseonly -maxsteps &lt;N&gt; instead of -seq &lt;N&gt;.
+
+    -set-at &lt;N&gt; &lt;signal&gt; &lt;value&gt;
+    -unset-at &lt;N&gt; &lt;signal&gt;
+        set or unset the specified signal to the specified value in the
+        given timestep. this has priority over a -set for the same signal.
+
+    -set-assumes
+        set all assumptions provided via $assume cells
+
+    -set-def-at &lt;N&gt; &lt;signal&gt;
+    -set-any-undef-at &lt;N&gt; &lt;signal&gt;
+    -set-all-undef-at &lt;N&gt; &lt;signal&gt;
+        add undef constraints in the given timestep.
+
+    -set-init &lt;signal&gt; &lt;value&gt;
+        set the initial value for the register driving the signal to the value
+
+    -set-init-undef
+        set all initial states (not set using -set-init) to undef
+
+    -set-init-def
+        do not force a value for the initial state but do not allow undef
+
+    -set-init-zero
+        set all initial states (not set using -set-init) to zero
+
+    -dump_vcd &lt;vcd-file-name&gt;
+        dump SAT model (counter example in proof) to VCD file
+
+    -dump_json &lt;json-file-name&gt;
+        dump SAT model (counter example in proof) to a WaveJSON file.
+
+    -dump_cnf &lt;cnf-file-name&gt;
+        dump CNF of SAT problem (in DIMACS format). in temporal induction
+        proofs this is the CNF of the first induction step.
+
+The following additional options can be used to set up a proof. If also -seq
+is passed, a temporal induction proof is performed.
+
+    -tempinduct
+        Perform a temporal induction proof. In a temporal induction proof it is
+        proven that the condition holds forever after the number of time steps
+        specified using -seq.
+
+    -tempinduct-def
+        Perform a temporal induction proof. Assume an initial state with all
+        registers set to defined values for the induction step.
+
+    -tempinduct-baseonly
+        Run only the basecase half of temporal induction (requires -maxsteps)
+
+    -tempinduct-inductonly
+        Run only the induction half of temporal induction
+
+    -tempinduct-skip &lt;N&gt;
+        Skip the first &lt;N&gt; steps of the induction proof.
+
+        note: this will assume that the base case holds for &lt;N&gt; steps.
+        this must be proven independently with "-tempinduct-baseonly
+        -maxsteps &lt;N&gt;". Use -initsteps if you just want to set a
+        minimal induction length.
+
+    -prove &lt;signal&gt; &lt;value&gt;
+        Attempt to proof that &lt;signal&gt; is always &lt;value&gt;.
+
+    -prove-x &lt;signal&gt; &lt;value&gt;
+        Like -prove, but an undef (x) bit in the lhs matches any value on
+        the right hand side. Useful for equivalence checking.
+
+    -prove-asserts
+        Prove that all asserts in the design hold.
+
+    -prove-skip &lt;N&gt;
+        Do not enforce the prove-condition for the first &lt;N&gt; time steps.
+
+    -maxsteps &lt;N&gt;
+        Set a maximum length for the induction.
+
+    -initsteps &lt;N&gt;
+        Set initial length for the induction.
+        This will speed up the search of the right induction length
+        for deep induction proofs.
+
+    -stepsize &lt;N&gt;
+        Increase the size of the induction proof in steps of &lt;N&gt;.
+        This will speed up the search of the right induction length
+        for deep induction proofs.
+
+    -timeout &lt;N&gt;
+        Maximum number of seconds a single SAT instance may take.
+
+    -verify
+        Return an error and stop the synthesis script if the proof fails.
+
+    -verify-no-timeout
+        Like -verify but do not return an error for timeouts.
+
+    -falsify
+        Return an error and stop the synthesis script if the proof succeeds.
+
+    -falsify-no-timeout
+        Like -falsify but do not return an error for timeouts.
+
+</pre>
+@footer@

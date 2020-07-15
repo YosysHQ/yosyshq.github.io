@@ -1,0 +1,41 @@
+@cmd_header read@
+<h1>read - load HDL designs</h1>
+<pre>
+    read {-vlog95|-vlog2k|-sv2005|-sv2009|-sv2012|-sv|-formal} &lt;verilog-file&gt;..
+
+Load the specified Verilog/SystemVerilog files. (Full SystemVerilog support
+is only available via Verific.)
+
+Additional -D&lt;macro&gt;[=&lt;value&gt;] options may be added after the option indicating
+the language version (and before file names) to set additional verilog defines.
+
+
+    read {-vhdl87|-vhdl93|-vhdl2k|-vhdl2008|-vhdl} &lt;vhdl-file&gt;..
+
+Load the specified VHDL files. (Requires Verific.)
+
+
+    read -define &lt;macro&gt;[=&lt;value&gt;]..
+
+Set global Verilog/SystemVerilog defines.
+
+
+    read -undef &lt;macro&gt;..
+
+Unset global Verilog/SystemVerilog defines.
+
+
+    read -incdir &lt;directory&gt;
+
+Add directory to global Verilog/SystemVerilog include directories.
+
+
+    read -verific
+    read -noverific
+
+Subsequent calls to 'read' will either use or not use Verific. Calling 'read'
+with -verific will result in an error on Yosys binaries that are built without
+Verific support. The default is to use Verific if it is available.
+
+</pre>
+@footer@

@@ -1,0 +1,7 @@
+Gimp 2.6.12: File -> Create -> Logos -> Gradient Bevel
+Text: Yosys Open SYnthesis Suite
+Font size: 50
+Font: FreeMono Bold
+Bevel height: 40
+Bevel width: 2.5
+Background color: #586

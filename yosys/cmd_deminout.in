@@ -1,0 +1,9 @@
+@cmd_header deminout@
+<h1>deminout - demote inout ports to input or output</h1>
+<pre>
+    deminout [options] [selection]
+
+"Demote" inout ports to input or output ports, if possible.
+
+</pre>
+@footer@

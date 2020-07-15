@@ -1,0 +1,47 @@
+@cmd_header equiv_opt@
+<h1>equiv_opt - prove equivalence for optimized circuit</h1>
+<pre>
+    equiv_opt [options] [command]
+
+This command checks circuit equivalence before and after an optimization pass.
+
+    -run &lt;from_label&gt;:&lt;to_label&gt;
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to the start of the command list, and empty to
+        label is synonymous to the end of the command list.
+
+    -map &lt;filename&gt;
+        expand the modules in this file before proving equivalence. this is
+        useful for handling architecture-specific primitives.
+
+    -assert
+        produce an error if the circuits are not equivalent.
+
+    -undef
+        enable modelling of undef states during equiv_induct.
+
+The following commands are executed by this verification command:
+
+    run_pass:
+        hierarchy -auto-top
+        design -save preopt
+        [command]
+        design -stash postopt
+
+    prepare:
+        design -copy-from preopt  -as gold A:top
+        design -copy-from postopt -as gate A:top
+
+    techmap:    (only with -map)
+        techmap -wb -D EQUIV -autoproc -map &lt;filename&gt; ...
+
+    prove:
+        equiv_make gold gate equiv
+        equiv_induct [-undef] equiv
+        equiv_status [-assert] equiv
+
+    restore:
+        design -load preopt
+
+</pre>
+@footer@

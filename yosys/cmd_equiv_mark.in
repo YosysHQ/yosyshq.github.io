@@ -1,0 +1,12 @@
+@cmd_header equiv_mark@
+<h1>equiv_mark - mark equivalence checking regions</h1>
+<pre>
+    equiv_mark [options] [selection]
+
+This command marks the regions in an equivalence checking module. Region 0 is
+the proven part of the circuit. Regions with higher numbers are connected
+unproven subcricuits. The integer attribute 'equiv_region' is set on all
+wires and cells.
+
+</pre>
+@footer@

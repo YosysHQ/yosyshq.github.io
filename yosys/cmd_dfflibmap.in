@@ -1,0 +1,17 @@
+@cmd_header dfflibmap@
+<h1>dfflibmap - technology mapping of flip-flops</h1>
+<pre>
+    dfflibmap [-prepare] -liberty &lt;file&gt; [selection]
+
+Map internal flip-flop cells to the flip-flop cells in the technology
+library specified in the given liberty file.
+
+This pass may add inverters as needed. Therefore it is recommended to
+first run this pass and then map the logic paths to the target technology.
+
+When called with -prepare, this command will convert the internal FF cells
+to the internal cell types that best match the cells found in the given
+liberty file.
+
+</pre>
+@footer@

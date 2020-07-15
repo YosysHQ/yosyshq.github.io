@@ -1,0 +1,10 @@
+@cmd_header ice40_ffinit@
+<h1>ice40_ffinit - iCE40: handle FF init values</h1>
+<pre>
+    ice40_ffinit [options] [selection]
+
+Remove zero init values for FF output signals. Add inverters to implement
+nonzero init values.
+
+</pre>
+@footer@

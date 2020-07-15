@@ -1,0 +1,210 @@
+
+body {
+	background-color:	#586;
+	/* background-image:url('images/background.png'); */
+}
+
+div#container {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	max-width: 1000px;
+	width: 100%;
+}
+
+@media (min-width: 1000px) {
+	div#container {
+		left: calc(50% - 500px);
+	}
+}
+
+img#banner {
+	position:               absolute;
+	left:                   50px;
+	top:                    20px;
+}
+
+div#navbar {
+	position:		relative;
+	left:			20px;
+	width:			160px;
+	top:			120px;
+	font-family:		sans-serif;
+	font-weight:		bold;
+	font-size:		100%;
+	height:			0px;
+}
+
+div#navbar a {
+	display:		block;
+	background-color:	#464;
+	padding:		5px;
+	margin-bottom:		5px;
+	text-decoration:	none;
+}
+
+div#navbar a.navX {
+	background-color:	#445;
+}
+
+div#navbar a.nav0_donate {
+	background-color:	#a84;
+}
+
+div#navbar a.nav1 {
+	text-shadow: 5px 3px 5px #020;
+}
+
+div#navbar a.nav1_donate {
+	background-color:	#a84;
+	text-shadow: 5px 3px 5px #020;
+}
+
+div#navbar a:hover {
+	background-color:	#575;
+}
+
+div#navbar a.navX:hover {
+	background-color:	#556;
+}
+
+div#navbar a.nav0_donate:hover {
+	background-color:	#ca4;
+}
+
+div#navbar a.nav1_donate:hover {
+	background-color:	#ca4;
+}
+
+div#navbar a:visited {
+	color:			#def;
+}
+
+div#navbar a:link {
+	color:			#def;
+}
+
+div#main {
+	position:		relative;
+	left:			200px;
+	top:			120px;
+	width:			calc(100% - 220px);
+	padding-bottom:		20px;
+}
+
+div#main > div {
+	background-color:	#ddd;
+	padding:		10px;
+}
+
+div#main > div h1 {
+	margin-top:		5px;
+}
+
+div#main > div, div#navbar a {
+	border-width:		1px;
+	border-color:		#000;
+	border-style:		solid;
+	border-radius:		5px;
+	box-shadow:		1px 2px 1px 1px #333;
+}
+
+pre {
+	margin-left:		50px;
+	margin-right:		50px;
+	padding:		10px;
+	background-color:	#ffd;
+	border-radius:		5px;
+}
+
+pre.small {
+	max-width:		500px;
+	font-size:		small;
+}
+
+img.show {
+	width:			calc(100% - 100px);
+	margin-left:		50px;
+	border-radius:		5px;
+}
+
+div.file:before {
+	content: "Download: "
+}
+
+div.file {
+	margin-top:		-5px;
+	padding-top:		0px;
+	margin-left:		50px;
+	font-weight:		bold;
+	font-size:		small;
+}
+
+div.tab {
+	margin:			13px;
+	margin-left:		50px;
+	margin-right:		50px;
+	background-color:	#dff;
+}
+
+div.tab > table {
+	border:			1px solid black;
+	width:			100%;
+	border-collapse:	collapse;
+}
+
+div.tab > table th {
+	border:			1px solid black;
+}
+
+div.tab > table td {
+	border:			1px solid black;
+	padding-left:		5px;
+	padding-right:		5px;
+}
+
+ul.cmds {
+	max-width:		500px;
+	overflow-x:		hidden;
+	list-style:		none;
+
+	margin:			13px;
+	margin-left:		50px;
+	margin-right:		50px;
+	background-color:	#dff;
+	border-radius:		5px;
+	padding:		10px;
+	padding-right:		0px;
+}
+
+ul.cmds li:before {
+	float:			left;
+	width:			0;
+	white-space:		nowrap;
+	content:		". . . . . . . . . . . . . . . . . . . . "
+				". . . . . . . . . . . . . . . . . . . . "
+				". . . . . . . . . . . . . . . . . . . . ";
+}
+
+ul.cmds li {
+	clear:			right;
+}
+
+ul.cmds a {
+	padding-right:		0.33em;
+	background:		#dff;
+}
+
+ul.cmds span {
+	float: right;
+	padding-left:		0.33em;
+	padding-right:		10px;
+	background:		#dff;
+}
+
+ul.list li {
+	margin-top:		1em;
+	margin-right:		3em;
+	max-width:		600px;
+}
+

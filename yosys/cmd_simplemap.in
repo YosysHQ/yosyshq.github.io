@@ -1,0 +1,15 @@
+@cmd_header simplemap@
+<h1>simplemap - mapping simple coarse-grain cells</h1>
+<pre>
+    simplemap [selection]
+
+This pass maps a small selection of simple coarse-grain cells to yosys gate
+primitives. The following internal cell types are mapped by this pass:
+
+  $not, $pos, $and, $or, $xor, $xnor
+  $reduce_and, $reduce_or, $reduce_xor, $reduce_xnor, $reduce_bool
+  $logic_not, $logic_and, $logic_or, $mux, $tribuf
+  $sr, $ff, $dff, $dffsr, $adff, $dlatch
+
+</pre>
+@footer@

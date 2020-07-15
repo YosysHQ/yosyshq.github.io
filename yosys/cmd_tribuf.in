@@ -1,0 +1,17 @@
+@cmd_header tribuf@
+<h1>tribuf - infer tri-state buffers</h1>
+<pre>
+    tribuf [options] [selection]
+
+This pass transforms $mux cells with 'z' inputs to tristate buffers.
+
+    -merge
+        merge multiple tri-state buffers driving the same net
+        into a single buffer.
+
+    -logic
+        convert tri-state buffers that do not drive output ports
+        to non-tristate logic. this option implies -merge.
+
+</pre>
+@footer@

@@ -1,0 +1,13 @@
+@cmd_header write_ilang@
+<h1>write_ilang - write design to ilang file</h1>
+<pre>
+    write_ilang [filename]
+
+Write the current design to an 'ilang' file. (ilang is a text representation
+of a design in yosys's internal format.)
+
+    -selected
+        only write selected parts of the design.
+
+</pre>
+@footer@

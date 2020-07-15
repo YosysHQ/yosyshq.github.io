@@ -1,0 +1,11 @@
+@cmd_header ls@
+<h1>ls - list modules or objects in modules</h1>
+<pre>
+    ls [selection]
+
+When no active module is selected, this prints a list of modules.
+
+When an active module is selected, this prints a list of objects in the module.
+
+</pre>
+@footer@

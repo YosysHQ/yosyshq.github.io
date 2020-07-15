@@ -1,0 +1,11 @@
+@cmd_header fsm_opt@
+<h1>fsm_opt - optimize finite state machines</h1>
+<pre>
+    fsm_opt [selection]
+
+This pass optimizes FSM cells. It detects which output signals are actually
+not used and removes them from the FSM. This pass is usually used in
+combination with the 'opt_clean' pass (see also 'help fsm').
+
+</pre>
+@footer@

@@ -1,0 +1,15 @@
+@cmd_header write_btor@
+<h1>write_btor - write design to BTOR file</h1>
+<pre>
+    write_btor [options] [filename]
+
+Write a BTOR description of the current design.
+
+  -v
+    Add comments and indentation to BTOR output file
+
+  -s
+    Output only a single bad property for all asserts
+
+</pre>
+@footer@

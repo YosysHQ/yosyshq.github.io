@@ -1,0 +1,11 @@
+@cmd_header equiv_purge@
+<h1>equiv_purge - purge equivalence checking module</h1>
+<pre>
+    equiv_purge [options] [selection]
+
+This command removes the proven part of an equivalence checking module, leaving
+only the unproven segments in the design. This will also remove and add module
+ports as needed.
+
+</pre>
+@footer@

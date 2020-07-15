@@ -1,0 +1,45 @@
+@cmd_header iopadmap@
+<h1>iopadmap - technology mapping of i/o pads (or buffers)</h1>
+<pre>
+    iopadmap [options] [selection]
+
+Map module inputs/outputs to PAD cells from a library. This pass
+can only map to very simple PAD cells. Use 'techmap' to further map
+the resulting cells to more sophisticated PAD cells.
+
+    -inpad &lt;celltype&gt; &lt;portname&gt;[:&lt;portname&gt;]
+        Map module input ports to the given cell type with the
+        given output port name. if a 2nd portname is given, the
+        signal is passed through the pad call, using the 2nd
+        portname as the port facing the module port.
+
+    -outpad &lt;celltype&gt; &lt;portname&gt;[:&lt;portname&gt;]
+    -inoutpad &lt;celltype&gt; &lt;portname&gt;[:&lt;portname&gt;]
+        Similar to -inpad, but for output and inout ports.
+
+    -toutpad &lt;celltype&gt; &lt;portname&gt;:&lt;portname&gt;[:&lt;portname&gt;]
+        Merges $_TBUF_ cells into the output pad cell. This takes precedence
+        over the other -outpad cell. The first portname is the enable input
+        of the tristate driver.
+
+    -tinoutpad &lt;celltype&gt; &lt;portname&gt;:&lt;portname&gt;:&lt;portname&gt;[:&lt;portname&gt;]
+        Merges $_TBUF_ cells into the inout pad cell. This takes precedence
+        over the other -inoutpad cell. The first portname is the enable input
+        of the tristate driver and the 2nd portname is the internal output
+        buffering the external signal.
+
+    -widthparam &lt;param_name&gt;
+        Use the specified parameter name to set the port width.
+
+    -nameparam &lt;param_name&gt;
+        Use the specified parameter to set the port name.
+
+    -bits
+        create individual bit-wide buffers even for ports that
+        are wider. (the default behavior is to create word-wide
+        buffers using -widthparam to set the word size on the cell.)
+
+Tristate PADS (-toutpad, -tinoutpad) always operate in -bits mode.
+
+</pre>
+@footer@

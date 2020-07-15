@@ -1,0 +1,15 @@
+@cmd_header chparam@
+<h1>chparam - re-evaluate modules with new parameters</h1>
+<pre>
+    chparam [ -set name value ]... [selection]
+
+Re-evaluate the selected modules with new parameters. String values must be
+passed in double quotes (").
+
+
+    chparam -list [selection]
+
+List the available parameters of the selected modules.
+
+</pre>
+@footer@

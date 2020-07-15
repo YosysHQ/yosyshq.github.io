@@ -1,0 +1,20 @@
+@cmd_header hilomap@
+<h1>hilomap - technology mapping of constant hi- and/or lo-drivers</h1>
+<pre>
+    hilomap [options] [selection]
+
+Map constants to 'tielo' and 'tiehi' driver cells.
+
+    -hicell &lt;celltype&gt; &lt;portname&gt;
+        Replace constant hi bits with this cell.
+
+    -locell &lt;celltype&gt; &lt;portname&gt;
+        Replace constant lo bits with this cell.
+
+    -singleton
+        Create only one hi/lo cell and connect all constant bits
+        to that cell. Per default a separate cell is created for
+        each constant bit.
+
+</pre>
+@footer@

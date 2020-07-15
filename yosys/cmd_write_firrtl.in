@@ -1,0 +1,11 @@
+@cmd_header write_firrtl@
+<h1>write_firrtl - write design to a FIRRTL file</h1>
+<pre>
+    write_firrtl [options] [filename]
+
+Write a FIRRTL netlist of the current design.
+The following commands are executed by this command:
+        pmuxtree
+
+</pre>
+@footer@

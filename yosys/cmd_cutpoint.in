@@ -1,0 +1,13 @@
+@cmd_header cutpoint@
+<h1>cutpoint - adds formal cut points to the design</h1>
+<pre>
+    cutpoint [options] [selection]
+
+This command adds formal cut points to the design.
+
+    -undef
+        set cupoint nets to undef (x). the default behavior is to create a
+        $anyseq cell and drive the cutpoint net from that
+
+</pre>
+@footer@

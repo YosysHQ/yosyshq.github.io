@@ -1,0 +1,9 @@
+@cmd_header ice40_dsp@
+<h1>ice40_dsp - iCE40: map multipliers</h1>
+<pre>
+    ice40_dsp [options] [selection]
+
+Map multipliers and multiply-accumulate blocks to iCE40 DSP resources.
+
+</pre>
+@footer@

@@ -1,0 +1,26 @@
+@cmd_header cd@
+<h1>cd - a shortcut for 'select -module &lt;name&gt;'</h1>
+<pre>
+    cd &lt;modname&gt;
+
+This is just a shortcut for 'select -module &lt;modname&gt;'.
+
+
+    cd &lt;cellname&gt;
+
+When no module with the specified name is found, but there is a cell
+with the specified name in the current module, then this is equivalent
+to 'cd &lt;celltype&gt;'.
+
+    cd ..
+
+Remove trailing substrings that start with '.' in current module name until
+the name of a module in the current design is generated, then switch to that
+module. Otherwise clear the current selection.
+
+    cd
+
+This is just a shortcut for 'select -clear'.
+
+</pre>
+@footer@

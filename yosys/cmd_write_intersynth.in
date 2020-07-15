@@ -1,0 +1,25 @@
+@cmd_header write_intersynth@
+<h1>write_intersynth - write design to InterSynth netlist file</h1>
+<pre>
+    write_intersynth [options] [filename]
+
+Write the current design to an 'intersynth' netlist file. InterSynth is
+a tool for Coarse-Grain Example-Driven Interconnect Synthesis.
+
+    -notypes
+        do not generate celltypes and conntypes commands. i.e. just output
+        the netlists. this is used for postsilicon synthesis.
+
+    -lib &lt;verilog_or_ilang_file&gt;
+        Use the specified library file for determining whether cell ports are
+        inputs or outputs. This option can be used multiple times to specify
+        more than one library.
+
+    -selected
+        only write selected modules. modules must be selected entirely or
+        not at all.
+
+http://www.clifford.at/intersynth/
+
+</pre>
+@footer@

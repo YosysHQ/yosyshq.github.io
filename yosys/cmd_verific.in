@@ -1,0 +1,129 @@
+@cmd_header verific@
+<h1>verific - load Verilog and VHDL designs using Verific</h1>
+<pre>
+    verific {-vlog95|-vlog2k|-sv2005|-sv2009|-sv2012|-sv} &lt;verilog-file&gt;..
+
+Load the specified Verilog/SystemVerilog files into Verific.
+
+All files specified in one call to this command are one compilation unit.
+Files passed to different calls to this command are treated as belonging to
+different compilation units.
+
+Additional -D&lt;macro&gt;[=&lt;value&gt;] options may be added after the option indicating
+the language version (and before file names) to set additional verilog defines.
+The macros SYNTHESIS and VERIFIC are defined implicitly.
+
+
+    verific -formal &lt;verilog-file&gt;..
+
+Like -sv, but define FORMAL instead of SYNTHESIS.
+
+
+    verific {-vhdl87|-vhdl93|-vhdl2k|-vhdl2008|-vhdl} &lt;vhdl-file&gt;..
+
+Load the specified VHDL files into Verific.
+
+
+    verific -work &lt;libname&gt; {-sv|-vhdl|...} &lt;hdl-file&gt;
+
+Load the specified Verilog/SystemVerilog/VHDL file into the specified library.
+(default library when -work is not present: "work")
+
+
+    verific -vlog-incdir &lt;directory&gt;..
+
+Add Verilog include directories.
+
+
+    verific -vlog-libdir &lt;directory&gt;..
+
+Add Verilog library directories. Verific will search in this directories to
+find undefined modules.
+
+
+    verific -vlog-define &lt;macro&gt;[=&lt;value&gt;]..
+
+Add Verilog defines.
+
+
+    verific -vlog-undef &lt;macro&gt;..
+
+Remove Verilog defines previously set with -vlog-define.
+
+
+    verific -set-error &lt;msg_id&gt;..
+    verific -set-warning &lt;msg_id&gt;..
+    verific -set-info &lt;msg_id&gt;..
+    verific -set-ignore &lt;msg_id&gt;..
+
+Set message severity. &lt;msg_id&gt; is the string in square brackets when a message
+is printed, such as VERI-1209.
+
+
+    verific -import [options] &lt;top-module&gt;..
+
+Elaborate the design for the specified top modules, import to Yosys and
+reset the internal state of Verific.
+
+Import options:
+
+  -all
+    Elaborate all modules, not just the hierarchy below the given top
+    modules. With this option the list of modules to import is optional.
+
+  -gates
+    Create a gate-level netlist.
+
+  -flatten
+    Flatten the design in Verific before importing.
+
+  -extnets
+    Resolve references to external nets by adding module ports as needed.
+
+  -autocover
+    Generate automatic cover statements for all asserts
+
+  -chparam name value 
+    Elaborate the specified top modules (all modules when -all given) using
+    this parameter value. Modules on which this parameter does not exist will
+    cause Verific to produce a VERI-1928 or VHDL-1676 message. This option
+    can be specified multiple times to override multiple parameters.
+    String values must be passed in double quotes (").
+
+  -v, -vv
+    Verbose log messages. (-vv is even more verbose than -v.)
+
+The following additional import options are useful for debugging the Verific
+bindings (for Yosys and/or Verific developers):
+
+  -k
+    Keep going after an unsupported verific primitive is found. The
+    unsupported primitive is added as blockbox module to the design.
+    This will also add all SVA related cells to the design parallel to
+    the checker logic inferred by it.
+
+  -V
+    Import Verific netlist as-is without translating to Yosys cell types. 
+
+  -nosva
+    Ignore SVA properties, do not infer checker logic.
+
+  -L &lt;int&gt;
+    Maximum number of ctrl bits for SVA checker FSMs (default=16).
+
+  -n
+    Keep all Verific names on instances and nets. By default only
+    user-declared names are preserved.
+
+  -d &lt;dump_file&gt;
+    Dump the Verific netlist as a verilog file.
+
+
+Use Symbiotic EDA Suite if you need Yosys+Verifc.
+https://www.symbioticeda.com/seda-suite
+
+Contact office@symbioticeda.com for free evaluation
+binaries of Symbiotic EDA Suite.
+
+</pre>
+@footer@

@@ -1,0 +1,10 @@
+@cmd_header proc_dff@
+<h1>proc_dff - extract flip-flops from processes</h1>
+<pre>
+    proc_dff [selection]
+
+This pass identifies flip-flops in the processes and converts them to
+d-type flip-flop cells.
+
+</pre>
+@footer@
