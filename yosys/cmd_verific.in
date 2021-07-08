@@ -118,12 +118,7 @@ bindings (for Yosys and/or Verific developers):
   -d &lt;dump_file&gt;
     Dump the Verific netlist as a verilog file.
 
-
-Use Symbiotic EDA Suite if you need Yosys+Verifc.
-https://www.symbioticeda.com/seda-suite
-
-Contact office@symbioticeda.com for free evaluation
-binaries of Symbiotic EDA Suite.
+Visit http://verific.com/ for more information on Verific.
 
 </pre>
 @footer@

@@ -8,9 +8,9 @@ difficulties when building on other platforms.</p>
 <p>Download the Yosys 0.9 release source code from GitHub:</p>
 
 <ul>
-<li><a href="https://github.com/cliffordwolf/yosys/releases/tag/yosys-0.9">Release Notes</a></li>
-<li><a href="https://github.com/cliffordwolf/yosys/archive/yosys-0.9.zip">yosys-0.9.zip</a></li>
-<li><a href="https://github.com/cliffordwolf/yosys/archive/yosys-0.9.tar.gz">yosys-0.9.tar.gz</a></li>
+<li><a href="https://github.com/YosysHQ/yosys/releases/tag/yosys-0.9">Release Notes</a></li>
+<li><a href="https://github.com/YosysHQ/yosys/archive/yosys-0.9.zip">yosys-0.9.zip</a></li>
+<li><a href="https://github.com/YosysHQ/yosys/archive/yosys-0.9.tar.gz">yosys-0.9.tar.gz</a></li>
 </ul>
 
 <h2>Installing on Ubuntu</h2>
@@ -43,7 +43,7 @@ Yosys C++ development on Windows:
 
 Clone source code from GIT repository:
 
-<pre>git clone https://github.com/cliffordwolf/yosys.git</pre>
+<pre>git clone https://github.com/YosysHQ/yosys.git</pre>
 
 Configure build and/or change build settings in Makefile:
 
@@ -58,7 +58,7 @@ make test
 sudo make install</pre>
 
 See the <a
-href="https://github.com/cliffordwolf/yosys/blob/master/README.md">README</a> file
+href="https://github.com/YosysHQ/yosys/blob/master/README.md">README</a> file
 for detailed build instructions.
 
 @footer@
