@@ -10,7 +10,7 @@ available for Yosys.</p>
 <p>A quick first-steps tutorial can be found in the <a
 href="https://github.com/YosysHQ/yosys/blob/master/README.md">README file</a>.</p>
 
-<p>The Yosys manual can be downloaded <a href="files/yosys_manual.pdf">here</a> (PDF).</p>
+<p>The Yosys manual can be downloaded <a href="https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/manual.pdf">here</a> (PDF).</p>
 
 <h2>Support</h2>
 
@@ -23,7 +23,7 @@ href="https://github.com/YosysHQ/yosys/issues/new">GitHub</a>.
 
 <h2>Presentation Slides</h2>
 
-<p><a href="files/yosys_presentation.pdf">This presentation slides</a> cover a wide range of topics related to Yosys. (The LaTeX source is part of the Yosys source distribution. Fell free to adapt the slides as needed.)</p>
+<p><a href="https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/presentation.pdf">This presentation slides</a> cover a wide range of topics related to Yosys. (The LaTeX source is part of the Yosys source distribution. Fell free to adapt the slides as needed.)</p>
 
 <h2>Application Notes</h2>
 
