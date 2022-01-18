@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: prep</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -55,7 +57,7 @@ on partly selected designs.
         do not run any of the memory_* passes
 
     -rdff
-        do not pass -nordff to 'memory_dff'. This enables merging of FFs into
+        call 'memory_dff'. This enables merging of FFs into
         memory read ports.
 
     -nokeepdc
@@ -78,13 +80,13 @@ The following commands are executed by this synthesis command:
         opt_expr -keepdc
         opt_clean
         check
-        opt -keepdc
+        opt -noff -keepdc
         wreduce -keepdc [-memx]
-        memory_dff [-nordff]
+        memory_dff    (if -rdff)
         memory_memx    (if -memx)
         opt_clean
         memory_collect
-        opt -keepdc -fast
+        opt -noff -keepdc -fast
 
     check:
         stat

@@ -14,7 +14,7 @@ the -nounset option.
 Unconnect all existing drivers for the specified expression.
 
 
-    connect [-nomap] -port &lt;cell&gt; &lt;port&gt; &lt;expr&gt;
+    connect [-nomap] [-assert] -port &lt;cell&gt; &lt;port&gt; &lt;expr&gt;
 
 Connect the specified cell port to the specified cell port.
 
@@ -25,6 +25,9 @@ this behavior.
 
 The connect command operates in one module only. Either only one module must
 be selected or an active module must be set using the 'cd' command.
+
+The -assert option verifies that the connection already exists, instead of
+making it.
 
 This command does not operate on module with processes.
 

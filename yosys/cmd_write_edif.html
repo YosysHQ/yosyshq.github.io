@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: write_edif</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -45,6 +47,9 @@ Write the current design to an EDIF netlist file.
 
     -attrprop
         create EDIF properties for cell attributes
+
+    -keep
+        create extra KEEP nets by allowing a cell to drive multiple nets.
 
     -pvector {par|bra|ang}
         sets the delimiting character for module port rename clauses to

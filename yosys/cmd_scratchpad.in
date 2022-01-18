@@ -1,0 +1,35 @@
+@cmd_header scratchpad@
+<h1>scratchpad - get/set values in the scratchpad</h1>
+<pre>
+    scratchpad [options]
+
+This pass allows to read and modify values from the scratchpad of the current
+design. Options:
+
+    -get &lt;identifier&gt;
+        print the value saved in the scratchpad under the given identifier.
+
+    -set &lt;identifier&gt; &lt;value&gt;
+        save the given value in the scratchpad under the given identifier.
+
+    -unset &lt;identifier&gt;
+        remove the entry for the given identifier from the scratchpad.
+
+    -copy &lt;identifier_from&gt; &lt;identifier_to&gt;
+        copy the value of the first identifier to the second identifier.
+
+    -assert &lt;identifier&gt; &lt;value&gt;
+        assert that the entry for the given identifier is set to the given value.
+
+    -assert-set &lt;identifier&gt;
+        assert that the entry for the given identifier exists.
+
+    -assert-unset &lt;identifier&gt;
+        assert that the entry for the given identifier does not exist.
+
+The identifier may not contain whitespace. By convention, it is usually prefixed
+by the name of the pass that uses it, e.g. 'opt.did_something'. If the value
+contains whitespace, it must be enclosed in double quotes.
+
+</pre>
+@footer@

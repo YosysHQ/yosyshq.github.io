@@ -1,0 +1,9 @@
+@cmd_header anlogic_fixcarry@
+<h1>anlogic_fixcarry - Anlogic: fix carry chain</h1>
+<pre>
+    anlogic_fixcarry [options] [selection]
+
+Add Anlogic adders to fix carry chain if needed.
+
+</pre>
+@footer@

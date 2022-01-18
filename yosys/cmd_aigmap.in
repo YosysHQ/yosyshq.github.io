@@ -9,5 +9,9 @@ $_NOT_ cells.
     -nand
         Enable creation of $_NAND_ cells
 
+    -select
+        Overwrite replaced cells in the current selection with new $_AND_,
+        $_NOT_, and $_NAND_, cells
+
 </pre>
 @footer@

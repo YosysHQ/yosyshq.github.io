@@ -6,10 +6,15 @@
 Cover trees of $_MUX_ cells with $_MUX{4,8,16}_ cells
 
     -mux4[=cost], -mux8[=cost], -mux16[=cost]
-        Use the specified types of MUXes (with optional integer costs). If none
-        of these options are given, the effect is the same as if all of them are.
-        Default costs: $_MUX_ = 100, $_MUX4_ = 220,
-                       $_MUX8_ = 460, $_MUX16_ = 940
+        Cover $_MUX_ trees using the specified types of MUXes (with optional
+        integer costs). If none of these options are given, the effect is the
+        same as if all of them are.
+        Default costs: $_MUX4_ = 220, $_MUX8_ = 460, 
+                       $_MUX16_ = 940
+
+    -mux2=cost
+        Use the specified cost for $_MUX_ cells when making covering decisions.
+        Default cost: $_MUX_ = 100
 
     -dmux=cost
         Use the specified cost for $_MUX_ cells used in decoders.

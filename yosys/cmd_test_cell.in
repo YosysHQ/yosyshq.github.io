@@ -15,12 +15,12 @@ cell types. Use for example 'all /$add' for all cell types except $add.
     -s {positive_integer}
         use this value as rng seed value (default = unix time).
 
-    -f {ilang_file}
-        don't generate circuits. instead load the specified ilang file.
+    -f {rtlil_file}
+        don't generate circuits. instead load the specified RTLIL file.
 
     -w {filename_prefix}
         don't test anything. just generate the circuits and write them
-        to ilang files with the specified prefix
+        to RTLIL files with the specified prefix
 
     -map {filename}
         pass this option to techmap.

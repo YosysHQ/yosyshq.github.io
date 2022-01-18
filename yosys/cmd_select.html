@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: select</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -28,6 +30,7 @@
 <h1>select - modify and view the list of selected objects</h1>
 <pre>
     select [ -add | -del | -set &lt;name&gt; ] {-read &lt;filename&gt; | &lt;selection&gt;}
+    select [ -unset &lt;name&gt; ]
     select [ &lt;assert_option&gt; ] {-read &lt;filename&gt; | &lt;selection&gt;}
     select [ -list | -write &lt;filename&gt; | -count | -clear ]
     select -module &lt;modname&gt;
@@ -50,6 +53,9 @@ described here.
         under the given name (see @&lt;name&gt; below). to save the current selection,
         use "select -set &lt;name&gt; %"
 
+    -unset &lt;name&gt;
+        do not modify the current selection. instead remove a previously saved
+        selection under the given name (see @&lt;name&gt; below).
     -assert-none
         do not modify the current selection. instead assert that the given
         selection is empty. i.e. produce an error if any object matching the
@@ -120,12 +126,18 @@ Pushing (selecting) object when in -module mode:
     &lt;obj_pattern&gt;
         select the specified object(s) from the current module
 
+By default, patterns will not match black/white-box modules or theircontents. To include such objects, prefix the pattern with '='.
+
 A &lt;mod_pattern&gt; can be a module name, wildcard expression (*, ?, [..])
 matching module names, or one of the following:
 
     A:&lt;pattern&gt;, A:&lt;pattern&gt;=&lt;pattern&gt;
         all modules with an attribute matching the given pattern
         in addition to = also &lt;, &lt;=, &gt;=, and &gt; are supported
+
+    N:&lt;pattern&gt;
+        all modules with a name matching the given pattern
+        (i.e. 'N:' is optional as it is the default matching rule)
 
 An &lt;obj_pattern&gt; can be an object name, wildcard expression, or one of
 the following:

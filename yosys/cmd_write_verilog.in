@@ -5,6 +5,9 @@
 
 Write the current design to a Verilog file.
 
+    -sv
+        with this option, SystemVerilog constructs like always_comb are used
+
     -norename
         without this option all internal object names (the ones with a dollar
         instead of a backslash prefix) are changed to short names in the
@@ -46,8 +49,19 @@ Write the current design to a Verilog file.
         deactivates this feature and instead will write string constants
         as binary numbers.
 
+    -simple-lhs
+        Connection assignments with simple left hand side without concatenations.
+
+    -extmem
+        instead of initializing memories using assignments to individual
+        elements, use the '$readmemh' function to read initialization data
+        from a file. This data is written to a file named by appending
+        a sequential index to the Verilog filename and replacing the extension
+        with '.mem', e.g. 'write_verilog -extmem foo.v' writes 'foo-1.mem',
+        'foo-2.mem' and so on.
+
     -defparam
-        Use 'defparam' statements instead of the Verilog-2001 syntax for
+        use 'defparam' statements instead of the Verilog-2001 syntax for
         cell parameters.
 
     -blackboxes

@@ -19,5 +19,16 @@ than the object to be created.
 Like 'add -input', but also connect the signal between instances of the
 selected modules.
 
+
+    add {-assert|-assume|-live|-fair|-cover} &lt;name1&gt; [-if &lt;name2&gt;]
+
+Add an $assert, $assume, etc. cell connected to a wire named name1, with its
+enable signal optionally connected to a wire named name2 (default: 1'b1).
+
+
+    add -mod &lt;name[s]&gt;
+
+Add module[s] with the specified name[s].
+
 </pre>
 @footer@

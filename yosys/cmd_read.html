@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: read</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -39,6 +41,12 @@ the language version (and before file names) to set additional verilog defines.
     read {-vhdl87|-vhdl93|-vhdl2k|-vhdl2008|-vhdl} &lt;vhdl-file&gt;..
 
 Load the specified VHDL files. (Requires Verific.)
+
+
+    read {-f|-F} &lt;command-file&gt;
+
+Load and execute the specified command file. (Requires Verific.)
+Check verific command for more information about supported commands in file.
 
 
     read -define &lt;macro&gt;[=&lt;value&gt;]..

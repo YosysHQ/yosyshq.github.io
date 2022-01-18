@@ -28,8 +28,11 @@ This command runs synthesis for ECP5 FPGAs.
     -noflatten
         do not flatten design before synthesis
 
+    -dff
+        run 'abc'/'abc9' with -dff option
+
     -retime
-        run 'abc' with -dff option
+        run 'abc' with '-dff -D 1' options
 
     -noccu2
         do not use CCU2 cells in output netlist
@@ -38,76 +41,108 @@ This command runs synthesis for ECP5 FPGAs.
         do not use flipflops with CE in output netlist
 
     -nobram
-        do not use BRAM cells in output netlist
+        do not use block RAM cells in output netlist
 
-    -nodram
-        do not use distributed RAM cells in output netlist
+    -nolutram
+        do not use LUT RAM cells in output netlist
 
     -nowidelut
         do not use PFU muxes to implement LUTs larger than LUT4s
 
+    -asyncprld
+        use async PRLD mode to implement ALDFF (EXPERIMENTAL)
+
     -abc2
         run two passes of 'abc' for slightly improved logic density
+
+    -abc9
+        use new ABC9 flow (EXPERIMENTAL)
 
     -vpr
         generate an output netlist (and BLIF file) suitable for VPR
         (this feature is experimental and incomplete)
 
+    -nodsp
+        do not map multipliers to MULT18X18D
+
 
 The following commands are executed by this synthesis command:
 
     begin:
-        read_verilog -lib +/ecp5/cells_sim.v +/ecp5/cells_bb.v
+        read_verilog -lib -specify +/ecp5/cells_sim.v +/ecp5/cells_bb.v
         hierarchy -check -top &lt;top&gt;
 
-    flatten:    (unless -noflatten)
+    coarse:
         proc
         flatten
         tribuf -logic
         deminout
+        opt_expr
+        opt_clean
+        check
+        opt -nodffe -nosdff
+        fsm
+        opt
+        wreduce
+        peepopt
+        opt_clean
+        share
+        techmap -map +/cmp2lut.v -D LUT_WIDTH=4
+        opt_expr
+        opt_clean
+        techmap -map +/mul2dsp.v -map +/ecp5/dsp_map.v -D DSP_A_MAXWIDTH=18 -D DSP_B_MAXWIDTH=18  -D DSP_A_MINWIDTH=2 -D DSP_B_MINWIDTH=2  -D DSP_NAME=$__MUL18X18    (unless -nodsp)
+        chtype -set $mul t:$__soft_mul    (unless -nodsp)
+        alumacc
+        opt
+        memory -nomap
+        opt_clean
 
-    coarse:
-        synth -run coarse
-
-    bram:    (skip if -nobram)
-        memory_bram -rules +/ecp5/bram.txt
+    map_bram:    (skip if -nobram)
+        memory_bram -rules +/ecp5/brams.txt
         techmap -map +/ecp5/brams_map.v
 
-    dram:    (skip if -nodram)
-        memory_bram -rules +/ecp5/dram.txt
-        techmap -map +/ecp5/drams_map.v
+    map_lutram:    (skip if -nolutram)
+        memory_bram -rules +/ecp5/lutrams.txt
+        techmap -map +/ecp5/lutrams_map.v
 
-    fine:
+    map_ffram:
         opt -fast -mux_undef -undriven -fine
-        memory_map
+        memory_map -iattr -attr !ram_block -attr !rom_block -attr logic_block -attr syn_ramstyle=auto -attr syn_ramstyle=registers -attr syn_romstyle=auto -attr syn_romstyle=logic
         opt -undriven -fine
+
+    map_gates:
         techmap -map +/techmap.v -map +/ecp5/arith_map.v
-        abc -dff    (only if -retime)
+        opt -fast
+        abc -dff -D 1    (only if -retime)
 
     map_ffs:
-        dffsr2dff
-        dff2dffs
         opt_clean
-        dff2dffe -direct-match $_DFF_* -direct-match $__DFFS_*
+        dfflegalize -cell $_DFF_?_ 01 -cell $_DFF_?P?_ r -cell $_SDFF_?P?_ r [-cell $_DFFE_??_ 01 -cell $_DFFE_?P??_ r -cell $_SDFFE_?P??_ r] [-cell $_ALDFF_?P_ x -cell $_ALDFFE_?P?_ x] [-cell $_DLATCH_?_ x]    ($_ALDFF_*_ only if -asyncprld, $_DLATCH_* only if not -asyncprld, $_*DFFE_* only if not -nodffe)
+        zinit -all w:* t:$_DFF_?_ t:$_DFFE_??_ t:$_SDFF*    (only if -abc9 and -dff)
         techmap -D NO_LUT -map +/ecp5/cells_map.v
         opt_expr -undriven -mux_undef
         simplemap
-        ecp5_ffinit
+        ecp5_gsr
+        attrmvcp -copy -attr syn_useioff
+        opt_clean
 
     map_luts:
         abc          (only if -abc2)
-        techmap -map +/ecp5/latches_map.v
-        abc -lut 4:7 -dress
+        techmap -map +/ecp5/latches_map.v    (skip if -asyncprld)
+        abc -dress -lut 4:7
         clean
 
     map_cells:
-        techmap -map +/ecp5/cells_map.v    (with -D NO_LUT in vpr mode)
+        techmap -map +/ecp5/cells_map.v    (skip if -vpr)
+        opt_lut_ins -tech ecp5
         clean
 
     check:
+        autoname
         hierarchy -check
         stat
         check -noinit
+        blackbox =A:whitebox
 
     blif:
         opt_clean -purge                                     (vpr mode)

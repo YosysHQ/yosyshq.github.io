@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: equiv_opt</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -29,7 +31,8 @@
 <pre>
     equiv_opt [options] [command]
 
-This command checks circuit equivalence before and after an optimization pass.
+This command uses temporal induction to check circuit equivalence before and
+after an optimization pass.
 
     -run &lt;from_label&gt;:&lt;to_label&gt;
         only run the commands between the labels (see below). an empty
@@ -40,8 +43,18 @@ This command checks circuit equivalence before and after an optimization pass.
         expand the modules in this file before proving equivalence. this is
         useful for handling architecture-specific primitives.
 
+    -blacklist &lt;file&gt;
+        Do not match cells or signals that match the names in the file
+        (passed to equiv_make).
+
     -assert
         produce an error if the circuits are not equivalent.
+
+    -multiclock
+        run clk2fflogic before equivalence checking.
+
+    -async2sync
+        run async2sync before equivalence checking.
 
     -undef
         enable modelling of undef states during equiv_induct.
@@ -62,7 +75,9 @@ The following commands are executed by this verification command:
         techmap -wb -D EQUIV -autoproc -map &lt;filename&gt; ...
 
     prove:
-        equiv_make gold gate equiv
+        clk2fflogic    (only with -multiclock)
+        async2sync     (only with -async2sync)
+        equiv_make -blacklist &lt;filename&gt; ... gold gate equiv
         equiv_induct [-undef] equiv
         equiv_status [-assert] equiv
 

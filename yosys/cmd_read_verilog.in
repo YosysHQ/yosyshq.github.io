@@ -14,6 +14,9 @@ Verilog-2005 is supported.
         enable support for SystemVerilog assertions and some Yosys extensions
         replace the implicit -D SYNTHESIS with -D FORMAL
 
+    -nosynthesis
+        don't add implicit -D SYNTHESIS
+
     -noassert
         ignore assert() statements
 
@@ -155,8 +158,8 @@ recommended to use a simulator (for example Icarus Verilog) for checking
 the syntax of the code, rather than to rely on read_verilog for that.
 
 Depending on if read_verilog is run in -formal mode, either the macro
-SYNTHESIS or FORMAL is defined automatically. In addition, read_verilog
-always defines the macro YOSYS.
+SYNTHESIS or FORMAL is defined automatically, unless -nosynthesis is used.
+In addition, read_verilog always defines the macro YOSYS.
 
 See the Yosys README file for a list of non-standard Verilog features
 supported by the Yosys Verilog front-end.

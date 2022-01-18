@@ -1,0 +1,9 @@
+@cmd_header memory_narrow@
+<h1>memory_narrow - split up wide memory ports</h1>
+<pre>
+    memory_narrow [options] [selection]
+
+This pass splits up wide memory ports into several narrow ports.
+
+</pre>
+@footer@

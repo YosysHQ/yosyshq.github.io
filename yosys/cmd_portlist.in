@@ -1,0 +1,14 @@
+@cmd_header portlist@
+<h1>portlist - list (top-level) ports</h1>
+<pre>
+    portlist [options] [selection]
+
+This command lists all module ports found in the selected modules.
+
+If no selection is provided then it lists the ports on the top module.
+
+  -m
+    print verilog blackbox module definitions instead of port lists
+
+</pre>
+@footer@

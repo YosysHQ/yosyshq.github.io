@@ -20,6 +20,9 @@ Write the current design to an EDIF netlist file.
     -attrprop
         create EDIF properties for cell attributes
 
+    -keep
+        create extra KEEP nets by allowing a cell to drive multiple nets.
+
     -pvector {par|bra|ang}
         sets the delimiting character for module port rename clauses to
         parentheses, square brackets, or angle brackets.

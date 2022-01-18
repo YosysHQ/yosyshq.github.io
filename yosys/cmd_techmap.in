@@ -4,7 +4,7 @@
     techmap [-map filename] [selection]
 
 This pass implements a very simple technology mapper that replaces cells in
-the design with implementations given in form of a Verilog or ilang source
+the design with implementations given in form of a Verilog or RTLIL source
 file.
 
     -map filename
@@ -21,7 +21,8 @@ file.
         instead of inlining them.
 
     -max_iter &lt;number&gt;
-        only run the specified number of iterations.
+        only run the specified number of iterations on each module.
+        default: unlimited
 
     -recursive
         instead of the iterative breadth-first algorithm use a recursive
@@ -46,7 +47,9 @@ file.
 
 When a module in the map file has the 'techmap_celltype' attribute set, it will
 match cells with a type that match the text value of this attribute. Otherwise
-the module name will be used to match the cell.
+the module name will be used to match the cell.  Multiple space-separated cell
+types can be listed, and wildcards using [] will be expanded (ie. "$_DFF_[PN]_"
+is the same as "$_DFF_P_ $_DFF_N_").
 
 When a module in the map file has the 'techmap_simplemap' attribute set, techmap
 will use 'simplemap' (see 'help simplemap') to map cells matching the module.
@@ -57,6 +60,11 @@ will use 'maccmap' (see 'help maccmap') to map cells matching the module.
 When a module in the map file has the 'techmap_wrap' attribute set, techmap
 will create a wrapper for the cell and then run the command string that the
 attribute is set to on the wrapper module.
+
+When a port on a module in the map file has the 'techmap_autopurge' attribute
+set, and that port is not connected in the instantiation that is mapped, then
+then a cell port connected only to such wires will be omitted in the mapped
+version of the circuit.
 
 All wires in the modules from the map file matching the pattern _TECHMAP_*
 or *._TECHMAP_* are special wires that are used to pass instructions from
@@ -96,6 +104,13 @@ wires are supported:
 
         It is possible to combine both prefixes to 'RECURSION; CONSTMAP; '.
 
+    _TECHMAP_REMOVEINIT_&lt;port-name&gt;_
+        When this wire is set to a constant value, the init attribute of the wire(s)
+        connected to this port will be consumed.  This wire must have the same
+        width as the given port, and for every bit that is set to 1 in the value,
+        the corresponding init attribute bit will be changed to 1'bx.  If all
+        bits of an init attribute are left as x, it will be removed.
+
 In addition to this special wires, techmap also supports special parameters in
 modules in the map file:
 
@@ -103,11 +118,22 @@ modules in the map file:
         When a parameter with this name exists, it will be set to the type name
         of the cell that matches the module.
 
+    _TECHMAP_CELLNAME_
+        When a parameter with this name exists, it will be set to the name
+        of the cell that matches the module.
+
     _TECHMAP_CONSTMSK_&lt;port-name&gt;_
     _TECHMAP_CONSTVAL_&lt;port-name&gt;_
         When this pair of parameters is available in a module for a port, then
         former has a 1-bit for each constant input bit and the latter has the
         value for this bit. The unused bits of the latter are set to undef (x).
+
+    _TECHMAP_WIREINIT_&lt;port-name&gt;_
+        When a parameter with this name exists, it will be set to the initial
+        value of the wire(s) connected to the given port, as specified by the init
+        attribute. If the attribute doesn't exist, x will be filled for the
+        missing bits.  To remove the init attribute bits used, use the
+        _TECHMAP_REMOVEINIT_*_ wires.
 
     _TECHMAP_BITS_CONNMAP_
     _TECHMAP_CONNMAP_&lt;port-name&gt;_
@@ -124,6 +150,12 @@ constant value.
 
 A cell with the name _TECHMAP_REPLACE_ in the map file will inherit the name
 and attributes of the cell that is being replaced.
+A cell with a name of the form `_TECHMAP_REPLACE_.&lt;suffix&gt;` in the map file will
+be named thus but with the `_TECHMAP_REPLACE_' prefix substituted with the name
+of the cell being replaced.
+Similarly, a wire named in the form `_TECHMAP_REPLACE_.&lt;suffix&gt;` will cause a
+new wire alias to be created and named as above but with the `_TECHMAP_REPLACE_'
+prefix also substituted.
 
 See 'help extract' for a pass that does the opposite thing.
 

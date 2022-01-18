@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: synth_intel_alm</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
+  <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
+  <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
+  <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>synth_intel_alm - synthesis for ALM-based Intel (Altera) FPGAs.</h1>
+<pre>
+    synth_intel_alm [options]
+
+This command runs synthesis for ALM-based Intel FPGAs.
+
+    -top &lt;module&gt;
+        use the specified module as top module
+
+    -family &lt;family&gt;
+        target one of:
+        "cyclonev"    - Cyclone V (default)
+        "arriav"      - Arria V (non-GZ)        "cyclone10gx" - Cyclone 10GX
+
+    -vqm &lt;file&gt;
+        write the design to the specified Verilog Quartus Mapping File. Writing of an
+        output file is omitted if this parameter is not specified. Implies -quartus.
+
+    -noflatten
+        do not flatten design before synthesis; useful for per-module area statistics
+
+    -quartus
+        output a netlist using Quartus cells instead of MISTRAL_* cells
+
+    -dff
+        pass DFFs to ABC to perform sequential logic optimisations (EXPERIMENTAL)
+
+    -run &lt;from_label&gt;:&lt;to_label&gt;
+        only run the commands between the labels (see below). an empty
+        from label is synonymous to 'begin', and empty to label is
+        synonymous to the end of the command list.
+
+    -nolutram
+        do not use LUT RAM cells in output netlist
+
+    -nobram
+        do not use block RAM cells in output netlist
+
+    -nodsp
+        do not map multipliers to MISTRAL_MUL cells
+
+    -noiopad
+        do not instantiate IO buffers
+
+    -noclkbuf
+        do not insert global clock buffers
+
+The following commands are executed by this synthesis command:
+
+    begin:
+        read_verilog -specify -lib -D &lt;family&gt; +/intel_alm/common/alm_sim.v
+        read_verilog -specify -lib -D &lt;family&gt; +/intel_alm/common/dff_sim.v
+        read_verilog -specify -lib -D &lt;family&gt; +/intel_alm/common/dsp_sim.v
+        read_verilog -specify -lib -D &lt;family&gt; +/intel_alm/common/mem_sim.v
+        read_verilog -specify -lib -D &lt;family&gt; +/intel_alm/common/misc_sim.v
+        read_verilog -specify -lib -D &lt;family&gt; -icells +/intel_alm/common/abc9_model.v
+        read_verilog -lib +/intel/common/altpll_bb.v
+        read_verilog -lib +/intel_alm/common/megafunction_bb.v
+        hierarchy -check -top &lt;top&gt;
+
+    coarse:
+        proc
+        flatten    (skip if -noflatten)
+        tribuf -logic
+        deminout
+        opt_expr
+        opt_clean
+        check
+        opt -nodffe -nosdff
+        fsm
+        opt
+        wreduce
+        peepopt
+        opt_clean
+        share
+        techmap -map +/cmp2lut.v -D LUT_WIDTH=6
+        opt_expr
+        opt_clean
+        techmap -map +/mul2dsp.v [...]    (unless -nodsp)
+        alumacc
+        iopadmap -bits -outpad MISTRAL_OB I:PAD -inpad MISTRAL_IB O:PAD -toutpad MISTRAL_IO OE:O:PAD -tinoutpad MISTRAL_IO OE:O:I:PAD A:top    (unless -noiopad)
+        techmap -map +/intel_alm/common/arith_alm_map.v -map +/intel_alm/common/dsp_map.v
+        opt
+        memory -nomap
+        opt_clean
+
+    map_bram:    (skip if -nobram)
+        memory_bram -rules +/intel_alm/common/bram_&lt;bram_type&gt;.txt
+        techmap -map +/intel_alm/common/bram_&lt;bram_type&gt;_map.v
+
+    map_lutram:    (skip if -nolutram)
+        memory_bram -rules +/intel_alm/common/lutram_mlab.txt    (for Cyclone V / Cyclone 10GX)
+
+    map_ffram:
+        memory_map
+        opt -full
+
+    map_ffs:
+        techmap
+        dfflegalize -cell $_DFFE_PN0P_ 0 -cell $_SDFFCE_PP0P_ 0
+        techmap -map +/intel_alm/common/dff_map.v
+        opt -full -undriven -mux_undef
+        clean -purge
+        clkbufmap -buf MISTRAL_CLKBUF Q:A    (unless -noclkbuf)
+
+    map_luts:
+        techmap -map +/intel_alm/common/abc9_map.v
+        abc9 [-dff] -maxlut 6 -W 600
+        techmap -map +/intel_alm/common/abc9_unmap.v
+        techmap -map +/intel_alm/common/alm_map.v
+        opt -fast
+        autoname
+        clean
+
+    check:
+        hierarchy -check
+        stat
+        check
+        blackbox =A:whitebox
+
+    quartus:
+        rename -hide w:*[* w:*]*
+        setundef -zero
+        hilomap -singleton -hicell __MISTRAL_VCC Q -locell __MISTRAL_GND Q
+        techmap -D &lt;family&gt; -map +/intel_alm/common/quartus_rename.v
+
+    vqm:
+        write_verilog -attr2comment -defparam -nohex -decimal &lt;file-name&gt;
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

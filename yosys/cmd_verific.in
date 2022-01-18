@@ -11,7 +11,7 @@ different compilation units.
 
 Additional -D&lt;macro&gt;[=&lt;value&gt;] options may be added after the option indicating
 the language version (and before file names) to set additional verilog defines.
-The macros SYNTHESIS and VERIFIC are defined implicitly.
+The macros YOSYS, SYNTHESIS, and VERIFIC are defined implicitly.
 
 
     verific -formal &lt;verilog-file&gt;..
@@ -24,10 +24,42 @@ Like -sv, but define FORMAL instead of SYNTHESIS.
 Load the specified VHDL files into Verific.
 
 
-    verific -work &lt;libname&gt; {-sv|-vhdl|...} &lt;hdl-file&gt;
+    verific {-f|-F} &lt;command-file&gt;
+
+Load and execute the specified command file.
+
+Command file parser supports following commands:
+    +define    - defines macro
+    -u         - upper case all identifier (makes Verilog parser case insensitive)
+    -v         - register library name (file)
+    -y         - register library name (directory)
+    +incdir    - specify include dir
+    +libext    - specify library extension
+    +liborder  - add library in ordered list
+    +librescan - unresolved modules will be always searched starting with the first
+                 library specified by -y/-v options.
+    -f/-file   - nested -f option
+    -F         - nested -F option
+
+    parse mode:
+        -ams
+        +systemverilogext
+        +v2k
+        +verilog1995ext
+        +verilog2001ext
+        -sverilog
+
+
+    verific [-work &lt;libname&gt;] {-sv|-vhdl|...} &lt;hdl-file&gt;
 
 Load the specified Verilog/SystemVerilog/VHDL file into the specified library.
 (default library when -work is not present: "work")
+
+
+    verific [-L &lt;libname&gt;] {-sv|-vhdl|...} &lt;hdl-file&gt;
+
+Look up external definitions in the specified library.
+(-L may be used more than once)
 
 
     verific -vlog-incdir &lt;directory&gt;..
@@ -83,6 +115,9 @@ Import options:
   -autocover
     Generate automatic cover statements for all asserts
 
+  -fullinit
+    Keep all register initializations, even those for non-FF registers.
+
   -chparam name value 
     Elaborate the specified top modules (all modules when -all given) using
     this parameter value. Modules on which this parameter does not exist will
@@ -118,7 +153,75 @@ bindings (for Yosys and/or Verific developers):
   -d &lt;dump_file&gt;
     Dump the Verific netlist as a verilog file.
 
-Visit http://verific.com/ for more information on Verific.
+
+    verific [-work &lt;libname&gt;] -pp [options] &lt;filename&gt; [&lt;module&gt;]..
+
+Pretty print design (or just module) to the specified file from the
+specified library. (default library when -work is not present: "work")
+
+Pretty print options:
+
+  -verilog
+    Save output for Verilog/SystemVerilog design modules (default).
+
+  -vhdl
+    Save output for VHDL design units.
+
+
+    verific -app &lt;application&gt;..
+
+Execute YosysHQ formal application on loaded Verilog files.
+
+Application options:
+
+    -module &lt;module&gt;
+        Run formal application only on specified module.
+
+    -blacklist &lt;filename[:lineno]&gt;
+        Do not run application on modules from files that match the filename
+        or filename and line number if provided in such format.
+        Parameter can also contain comma separated list of file locations.
+
+    -blfile &lt;file&gt;
+        Do not run application on locations specified in file, they can represent filename
+        or filename and location in file.
+
+Applications:
+
+  WARNING: Applications only available in commercial build.
+
+
+    verific -template &lt;name&gt; &lt;top_module&gt;..
+
+Generate template for specified top module of loaded design.
+
+Template options:
+
+  -out
+    Specifies output file for generated template, by default output is stdout
+
+  -chparam name value 
+    Generate template using this parameter value. Otherwise default parameter
+    values will be used for templat generate functionality. This option
+    can be specified multiple times to override multiple parameters.
+    String values must be passed in double quotes (").
+
+Templates:
+
+  WARNING: Templates only available in commercial build.
+
+
+
+    verific -cfg [&lt;name&gt; [&lt;value&gt;]]
+
+Get/set Verific runtime flags.
+
+
+Use YosysHQ Tabby CAD Suite if you need Yosys+Verific.
+https://www.yosyshq.com/
+
+Contact office@yosyshq.com for free evaluation
+binaries of YosysHQ Tabby CAD Suite.
 
 </pre>
 @footer@

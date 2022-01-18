@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: read_ilang</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -25,23 +27,9 @@
 </div>
 
 <div id="main"><div><!-- begin of content -->
-<h1>read_ilang - read modules from ilang file</h1>
+<h1>read_ilang - (deprecated) alias of read_rtlil</h1>
 <pre>
-    read_ilang [filename]
-
-Load modules from an ilang file to the current design. (ilang is a text
-representation of a design in yosys's internal format.)
-
-    -nooverwrite
-        ignore re-definitions of modules. (the default behavior is to
-        create an error message if the existing module is not a blackbox
-        module, and overwrite the existing module if it is a blackbox module.)
-
-    -overwrite
-        overwrite existing modules with the same name
-
-    -lib
-        only create empty blackbox modules
+See `help read_rtlil`.
 
 </pre>
 </div></div><!-- end of content -->

@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: read_verilog</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -39,6 +41,9 @@ Verilog-2005 is supported.
     -formal
         enable support for SystemVerilog assertions and some Yosys extensions
         replace the implicit -D SYNTHESIS with -D FORMAL
+
+    -nosynthesis
+        don't add implicit -D SYNTHESIS
 
     -noassert
         ignore assert() statements
@@ -181,8 +186,8 @@ recommended to use a simulator (for example Icarus Verilog) for checking
 the syntax of the code, rather than to rely on read_verilog for that.
 
 Depending on if read_verilog is run in -formal mode, either the macro
-SYNTHESIS or FORMAL is defined automatically. In addition, read_verilog
-always defines the macro YOSYS.
+SYNTHESIS or FORMAL is defined automatically, unless -nosynthesis is used.
+In addition, read_verilog always defines the macro YOSYS.
 
 See the Yosys README file for a list of non-standard Verilog features
 supported by the Yosys Verilog front-end.

@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: scc</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -33,7 +35,7 @@ This command identifies strongly connected components (aka logic loops) in the
 design.
 
     -expect &lt;num&gt;
-        expect to find exactly &lt;num&gt; SSCs. A different number of SSCs will
+        expect to find exactly &lt;num&gt; SCCs. A different number of SCCs will
         produce an error.
 
     -max_depth &lt;num&gt;
@@ -58,6 +60,9 @@ design.
     -select
         replace the current selection with a selection of all cells and wires
         that are part of a found logic loop
+
+    -specify
+        examine specify rules to detect logic loops in whitebox/blackbox cells
 
 </pre>
 </div></div><!-- end of content -->

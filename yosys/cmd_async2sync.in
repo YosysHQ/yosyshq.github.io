@@ -11,7 +11,5 @@ a reset deasserts with the clock edge, then the FF output will still drive the
 reset value in the next cycle regardless of the data-in value at the time of
 the clock edge.
 
-Currently only $adff and $dffsr cells are supported by this pass.
-
 </pre>
 @footer@

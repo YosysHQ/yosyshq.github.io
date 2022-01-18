@@ -7,7 +7,7 @@ This command identifies strongly connected components (aka logic loops) in the
 design.
 
     -expect &lt;num&gt;
-        expect to find exactly &lt;num&gt; SSCs. A different number of SSCs will
+        expect to find exactly &lt;num&gt; SCCs. A different number of SCCs will
         produce an error.
 
     -max_depth &lt;num&gt;
@@ -32,6 +32,9 @@ design.
     -select
         replace the current selection with a selection of all cells and wires
         that are part of a found logic loop
+
+    -specify
+        examine specify rules to detect logic loops in whitebox/blackbox cells
 
 </pre>
 @footer@

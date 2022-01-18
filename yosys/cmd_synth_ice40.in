@@ -5,6 +5,10 @@
 
 This command runs synthesis for iCE40 FPGAs.
 
+    -device &lt; hx | lp | u &gt;
+        relevant only for '-abc9' flow, optimise timing for the specified device.
+        default: hx
+
     -top &lt;module&gt;
         use the specified module as top module
 
@@ -28,11 +32,11 @@ This command runs synthesis for iCE40 FPGAs.
     -noflatten
         do not flatten design before synthesis
 
-    -retime
-        run 'abc' with -dff option
+    -dff
+        run 'abc'/'abc9' with -dff option
 
-    -relut
-        combine LUTs after synthesis
+    -retime
+        run 'abc' with '-dff -D 1' options
 
     -nocarry
         do not use SB_CARRY cells in output netlist
@@ -42,7 +46,7 @@ This command runs synthesis for iCE40 FPGAs.
 
     -dffe_min_ce_use &lt;min_ce_use&gt;
         do not use SB_DFFE* cells if the resulting CE line would go to less
-        than min_ce_use SB_DFFE*in output netlist
+        than min_ce_use SB_DFFE* in output netlist
 
     -nobram
         do not use SB_RAM40_4K* cells in output netlist
@@ -60,11 +64,17 @@ This command runs synthesis for iCE40 FPGAs.
         generate an output netlist (and BLIF file) suitable for VPR
         (this feature is experimental and incomplete)
 
+    -abc9
+        use new ABC9 flow (EXPERIMENTAL)
+
+    -flowmap
+        use FlowMap LUT techmapping instead of abc (EXPERIMENTAL)
+
 
 The following commands are executed by this synthesis command:
 
     begin:
-        read_verilog -lib +/ice40/cells_sim.v
+        read_verilog -D ICE40_HX -lib -specify +/ice40/cells_sim.v
         hierarchy -check -top &lt;top&gt;
         proc
 
@@ -77,6 +87,8 @@ The following commands are executed by this synthesis command:
         opt_expr
         opt_clean
         check
+        opt -nodffe -nosdff
+        fsm
         opt
         wreduce
         peepopt
@@ -85,58 +97,68 @@ The following commands are executed by this synthesis command:
         techmap -map +/cmp2lut.v -D LUT_WIDTH=4
         opt_expr
         opt_clean
-        ice40_dsp    (if -dsp)
+        memory_dff
+        wreduce t:$mul
+        techmap -map +/mul2dsp.v -map +/ice40/dsp_map.v -D DSP_A_MAXWIDTH=16 -D DSP_B_MAXWIDTH=16 -D DSP_A_MINWIDTH=2 -D DSP_B_MINWIDTH=2 -D DSP_Y_MINWIDTH=11 -D DSP_NAME=$__MUL16X16    (if -dsp)
+        select a:mul2dsp                  (if -dsp)
+        setattr -unset mul2dsp            (if -dsp)
+        opt_expr -fine                    (if -dsp)
+        wreduce                           (if -dsp)
+        select -clear                     (if -dsp)
+        ice40_dsp                         (if -dsp)
+        chtype -set $mul t:$__soft_mul    (if -dsp)
         alumacc
         opt
-        fsm
-        opt -fast
         memory -nomap
         opt_clean
 
-    bram:    (skip if -nobram)
+    map_bram:    (skip if -nobram)
         memory_bram -rules +/ice40/brams.txt
         techmap -map +/ice40/brams_map.v
         ice40_braminit
 
-    map:
+    map_ffram:
         opt -fast -mux_undef -undriven -fine
-        memory_map
+        memory_map -iattr -attr !ram_block -attr !rom_block -attr logic_block -attr syn_ramstyle=auto -attr syn_ramstyle=registers -attr syn_romstyle=auto -attr syn_romstyle=logic
         opt -undriven -fine
 
     map_gates:
+        ice40_wrapcarry
         techmap -map +/techmap.v -map +/ice40/arith_map.v
-        abc -dff    (only if -retime)
+        opt -fast
+        abc -dff -D 1    (only if -retime)
         ice40_opt
 
     map_ffs:
-        dffsr2dff
-        dff2dffe -direct-match $_DFF_*
-        techmap -D NO_LUT -map +/ice40/cells_map.v
+        dfflegalize -cell $_DFF_?_ 0 -cell $_DFFE_?P_ 0 -cell $_DFF_?P?_ 0 -cell $_DFFE_?P?P_ 0 -cell $_SDFF_?P?_ 0 -cell $_SDFFCE_?P?P_ 0 -cell $_DLATCH_?_ x -mince -1
+        techmap -map +/ice40/ff_map.v
         opt_expr -mux_undef
         simplemap
-        ice40_ffinit
-        ice40_ffssr
         ice40_opt -full
 
     map_luts:
         abc          (only if -abc2)
         ice40_opt    (only if -abc2)
         techmap -map +/ice40/latches_map.v
-        simplemap                                   (only if -noabc)
+        simplemap                                   (if -noabc or -flowmap)
         techmap -map +/gate2lut.v -D LUT_WIDTH=4    (only if -noabc)
-        abc -dress -lut 4    (skip if -noabc)
+        flowmap -maxlut 4    (only if -flowmap)
+        abc -dress -lut 4     (skip if -noabc)
+        ice40_wrapcarry -unwrap
+        techmap -map +/ice40/ff_map.v
         clean
-        ice40_unlut                                (only if -relut)
-        opt_lut -dlogic SB_CARRY:I0=1:I1=2:CI=3    (only if -relut)
+        opt_lut -dlogic SB_CARRY:I0=1:I1=2:CI=3 -dlogic SB_CARRY:CO=3
 
     map_cells:
-        techmap -map +/ice40/cells_map.v    (with -D NO_LUT in vpr mode)
+        techmap -map +/ice40/cells_map.v    (skip if -vpr)
         clean
 
     check:
+        autoname
         hierarchy -check
         stat
         check -noinit
+        blackbox =A:whitebox
 
     blif:
         opt_clean -purge                                     (vpr mode)

@@ -9,7 +9,7 @@ This command executes the following script:
         &lt;ice40 specific optimizations&gt;
         opt_expr -mux_undef -undriven [-full]
         opt_merge
-        opt_rmdff
+        opt_dff
         opt_clean
     while &lt;changed design&gt;
 

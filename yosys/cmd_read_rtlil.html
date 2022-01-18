@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: read_rtlil</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
+  <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
+  <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
+  <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>read_rtlil - read modules from RTLIL file</h1>
+<pre>
+    read_rtlil [filename]
+
+Load modules from an RTLIL file to the current design. (RTLIL is a text
+representation of a design in yosys's internal format.)
+
+    -nooverwrite
+        ignore re-definitions of modules. (the default behavior is to
+        create an error message if the existing module is not a blackbox
+        module, and overwrite the existing module if it is a blackbox module.)
+
+    -overwrite
+        overwrite existing modules with the same name
+
+    -lib
+        only create empty blackbox modules
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

@@ -1,9 +1,0 @@
-@cmd_header anlogic_determine_init@
-<h1>anlogic_determine_init - Anlogic: Determine the init value of cells</h1>
-<pre>
-    anlogic_determine_init [selection]
-
-Determine the init value of cells that doesn't allow unknown init value.
-
-</pre>
-@footer@

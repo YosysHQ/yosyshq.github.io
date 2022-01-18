@@ -104,8 +104,12 @@ Options:
         use the given template file. the line containing only the token '%%'
         is replaced with the regular output of this command.
 
+    -solver-option &lt;option&gt; &lt;value&gt;
+        emit a `; yosys-smt2-solver-option` directive for yosys-smtbmc to write
+        the given option as a `(set-option ...)` command in the SMT-LIBv2.
+
 [1] For more information on SMT-LIBv2 visit http://smt-lib.org/ or read David
-R. Cok's tutorial: http://www.grammatech.com/resources/smt/SMTLIBTutorial.pdf
+R. Cok's tutorial: https://smtlib.github.io/jSMTLIB/SMTLIBTutorial.pdf
 
 ---------------------------------------------------------------------------
 
@@ -121,7 +125,7 @@ never transition from a non-zero value to a zero value.
 
 For this proof we create the following template (test.tpl).
 
-        ; we need QF_UFBV for this poof
+        ; we need QF_UFBV for this proof
         (set-logic QF_UFBV)
 
         ; insert the auto-generated code here

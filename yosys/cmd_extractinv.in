@@ -1,0 +1,21 @@
+@cmd_header extractinv@
+<h1>extractinv - extract explicit inverter cells for invertible cell pins</h1>
+<pre>
+    extractinv [options] [selection]
+
+Searches the design for all cells with invertible pins controlled by a cell
+parameter (eg. IS_CLK_INVERTED on many Xilinx cells) and removes the parameter.
+If the parameter was set to 1, inserts an explicit inverter cell in front of
+the pin instead.  Normally used for output to ISE, which does not support the
+inversion parameters.
+
+To mark a cell port as invertible, use (* invertible_pin = "param_name" *)
+on the wire in the blackbox module.  The parameter value should have
+the same width as the port, and will be effectively XORed with it.
+
+    -inv &lt;celltype&gt; &lt;portname_out&gt;:&lt;portname_in&gt;
+        Specifies the cell type to use for the inverters and its port names.
+        This option is required.
+
+</pre>
+@footer@

@@ -15,6 +15,10 @@ Write the current design to an SPICE netlist file.
     -pos net_name
         set the net name for constant 1 (default: Vdd)
 
+    -buf DC|subckt_name
+        set the name for jumper element (default: DC)
+        (used to connect different nets)
+
     -nc_prefix
         prefix for not-connected nets (default: _NC)
 

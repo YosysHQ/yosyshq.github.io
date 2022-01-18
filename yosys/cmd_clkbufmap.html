@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: clkbufmap</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
+  <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
+  <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
+  <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>clkbufmap - insert clock buffers on clock networks</h1>
+<pre>
+    clkbufmap [options] [selection]
+
+Inserts clock buffers between nets connected to clock inputs and their drivers.
+
+In the absence of any selection, all wires without the 'clkbuf_inhibit'
+attribute will be considered for clock buffer insertion.
+Alternatively, to consider all wires without the 'buffer_type' attribute set to
+'none' or 'bufr' one would specify:
+  'w:* a:buffer_type=none a:buffer_type=bufr %u %d'
+as the selection.
+
+    -buf &lt;celltype&gt; &lt;portname_out&gt;:&lt;portname_in&gt;
+        Specifies the cell type to use for the clock buffers
+        and its port names.  The first port will be connected to
+        the clock network sinks, and the second will be connected
+        to the actual clock source.
+
+    -inpad &lt;celltype&gt; &lt;portname_out&gt;:&lt;portname_in&gt;
+        If specified, a PAD cell of the given type is inserted on
+        clock nets that are also top module's inputs (in addition
+        to the clock buffer, if any).
+
+At least one of -buf or -inpad should be specified.
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

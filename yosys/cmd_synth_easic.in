@@ -24,7 +24,7 @@ This command runs synthesis for eASIC platform.
         do not flatten design before synthesis
 
     -retime
-        run 'abc' with -dff option
+        run 'abc' with '-dff -D 1' options
 
 
 The following commands are executed by this synthesis command:
@@ -47,7 +47,7 @@ The following commands are executed by this synthesis command:
         opt -undriven -fine
         techmap
         opt -fast
-        abc -dff     (only if -retime)
+        abc -dff -D 1     (only if -retime)
         opt_clean    (only if -retime)
 
     map:
@@ -59,6 +59,7 @@ The following commands are executed by this synthesis command:
         hierarchy -check
         stat
         check -noinit
+        blackbox =A:whitebox
 
     vlog:
         write_verilog -noexpr -attr2comment &lt;file-name&gt;

@@ -12,7 +12,7 @@ and typical applications:</p>
 <li>Converting Verilog to BLIF / EDIF/ BTOR / SMT-LIB / simple RTL Verilog / etc.
 <li>Built-in formal methods for checking properties and equivalence
 <li>Mapping to ASIC standard cell libraries (in Liberty File Format)
-<li>Mapping to Xilinx 7-Series and Lattice iCE40 FPGAs
+<li>Mapping to Xilinx 7-Series and Lattice iCE40 and ECP5 FPGAs
 <li>Foundation and/or front-end for custom flows
 </ul>
 
@@ -20,6 +20,11 @@ and typical applications:</p>
 the existing passes (algorithms) using synthesis scripts and
 adding additional passes as needed by extending the Yosys C++
 code base.</p>
+
+<p>Yosys also serves as backend for several tools that use formal methods to
+reason about designs, such as <a href="https://yosyshq.readthedocs.io/en/latest/tools.html#formal-assertions-based-verification-abv-with-symbiyosys-sby">sby</a>
+for SMT-solver-based formal property checking or <a href="https://yosyshq.readthedocs.io/en/latest/tools.html#mutation-coverage-with-yosys-mcy">mcy</a>
+for evaluating the quality of testbenches with mutation coverage metrics.<p>
 
 <p>Yosys is free software licensed under the <a
 href="http://en.wikipedia.org/wiki/ISC_license">ISC license</a> (a GPL
@@ -34,7 +39,7 @@ the verilog file <tt>mydesign.v</tt>, synthesizes it to a gate-level netlist
 using the cell library in the Liberty file <tt>mycells.lib</tt> and writes the
 synthesized results as Verilog netlist to <tt>synth.v</tt>:</p>
 
-<pre># read design 
+<pre># read design
 read_verilog mydesign.v
 
 # elaborate design hierarchy
@@ -61,7 +66,7 @@ write_verilog synth.v</pre>
 <p>The <tt>synth</tt> command provides a good default script that can be used
 as basis for simple synthesis scripts:</p>
 
-<pre># read design 
+<pre># read design
 read_verilog mydesign.v
 
 # generic synthesis

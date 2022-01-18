@@ -1,9 +1,0 @@
-@cmd_header ice40_unlut@
-<h1>ice40_unlut - iCE40: transform SB_LUT4 cells to $lut cells</h1>
-<pre>
-    ice40_unlut [options] [selection]
-
-This command transforms all SB_LUT4 cells to generic $lut cells.
-
-</pre>
-@footer@

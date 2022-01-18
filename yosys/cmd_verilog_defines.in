@@ -12,5 +12,11 @@ Define and undefine verilog preprocessor macros.
     -Uname[=definition]
         undefine the preprocessor symbol 'name'
 
+    -reset
+        clear list of defined preprocessor symbols
+
+    -list
+        list currently defined preprocessor symbols
+
 </pre>
 @footer@
