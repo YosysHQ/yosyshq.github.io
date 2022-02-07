@@ -1,0 +1,33 @@
+@cmd_header exec@
+<h1>exec - execute commands in the operating system shell</h1>
+<pre>
+    exec [options] -- [command]
+
+Execute a command in the operating system shell.  All supplied arguments are
+concatenated and passed as a command to popen(3).  Whitespace is not guaranteed
+to be preserved, even if quoted.  stdin and stderr are not connected, while stdout is
+logged unless the "-q" option is specified.
+
+
+    -q
+        Suppress stdout and stderr from subprocess
+
+    -expect-return &lt;int&gt;
+        Generate an error if popen() does not return specified value.
+        May only be specified once; the final specified value is controlling
+        if specified multiple times.
+
+    -expect-stdout &lt;regex&gt;
+        Generate an error if the specified regex does not match any line
+        in subprocess's stdout.  May be specified multiple times.
+
+    -not-expect-stdout &lt;regex&gt;
+        Generate an error if the specified regex matches any line
+        in subprocess's stdout.  May be specified multiple times.
+
+
+    Example: exec -q -expect-return 0 -- echo "bananapie" | grep "nana"
+
+
+</pre>
+@footer@

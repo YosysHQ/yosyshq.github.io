@@ -20,57 +20,60 @@ library to a target architecture.
 
         if no -script parameter is given, the following scripts are used:
 
-        for -liberty without -constr:
-          strash; ifraig; scorr; dc2; dretime; retime {D}; strash; &amp;get -n;
-               &amp;dch -f; &amp;nf {D}; &amp;put
+        for -liberty/-genlib without -constr:
+          strash; ifraig; scorr; dc2; dretime; strash; &amp;get -n; &amp;dch -f;
+               &amp;nf {D}; &amp;put
 
-        for -liberty with -constr:
-          strash; ifraig; scorr; dc2; dretime; retime {D}; strash; &amp;get -n;
-               &amp;dch -f; &amp;nf {D}; &amp;put; buffer; upsize {D}; dnsize {D};
-               stime -p
+        for -liberty/-genlib with -constr:
+          strash; ifraig; scorr; dc2; dretime; strash; &amp;get -n; &amp;dch -f;
+               &amp;nf {D}; &amp;put; buffer; upsize {D}; dnsize {D}; stime -p
 
         for -lut/-luts (only one LUT size):
-          strash; ifraig; scorr; dc2; dretime; retime {D}; strash; dch -f;
-               if; mfs2; lutpack {S}
+          strash; ifraig; scorr; dc2; dretime; strash; dch -f; if; mfs2;
+               lutpack {S}
 
         for -lut/-luts (different LUT sizes):
-          strash; ifraig; scorr; dc2; dretime; retime {D}; strash; dch -f;
-               if; mfs2
+          strash; ifraig; scorr; dc2; dretime; strash; dch -f; if; mfs2
 
         for -sop:
-          strash; ifraig; scorr; dc2; dretime; retime {D}; strash; dch -f;
+          strash; ifraig; scorr; dc2; dretime; strash; dch -f;
                cover {I} {P}
 
         otherwise:
-          strash; ifraig; scorr; dc2; dretime; retime {D}; strash; &amp;get -n;
-               &amp;dch -f; &amp;nf {D}; &amp;put
+          strash; ifraig; scorr; dc2; dretime; strash; &amp;get -n; &amp;dch -f;
+               &amp;nf {D}; &amp;put
 
     -fast
         use different default scripts that are slightly faster (at the cost
         of output quality):
 
-        for -liberty without -constr:
-          strash; dretime; retime {D}; map {D}
+        for -liberty/-genlib without -constr:
+          strash; dretime; map {D}
 
-        for -liberty with -constr:
-          strash; dretime; retime {D}; map {D}; buffer; upsize {D};
-               dnsize {D}; stime -p
+        for -liberty/-genlib with -constr:
+          strash; dretime; map {D}; buffer; upsize {D}; dnsize {D};
+               stime -p
 
         for -lut/-luts:
-          strash; dretime; retime {D}; if
+          strash; dretime; if
 
         for -sop:
-          strash; dretime; retime {D}; cover -I {I} -P {P}
+          strash; dretime; cover {I} {P}
 
         otherwise:
-          strash; dretime; retime {D}; map
+          strash; dretime; map
 
     -liberty &lt;file&gt;
         generate netlists for the specified cell library (using the liberty
         file format).
 
+    -genlib &lt;file&gt;
+        generate netlists for the specified cell library (using the SIS Genlib
+        file format).
+
     -constr &lt;file&gt;
-        pass this file with timing constraints to ABC. use with -liberty.
+        pass this file with timing constraints to ABC.
+        use with -liberty/-genlib.
 
         a constr file contains two lines:
             set_driving_cell &lt;cell_name&gt;
@@ -116,19 +119,25 @@ library to a target architecture.
 
     -g type1,type2,...
         Map to the specified list of gate types. Supported gates types are:
-        AND, NAND, OR, NOR, XOR, XNOR, ANDNOT, ORNOT, MUX, AOI3, OAI3, AOI4, OAI4.
+           AND, NAND, OR, NOR, XOR, XNOR, ANDNOT, ORNOT, MUX,
+           NMUX, AOI3, OAI3, AOI4, OAI4.
         (The NOT gate is always added to this list automatically.)
 
         The following aliases can be used to reference common sets of gate types:
           simple: AND OR XOR MUX
-          cmos2: NAND NOR
-          cmos3: NAND NOR AOI3 OAI3
-          cmos4: NAND NOR AOI3 OAI3 AOI4 OAI4
-          gates: AND NAND OR NOR XOR XNOR ANDNOT ORNOT
-          aig: AND NAND OR NOR ANDNOT ORNOT
+          cmos2:  NAND NOR
+          cmos3:  NAND NOR AOI3 OAI3
+          cmos4:  NAND NOR AOI3 OAI3 AOI4 OAI4
+          cmos:   NAND NOR AOI3 OAI3 AOI4 OAI4 NMUX MUX XOR XNOR
+          gates:  AND NAND OR NOR XOR XNOR ANDNOT ORNOT
+          aig:    AND NAND OR NOR ANDNOT ORNOT
+
+        The alias 'all' represent the full set of all gate types.
 
         Prefix a gate type with a '-' to remove it from the list. For example
         the arguments 'AND,OR,XOR' and 'simple,-MUX' are equivalent.
+
+        The default is 'all,-NMUX,-AOI3,-OAI3,-AOI4,-OAI4'.
 
     -dff
         also pass $_DFF_?_ and $_DFFE_??_ cells through ABC. modules with many
@@ -161,14 +170,14 @@ library to a target architecture.
         preserve naming by an equivalence check between the original and post-ABC
         netlists (experimental).
 
-When neither -liberty nor -lut is used, the Yosys standard cell library is
+When no target cell library is specified the Yosys standard cell library is
 loaded into ABC before the ABC script is executed.
 
 Note that this is a logic optimization pass within Yosys that is calling ABC
 internally. This is not going to "run ABC on your design". It will instead run
 ABC on logic snippets extracted from your design. You will not get any useful
 output when passing an ABC script that writes a file. Instead write your full
-design as BLIF file with write_blif and the load that into ABC externally if
+design as BLIF file with write_blif and then load that into ABC externally if
 you want to use ABC to convert your design into another format.
 
 [1] http://www.eecs.berkeley.edu/~alanmi/abc/

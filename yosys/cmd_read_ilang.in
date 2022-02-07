@@ -1,21 +1,7 @@
 @cmd_header read_ilang@
-<h1>read_ilang - read modules from ilang file</h1>
+<h1>read_ilang - (deprecated) alias of read_rtlil</h1>
 <pre>
-    read_ilang [filename]
-
-Load modules from an ilang file to the current design. (ilang is a text
-representation of a design in yosys's internal format.)
-
-    -nooverwrite
-        ignore re-definitions of modules. (the default behavior is to
-        create an error message if the existing module is not a blackbox
-        module, and overwrite the existing module if it is a blackbox module.)
-
-    -overwrite
-        overwrite existing modules with the same name
-
-    -lib
-        only create empty blackbox modules
+See `help read_rtlil`.
 
 </pre>
 @footer@

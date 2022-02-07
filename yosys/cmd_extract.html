@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: extract</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -32,7 +34,7 @@
 
 This pass looks for subcircuits that are isomorphic to any of the modules
 in the given map file and replaces them with instances of this modules. The
-map file can be a Verilog source file (*.v) or an ilang file (*.il).
+map file can be a Verilog source file (*.v) or an RTLIL source file (*.il).
 
     -map &lt;map_file&gt;
         use the modules in this file as reference. This option can be used
@@ -87,7 +89,7 @@ This pass can also be used for mining for frequent subcircuits. In this mode
 the following options are to be used instead of the -map option.
 
     -mine &lt;out_file&gt;
-        mine for frequent subcircuits and write them to the given ilang file
+        mine for frequent subcircuits and write them to the given RTLIL file
 
     -mine_cells_span &lt;min&gt; &lt;max&gt;
         only mine for subcircuits with the specified number of cells

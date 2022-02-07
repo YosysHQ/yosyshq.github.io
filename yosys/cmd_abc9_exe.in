@@ -1,0 +1,74 @@
+@cmd_header abc9_exe@
+<h1>abc9_exe - use ABC9 for technology mapping</h1>
+<pre>
+    abc9_exe [options]
+
+ 
+This pass uses the ABC tool [1] for technology mapping of the top module
+(according to the (* top *) attribute or if only one module is currently selected)
+to a target FPGA architecture.
+
+    -exe &lt;command&gt;
+        use the specified command instead of "&lt;yosys-bindir&gt;/yosys-abc" to execute ABC.
+        This can e.g. be used to call a specific version of ABC or a wrapper.
+
+    -script &lt;file&gt;
+        use the specified ABC script file instead of the default script.
+
+        if &lt;file&gt; starts with a plus sign (+), then the rest of the filename
+        string is interpreted as the command string to be passed to ABC. The
+        leading plus sign is removed and all commas (,) in the string are
+        replaced with blanks before the string is passed to ABC.
+
+        if no -script parameter is given, the following scripts are used:
+          &amp;scorr; &amp;sweep; &amp;dc2; &amp;dch -f; &amp;ps; &amp;if {C} {W} {D} {R} -v; &amp;mfs
+
+    -fast
+        use different default scripts that are slightly faster (at the cost
+        of output quality):
+          &amp;if {C} {W} {D} {R} -v
+
+    -D &lt;picoseconds&gt;
+        set delay target. the string {D} in the default scripts above is
+        replaced by this option when used, and an empty string otherwise
+        (indicating best possible delay).
+
+    -lut &lt;width&gt;
+        generate netlist using luts of (max) the specified width.
+
+    -lut &lt;w1&gt;:&lt;w2&gt;
+        generate netlist using luts of (max) the specified width &lt;w2&gt;. All
+        luts with width &lt;= &lt;w1&gt; have constant cost. for luts larger than &lt;w1&gt;
+        the area cost doubles with each additional input bit. the delay cost
+        is still constant for all lut widths.
+
+    -lut &lt;file&gt;
+        pass this file with lut library to ABC.
+
+    -luts &lt;cost1&gt;,&lt;cost2&gt;,&lt;cost3&gt;,&lt;sizeN&gt;:&lt;cost4-N&gt;,..
+        generate netlist using luts. Use the specified costs for luts with 1,
+        2, 3, .. inputs.
+
+    -showtmp
+        print the temp dir name in log. usually this is suppressed so that the
+        command output is identical across runs.
+
+    -box &lt;file&gt;
+        pass this file with box library to ABC.
+
+    -cwd &lt;dir&gt;
+        use this as the current working directory, inside which the 'input.xaig'
+        file is expected. temporary files will be created in this directory, and
+        the mapped result will be written to 'output.aig'.
+
+Note that this is a logic optimization pass within Yosys that is calling ABC
+internally. This is not going to "run ABC on your design". It will instead run
+ABC on logic snippets extracted from your design. You will not get any useful
+output when passing an ABC script that writes a file. Instead write your full
+design as BLIF file with write_blif and then load that into ABC externally if
+you want to use ABC to convert your design into another format.
+
+[1] http://www.eecs.berkeley.edu/~alanmi/abc/
+
+</pre>
+@footer@

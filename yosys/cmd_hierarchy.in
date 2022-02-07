@@ -6,9 +6,9 @@
 
 In parametric designs, a module might exists in several variations with
 different parameter values. This pass looks at all modules in the current
-design an re-runs the language frontends for the parametric modules as
+design and re-runs the language frontends for the parametric modules as
 needed. It also resolves assignments to wired logic data types (wand/wor),
-resolves positional module parameters, unroll array instances, and more.
+resolves positional module parameters, unrolls array instances, and more.
 
     -check
         also check the design hierarchy. this generates an error when

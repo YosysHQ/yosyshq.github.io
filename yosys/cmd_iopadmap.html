@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: iopadmap</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -33,26 +35,33 @@ Map module inputs/outputs to PAD cells from a library. This pass
 can only map to very simple PAD cells. Use 'techmap' to further map
 the resulting cells to more sophisticated PAD cells.
 
-    -inpad &lt;celltype&gt; &lt;portname&gt;[:&lt;portname&gt;]
+    -inpad &lt;celltype&gt; &lt;in_port&gt;[:&lt;ext_port&gt;]
         Map module input ports to the given cell type with the
         given output port name. if a 2nd portname is given, the
         signal is passed through the pad call, using the 2nd
         portname as the port facing the module port.
 
-    -outpad &lt;celltype&gt; &lt;portname&gt;[:&lt;portname&gt;]
-    -inoutpad &lt;celltype&gt; &lt;portname&gt;[:&lt;portname&gt;]
+    -outpad &lt;celltype&gt; &lt;out_port&gt;[:&lt;ext_port&gt;]
+    -inoutpad &lt;celltype&gt; &lt;io_port&gt;[:&lt;ext_port&gt;]
         Similar to -inpad, but for output and inout ports.
 
-    -toutpad &lt;celltype&gt; &lt;portname&gt;:&lt;portname&gt;[:&lt;portname&gt;]
+    -toutpad &lt;celltype&gt; &lt;oe_port&gt;:&lt;out_port&gt;[:&lt;ext_port&gt;]
         Merges $_TBUF_ cells into the output pad cell. This takes precedence
         over the other -outpad cell. The first portname is the enable input
-        of the tristate driver.
+        of the tristate driver, which can be prefixed with `~` for negative
+        polarity enable.
 
-    -tinoutpad &lt;celltype&gt; &lt;portname&gt;:&lt;portname&gt;:&lt;portname&gt;[:&lt;portname&gt;]
+    -tinoutpad &lt;celltype&gt; &lt;oe_port&gt;:&lt;in_port&gt;:&lt;out_port&gt;[:&lt;ext_port&gt;]
         Merges $_TBUF_ cells into the inout pad cell. This takes precedence
         over the other -inoutpad cell. The first portname is the enable input
         of the tristate driver and the 2nd portname is the internal output
-        buffering the external signal.
+        buffering the external signal.  Like with `-toutpad`, the enable can
+        be marked as negative polarity by prefixing the name with `~`.
+
+    -ignore &lt;celltype&gt; &lt;portname&gt;[:&lt;portname&gt;]*
+        Skips mapping inputs/outputs that are already connected to given
+        ports of the given cell.  Can be used multiple times.  This is in
+        addition to the cells specified as mapping targets.
 
     -widthparam &lt;param_name&gt;
         Use the specified parameter name to set the port width.

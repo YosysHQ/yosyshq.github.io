@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: synth_achronix</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -47,7 +49,7 @@ This command runs synthesis for Achronix Speedster eFPGAs. This work is still ex
         do not flatten design before synthesis
 
     -retime
-        run 'abc' with -dff option
+        run 'abc' with '-dff -D 1' options
 
 
 The following commands are executed by this synthesis command:
@@ -69,14 +71,13 @@ The following commands are executed by this synthesis command:
         opt -fast -mux_undef -undriven -fine -full
         memory_map
         opt -undriven -fine
-        dffsr2dff
-        dff2dffe -direct-match $_DFF_*
         opt -fine
         techmap -map +/techmap.v
         opt -full
         clean -purge
         setundef -undriven -zero
-        abc -markgroups -dff    (only if -retime)
+        dfflegalize -cell $_DFF_P_ x
+        abc -markgroups -dff -D 1    (only if -retime)
 
     map_luts:
         abc -lut 4
@@ -91,6 +92,7 @@ The following commands are executed by this synthesis command:
         hierarchy -check
         stat
         check -noinit
+        blackbox =A:whitebox
 
     vout:
         write_verilog -nodec -attr2comment -defparam -renameprefix syn_ &lt;file-name&gt;

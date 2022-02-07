@@ -1,0 +1,9 @@
+@cmd_header opt_mem@
+<h1>opt_mem - optimize memories</h1>
+<pre>
+    opt_mem [options] [selection]
+
+This pass performs various optimizations on memories in the design.
+
+</pre>
+@footer@

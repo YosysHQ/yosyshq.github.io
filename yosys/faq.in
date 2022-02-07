@@ -6,10 +6,9 @@
 
 <p>If possible, do not mail the author directly with bug reports or support
 questions. Instead, post them on <a
-href="https://github.com/YosysHQ/yosys/issues/new">GitHub</a>, <a
-href="http://www.reddit.com/r/yosys/">Yosys Subreddit</a>, or <a
-href="http://stackoverflow.com/questions/tagged/yosys">Stack Overflow</a>, so
-others can profit from your question and the posted answers as well.</p>
+href="https://github.com/YosysHQ/yosys/issues/new">GitHub Issues</a> (for bugs)
+or <a href="https://github.com/YosysHQ/yosys/discussions">Discussions</a> (for
+questions), so others can profit from your question and the posted answers as well.</p>
 
 <p>A good bug report contains a <a href="http://stackoverflow.com/help/mcve">minimal,
 complete, and verifiable code example</a> that demonstrates the
@@ -33,15 +32,18 @@ information necessary to easily and quickly reproduce the problem you are seeing
 <h2>2. What synthesis targets are supported by Yosys?</h2>
 
 <p>Yosys is retargetable and adding support for additional targets is not very
-hard. At the moment, Yosys ships with support for ASIC synthesis (from liberty
-cell library files), iCE40 FPGAs, Xilinx 7-Series FPGAs, Silego GreenPAK4 devices,
-and Gowinsemi GW1N/GW2A FPGAs.</p>
+hard. At the moment, Yosys ships with mature flows targeting Lattice iCE40 and
+ECP5 FPGAs as well as Xilinx 7-Series FPGAs, experimental flows for many others,
+and support for ASIC synthesis from liberty cell library files.</p>
 
-<p>Note that in all this cases Yosys only performs synthesis. For a complete
-open source ASIC flow using Yosys see <a href="http://opencircuitdesign.com/qflow/">Qflow</a>,
+<p>Note that in all these cases Yosys only performs synthesis. Yosys's sister
+project <a href="https://github.com/YosysHQ/nextpnr">nextpnr</a> can be used for
+place and route for several FPGA families.</p>
+
+<p>For a complete open source ASIC flow using Yosys see <a href="http://opencircuitdesign.com/qflow/">Qflow</a>
+or <a href="https://github.com/The-OpenROAD-Project/OpenLane">the OpenROAD Project's OpenLane</a>,
 for a complete open source iCE40 flow see <a
-href="http://www.clifford.at/icestorm/">Project IceStorm</a>. Yosys
-Xilinx 7-Series synthesis output can be placed and routed with Xilinx Vivado.</p>
+href="https://github.com/YosysHQ/icestorm">Project IceStorm</a>.</p>
 
 <h2>3. Does Yosys support timing driven synthesis?</h2>
 
@@ -62,10 +64,6 @@ it is possible to write dedicated mapping rules for things like adders, that
 simply map arithmetic operations in the design to e.g. full-adder cells. See
 e.g. inference of <tt>SB_CARRY+SB_LUT</tt> blocks for arithmetic operations in
 the iCE40 flow.</p>
-
-<p>There is limited support for FFs with non-inverted and inverted outputs in
-Yosys and there are plans to further improve support for this cells in the near
-future.</p>
 
 <h2>5. The Verilog front-end does not create nice errors for invalid code!</h2>
 

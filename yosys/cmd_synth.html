@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: synth</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -69,6 +71,12 @@ on partly selected designs.
         from label is synonymous to 'begin', and empty to label is
         synonymous to the end of the command list.
 
+    -abc9
+        use new ABC9 flow (EXPERIMENTAL)
+
+    -flowmap
+        use FlowMap LUT techmapping instead of ABC
+
 
 The following commands are executed by this synthesis command:
 
@@ -81,16 +89,16 @@ The following commands are executed by this synthesis command:
         opt_expr
         opt_clean
         check
+        opt -nodffe -nosdff
+        fsm          (unless -nofsm)
         opt
         wreduce
         peepopt
         opt_clean
-        techmap -map +/cmp2lut.v     (if -lut)
+        techmap -map +/cmp2lut.v -map +/cmp2lcu.v     (if -lut)
         alumacc      (unless -noalumacc)
         share        (unless -noshare)
         opt
-        fsm          (unless -nofsm)
-        opt -fast
         memory -nomap
         opt_clean
 
@@ -101,6 +109,7 @@ The following commands are executed by this synthesis command:
         techmap
         techmap -map +/gate2lut.v    (if -noabc and -lut)
         clean; opt_lut               (if -noabc and -lut)
+        flowmap -maxlut K            (if -flowmap and -lut)
         opt -fast
         abc -fast           (unless -noabc, unless -lut)
         abc -fast -lut k    (unless -noabc, if -lut)

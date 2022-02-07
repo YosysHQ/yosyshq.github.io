@@ -11,7 +11,7 @@ $assert and $assume cells are converted to AIGER bad state properties and
 invariant constraints.
 
     -ascii
-        write ASCII version of AGIER format
+        write ASCII version of AIGER format
 
     -zinit
         convert FFs to zero-initialized FFs, adding additional inputs for
@@ -29,9 +29,9 @@ invariant constraints.
     -vmap &lt;filename&gt;
         like -map, but more verbose
 
-    -I, -O, -B
-        If the design contains no input/output/assert then create one
-        dummy input/output/bad_state pin to make the tools reading the
+    -I, -O, -B, -L
+        If the design contains no input/output/assert/flip-flop then create one
+        dummy input/output/bad_state-pin or latch to make the tools reading the
         AIGER file happy.
 
 </pre>

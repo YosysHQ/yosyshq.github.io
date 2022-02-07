@@ -128,6 +128,14 @@ img.show {
 	border-radius:		5px;
 }
 
+img.logo {
+	width:			calc(100% - 100px);
+	max-width: 500px;
+	display:	block;
+  margin-left:	auto;
+  margin-right:	auto;
+}
+
 div.file:before {
 	content: "Download: "
 }
@@ -164,7 +172,7 @@ div.tab > table td {
 }
 
 ul.cmds {
-	max-width:		500px;
+	max-width:		700px;
 	overflow-x:		hidden;
 	list-style:		none;
 
@@ -207,4 +215,3 @@ ul.list li {
 	margin-right:		3em;
 	max-width:		600px;
 }
-

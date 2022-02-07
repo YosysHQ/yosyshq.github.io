@@ -1,0 +1,31 @@
+@cmd_header paramap@
+<h1>paramap - renaming cell parameters</h1>
+<pre>
+    paramap [options] [selection]
+
+This command renames cell parameters and/or maps key/value pairs to
+other key/value pairs.
+
+    -tocase &lt;name&gt;
+        Match attribute names case-insensitively and set it to the specified
+        name.
+
+    -rename &lt;old_name&gt; &lt;new_name&gt;
+        Rename attributes as specified
+
+    -map &lt;old_name&gt;=&lt;old_value&gt; &lt;new_name&gt;=&lt;new_value&gt;
+        Map key/value pairs as indicated.
+
+    -imap &lt;old_name&gt;=&lt;old_value&gt; &lt;new_name&gt;=&lt;new_value&gt;
+        Like -map, but use case-insensitive match for &lt;old_value&gt; when
+        it is a string value.
+
+    -remove &lt;name&gt;=&lt;value&gt;
+        Remove attributes matching this pattern.
+
+For example, mapping Diamond-style ECP5 "init" attributes to Yosys-style:
+
+    paramap -tocase INIT t:LUT4
+
+</pre>
+@footer@

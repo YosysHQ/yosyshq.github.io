@@ -1,0 +1,24 @@
+@cmd_header test_pmgen@
+<h1>test_pmgen - test pass for pmgen</h1>
+<pre>
+    test_pmgen -reduce_chain [options] [selection]
+
+Demo for recursive pmgen patterns. Map chains of AND/OR/XOR to $reduce_*.
+
+
+    test_pmgen -reduce_tree [options] [selection]
+
+Demo for recursive pmgen patterns. Map trees of AND/OR/XOR to $reduce_*.
+
+
+    test_pmgen -eqpmux [options] [selection]
+
+Demo for recursive pmgen patterns. Optimize EQ/NE/PMUX circuits.
+
+
+    test_pmgen -generate [options] &lt;pattern_name&gt;
+
+Create modules that match the specified pattern.
+
+</pre>
+@footer@

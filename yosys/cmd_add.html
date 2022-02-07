@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: add</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -44,6 +46,17 @@ than the object to be created.
 
 Like 'add -input', but also connect the signal between instances of the
 selected modules.
+
+
+    add {-assert|-assume|-live|-fair|-cover} &lt;name1&gt; [-if &lt;name2&gt;]
+
+Add an $assert, $assume, etc. cell connected to a wire named name1, with its
+enable signal optionally connected to a wire named name2 (default: 1'b1).
+
+
+    add -mod &lt;name[s]&gt;
+
+Add module[s] with the specified name[s].
 
 </pre>
 </div></div><!-- end of content -->

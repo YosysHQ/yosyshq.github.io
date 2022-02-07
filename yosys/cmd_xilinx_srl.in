@@ -1,0 +1,22 @@
+@cmd_header xilinx_srl@
+<h1>xilinx_srl - Xilinx shift register extraction</h1>
+<pre>
+    xilinx_srl [options] [selection]
+
+This pass converts chains of built-in flops (bit-level: $_DFF_[NP]_, $_DFFE_*
+and word-level: $dff, $dffe) as well as Xilinx flops (FDRE, FDRE_1) into a
+$__XILINX_SHREG cell. Chains must be of the same cell type, clock, clock polarity,
+enable, and enable polarity (where relevant).
+Flops with resets cannot be mapped to Xilinx devices and will not be inferred.
+    -minlen N
+        min length of shift register (default = 3)
+
+    -fixed
+        infer fixed-length shift registers.
+
+    -variable
+        infer variable-length shift registers (i.e. fixed-length shifts where
+        each element also fans-out to a $shiftx cell).
+
+</pre>
+@footer@

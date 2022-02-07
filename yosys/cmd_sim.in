@@ -26,6 +26,9 @@ This command simulates the circuit using the given top-level module.
     -zinit
         zero-initialize all uninitialized regs and memories
 
+    -timescale &lt;string&gt;
+        include the specified timescale declaration in the vcd
+
     -n &lt;integer&gt;
         number of cycles to simulate (default: 20)
 

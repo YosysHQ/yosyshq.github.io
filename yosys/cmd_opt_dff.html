@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: opt_dff</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
+  <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
+  <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
+  <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>opt_dff - perform DFF optimizations</h1>
+<pre>
+    opt_dff [-nodffe] [-nosdff] [-keepdc] [-sat] [selection]
+
+This pass converts flip-flops to a more suitable type by merging clock enables
+and synchronous reset multiplexers, removing unused control inputs, or potentially
+removes the flip-flop altogether, converting it to a constant driver.
+
+    -nodffe
+        disables dff -&gt; dffe conversion, and other transforms recognizing clock enable
+
+    -nosdff
+        disables dff -&gt; sdff conversion, and other transforms recognizing sync resets
+
+    -simple-dffe
+        only enables clock enable recognition transform for obvious cases
+
+    -sat
+        additionally invoke SAT solver to detect and remove flip-flops (with
+        non-constant inputs) that can also be replaced with a constant driver
+
+    -keepdc
+        some optimizations change the behavior of the circuit with respect to
+        don't-care bits. for example in 'a+0' a single x-bit in 'a' will cause
+        all result bits to be set to x. this behavior changes when 'a+0' is
+        replaced by 'a'. the -keepdc option disables all such optimizations.
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

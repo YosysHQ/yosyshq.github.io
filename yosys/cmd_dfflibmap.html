@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: dfflibmap</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -27,7 +29,7 @@
 <div id="main"><div><!-- begin of content -->
 <h1>dfflibmap - technology mapping of flip-flops</h1>
 <pre>
-    dfflibmap [-prepare] -liberty &lt;file&gt; [selection]
+    dfflibmap [-prepare] [-map-only] [-info] -liberty &lt;file&gt; [selection]
 
 Map internal flip-flop cells to the flip-flop cells in the technology
 library specified in the given liberty file.
@@ -37,7 +39,15 @@ first run this pass and then map the logic paths to the target technology.
 
 When called with -prepare, this command will convert the internal FF cells
 to the internal cell types that best match the cells found in the given
-liberty file.
+liberty file, but won't actually map them to the target cells.
+
+When called with -map-only, this command will only map internal cell
+types that are already of exactly the right type to match the target
+cells, leaving remaining internal cells untouched.
+
+When called with -info, this command will only print the target cell
+list, along with their associated internal cell types, and the argumentsthat would be passed to the dfflegalize pass.  The design will not be
+changed.
 
 </pre>
 </div></div><!-- end of content -->

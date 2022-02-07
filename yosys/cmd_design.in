@@ -21,6 +21,11 @@ Save the current design under the given name and then clear the current design.
 Push the current design to the stack and then clear the current design.
 
 
+    design -push-copy
+
+Push the current design to the stack without clearing the current design.
+
+
     design -pop
 
 Reset the current design and pop the last design from the stack.
@@ -54,6 +59,10 @@ module that is then used as top module for this command.
 
 The Verilog front-end remembers defined macros and top-level declarations
 between calls to 'read_verilog'. This command resets this memory.
+
+    design -delete &lt;name&gt;
+
+Delete the design previously saved under the given name.
 
 </pre>
 @footer@

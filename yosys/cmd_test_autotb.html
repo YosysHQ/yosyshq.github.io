@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: test_autotb</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -44,8 +46,16 @@ The attribute 'gentb_constant' can be used to force a signal to a constant
 value after initialization. This can e.g. be used to force a reset signal
 low in order to explore more inner states in a state machine.
 
+The attribute 'gentb_skip' can be attached to modules to suppress testbench
+generation.
+
     -n &lt;int&gt;
         number of iterations the test bench should run (default = 1000)
+
+    -seed &lt;int&gt;
+        seed used for pseudo-random number generation (default = 0).
+        a value of 0 will cause an arbitrary seed to be chosen, based on
+        the current system time.
 
 </pre>
 </div></div><!-- end of content -->

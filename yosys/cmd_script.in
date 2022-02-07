@@ -1,17 +1,24 @@
 @cmd_header script@
-<h1>script - execute commands from script file</h1>
+<h1>script - execute commands from file or wire</h1>
 <pre>
     script &lt;filename&gt; [&lt;from_label&gt;:&lt;to_label&gt;]
+    script -scriptwire [selection]
 
-This command executes the yosys commands in the specified file.
+This command executes the yosys commands in the specified file (default
+behaviour), or commands embedded in the constant text value connected to the
+selected wires.
 
-The 2nd argument can be used to only execute the section of the
-file between the specified labels. An empty from label is synonymous
-for the beginning of the file and an empty to label is synonymous
-for the end of the file.
+In the default (file) case, the 2nd argument can be used to only execute the
+section of the file between the specified labels. An empty from label is
+synonymous with the beginning of the file and an empty to label is synonymous
+with the end of the file.
 
 If only one label is specified (without ':') then only the block
 marked with that label (until the next label) is executed.
+
+In "-scriptwire" mode, the commands on the selected wire(s) will be executed
+in the scope of (and thus, relative to) the wires' owning module(s). This
+'-module' mode can be exited by using the 'cd' command.
 
 </pre>
 @footer@

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html><head>
+  <title>Yosys Open SYnthesis Suite :: Command Reference :: xilinx_srl</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
+</head><body>
+
+<div id="container">
+
+<img id="banner" src="images/banner.png" alt="Yosys -- Yosys Open SYnthesis Suite"/>
+
+<div id="navbar">
+  <a class="nav0" href="about.html">About</a>
+  <a class="nav1" href="documentation.html">Documentation</a>
+  <a class="nav0" href="faq.html">F.A.Q.</a>
+  <a class="nav0" href="screenshots.html">Screenshots</a>
+  <a class="nav0" href="download.html">Download</a>
+  <a class="nav0" href="links.html">Links</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
+  <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
+  <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
+  <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
+  <br/>
+  <b>Related Projects:</b><br/>
+  <a class="nav0" href="vloghammer.html">VlogHammer</a>
+  <a class="nav0" href="yosysjs.html">YosysJS</a>
+</div>
+
+<div id="main"><div><!-- begin of content -->
+<h1>xilinx_srl - Xilinx shift register extraction</h1>
+<pre>
+    xilinx_srl [options] [selection]
+
+This pass converts chains of built-in flops (bit-level: $_DFF_[NP]_, $_DFFE_*
+and word-level: $dff, $dffe) as well as Xilinx flops (FDRE, FDRE_1) into a
+$__XILINX_SHREG cell. Chains must be of the same cell type, clock, clock polarity,
+enable, and enable polarity (where relevant).
+Flops with resets cannot be mapped to Xilinx devices and will not be inferred.
+    -minlen N
+        min length of shift register (default = 3)
+
+    -fixed
+        infer fixed-length shift registers.
+
+    -variable
+        infer variable-length shift registers (i.e. fixed-length shifts where
+        each element also fans-out to a $shiftx cell).
+
+</pre>
+</div></div><!-- end of content -->
+
+</div><!-- /container -->
+
+</body></html>

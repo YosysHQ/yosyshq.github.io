@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Command Reference :: synth_easic</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -50,7 +52,7 @@ This command runs synthesis for eASIC platform.
         do not flatten design before synthesis
 
     -retime
-        run 'abc' with -dff option
+        run 'abc' with '-dff -D 1' options
 
 
 The following commands are executed by this synthesis command:
@@ -73,7 +75,7 @@ The following commands are executed by this synthesis command:
         opt -undriven -fine
         techmap
         opt -fast
-        abc -dff     (only if -retime)
+        abc -dff -D 1     (only if -retime)
         opt_clean    (only if -retime)
 
     map:
@@ -85,6 +87,7 @@ The following commands are executed by this synthesis command:
         hierarchy -check
         stat
         check -noinit
+        blackbox =A:whitebox
 
     vlog:
         write_verilog -noexpr -attr2comment &lt;file-name&gt;

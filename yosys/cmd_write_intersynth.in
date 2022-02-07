@@ -10,7 +10,7 @@ a tool for Coarse-Grain Example-Driven Interconnect Synthesis.
         do not generate celltypes and conntypes commands. i.e. just output
         the netlists. this is used for postsilicon synthesis.
 
-    -lib &lt;verilog_or_ilang_file&gt;
+    -lib &lt;verilog_or_rtlil_file&gt;
         Use the specified library file for determining whether cell ports are
         inputs or outputs. This option can be used multiple times to specify
         more than one library.

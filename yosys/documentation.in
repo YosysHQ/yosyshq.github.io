@@ -2,15 +2,16 @@
 
 <h1>Documentation</h1>
 
-<p>This page has links to all the documentaton resources
-available for Yosys.</p>
+<p>This page has links to some documentaton resources available for Yosys.</p>
 
 <h2>Yosys Manual</h2>
 
 <p>A quick first-steps tutorial can be found in the <a
-href="https://github.com/YosysHQ/yosys/blob/master/README.md">README file</a>.</p>
+href="https://github.com/YosysHQ/yosys/blob/master/README.md#getting-started">README file</a>.</p>
 
 <p>The Yosys manual can be downloaded <a href="https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/manual.pdf">here</a> (PDF).</p>
+
+<p>The <a href="https://yosyshq.readthedocs.io/en/latest/">YosysHQ ReadTheDocs</a> has links to many resources for Yosys and Yosys-based tools.</p>
 
 <h2>Support</h2>
 
@@ -23,39 +24,44 @@ href="https://github.com/YosysHQ/yosys/issues/new">GitHub</a>.
 
 <h2>Presentation Slides</h2>
 
-<p><a href="https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/presentation.pdf">This presentation slides</a> cover a wide range of topics related to Yosys. (The LaTeX source is part of the Yosys source distribution. Fell free to adapt the slides as needed.)</p>
+<p><a href="https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/presentation.pdf">This presentation slides</a> cover a wide range of topics related to Yosys. (The LaTeX source is part of the Yosys source distribution. Feel free to adapt the slides as needed.)</p>
 
 <h2>Application Notes</h2>
 
 <ul class="list">
-<li><a href="files/yosys_appnote_010_verilog_to_blif.pdf">Yosys AppNote 010<a>: Converting Verilog to BLIF</li>
-<li><a href="files/yosys_appnote_011_design_investigation.pdf">Yosys AppNote 011<a>: Interactive Design Investigation</li>
-<li><a href="files/yosys_appnote_012_verilog_to_btor.pdf">Yosys AppNote 012<a>: Converting Verilog to BTOR</li>
+<li><a href="files/yosys_appnote_010_verilog_to_blif.pdf">Yosys AppNote 010<a>: Converting Verilog to BLIF
+<li><a href="files/yosys_appnote_011_design_investigation.pdf">Yosys AppNote 011<a>: Interactive Design Investigation
+<li><a href="files/yosys_appnote_012_verilog_to_btor.pdf">Yosys AppNote 012<a>: Converting Verilog to BTOR
 </ul>
 
 <h2>Papers and other Publications</h2>
 
-<p><i>This section is under construction.</i></p>
+<p>Yosys is used in many academic projects. Below are a few papers from the
+authors of Yosys. If you would like to use Yosys in your research or teaching,
+but you need VHDL features not implemented in the open source frontend such as
+VHDL or SystemVerilog Assertion support, <a href="https://www.yosyshq.com/contact">contact YosysHQ</a>
+for an academic license!</p>
 
-<ul class="list"><li>
-Clifford Wolf, Johann Glaser. Yosys - A Free Verilog Synthesis Suite.
+<ul class="list">
+<li>C. Wolf, J. Glaser. Yosys - A Free Verilog Synthesis Suite.
 In <i>Proceedings of Austrochip 2013</i>.
 [<a href="files/yosys-austrochip2013.pdf">download pdf</a>]
-</li><li>
-Johann Glaser and Clifford Wolf. Methodology and Example-Driven Interconnect
+<li>J. Glaser and C. Wolf. Methodology and Example-Driven Interconnect
 Synthesis for Designing Heterogeneous Coarse-Grain Reconfigurable
 Architectures. In Jan Haase, editor, <i>Models, Methods, and Tools for
 Complex Chip Design. Lecture Notes in Electrical Engineering. Volume 265,
 2014, pp 201-221. Springer, 2013.</i>
 [<a href="files/intersynth-yosys-springer2013.pdf">download pdf</a>]
-</li></ul>
+<li>D. Shah, E. Hung, C. Wolf, S. Bazanski, D. Gisselquist, and M. Milanovic. Yosys + nextpnr: an Open Source Framework from Verilog to Bitstream for Commercial FPGAs. In <i>2019 IEEE 27th Annual International Symposium on Field-Programmable Custom Computing Machines (FCCM). IEEE, 2019.</i>
+[<a href="https://arxiv.org/abs/1903.10407">arXiv</a>]
+</ul>
 
-In papers and reports, please refer to Yosys as follows: <b>Clifford Wolf.
+In papers and reports, please refer to Yosys as follows: <b>Claire Wolf.
 Yosys Open SYnthesis Suite. https://yosyshq.net/yosys/</b>, e.g. using the
 following BibTeX code:
 
 <pre class="small">@MISC{Yosys,
-	author = {Clifford Wolf},
+	author = {Claire Wolf},
 	title = {Yosys Open SYnthesis Suite},
 	howpublished = "\url{https://yosyshq.net/yosys/}"
 }</pre>

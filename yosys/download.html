@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Download</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav1" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -28,46 +30,33 @@
 
 <h1>Download / Install</h1>
 
-<p><b>Note:</b> At the moment Yosys is mostly tested on Linux. Expect some
-difficulties when building on other platforms.</p>
+<p>Download the latest Yosys release source code from GitHub:
 
-<p>Download the Yosys 0.9 release source code from GitHub:</p>
+<a href="https://github.com/YosysHQ/yosys/releases/latest">Release Notes and Download Links</a></p>
 
-<ul>
-<li><a href="https://github.com/YosysHQ/yosys/releases/tag/yosys-0.9">Release Notes</a></li>
-<li><a href="https://github.com/YosysHQ/yosys/archive/yosys-0.9.zip">yosys-0.9.zip</a></li>
-<li><a href="https://github.com/YosysHQ/yosys/archive/yosys-0.9.tar.gz">yosys-0.9.tar.gz</a></li>
-</ul>
+<p>Yosys is part of the <a href="https://www.yosyshq.com/tabby-cad-datasheet">Tabby CAD Suite</a> and the <a href="https://github.com/YosysHQ/oss-cad-suite-build">OSS CAD Suite</a>! The easiest way to use Yosys is to install the binary software suite, which contains all required dependencies and related tools. Download the latest nightly build here: <a href="https://github.com/YosysHQ/oss-cad-suite-build/releases/latest">OSS CAD Suite Download Links</a></p>
 
-<h2>Installing on Ubuntu</h2>
+<p>Many Linux distributions also have Yosys packages (not maintained by us, so they may or may not be up to date with the latest releases). Check your package manager!</p>
 
-<a href="https://launchpad.net/~saltmakrell">Ruben Undheim</a> maintains a PPA
-with Yosys Ubuntu packages. Use the following commands to install pre-compiled
-Yosys binaries on Ubuntu:
+<h2>Installing Tabby/OSS CAD Suite</h2>
 
-<pre>sudo add-apt-repository ppa:saltmakrell/ppa
-sudo apt-get update                                                                                                                                                                                              
-sudo apt-get install yosys</pre>
+<p>Binaries are available for Linux (x64, arm, arm64, riscv64), macOS (x64) and Windows (x64). Extract the archive in a location of your choice and source the environment script:</p>
 
-His PPA only provides updated packages for the latest
-Ubuntu desktop LTS version - trusty (14.04 LTS). As of vivid (15.04), yosys
-will be available in the standard package repository for Ubuntu.
+<h3>Linux / macOS</h3>
+<pre>source &lt;extracted_location&gt;/oss-cad-suite/environment</pre>
+<h3>Windows</h3>
 
-<h2>Yosys on MS Windows</h2>
+From existing shell:
+<pre>&lt;extracted_location&gt;\oss-cad-suite\environment.bat</pre>
+To create a new shell window:
+<pre>&lt;extracted_location&gt;\oss-cad-suite\start.bat</pre>
 
-There are two versions of Yosys for Win32. First there is the "official binary release"
-of Yosys for Win32 which is cross-compiled using <a href="http://mxe.cc/">MXE</a>:
-
-<ul><li><a href="nogit/win32/yosys-win32-mxebin-0.9.zip">yosys-win32-mxebin-0.9.zip</a></ul>
-
-And then there is a source code export for VisualStudio for users who want to do
-Yosys C++ development on Windows:
-
-<ul><li><a href="nogit/win32/yosys-win32-vcxsrc-0.9.zip">yosys-win32-vcxsrc-0.9.zip</a></li></ul>
 
 <h2>Building Development Sources</h2>
 
-Clone source code from GIT repository:
+<h3>Linux / macOS</h3>
+
+Clone source code from git repository:
 
 <pre>git clone https://github.com/YosysHQ/yosys.git</pre>
 
@@ -86,6 +75,24 @@ sudo make install</pre>
 See the <a
 href="https://github.com/YosysHQ/yosys/blob/master/README.md">README</a> file
 for detailed build instructions.
+
+<h3>Windows</h3>
+
+Builds for Windows can be built with VisualStudio or cross-compiled with <a href="http://mxe.cc/">MXE</a>.
+
+VisualStudio project files are created as part of the automated tests on GitHub.
+An easy way to compile Yosys on Windows is to use the project file from the
+latest run:
+
+<ul>
+<li>Go to <a href="https://github.com/YosysHQ/yosys/actions/workflows/vs.yml?query=branch%3Amaster">the Visual Studio Build Action on GitHub</a>
+<li>Click on the most recent completed run
+<li>In Artifacts region find vcxsrc and click on it to download
+<li>Unpack downloaded ZIP file
+<li>Open YosysVS.sln with Visual Studio
+</ul>
+
+Detailed Windows build instructions can be found in the <a href="https://github.com/YosysHQ/yosys/blob/master/guidelines/Windows">guidelines</a>.
 
 </div></div><!-- end of content -->
 

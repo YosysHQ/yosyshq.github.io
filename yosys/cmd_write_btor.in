@@ -11,5 +11,14 @@ Write a BTOR description of the current design.
   -s
     Output only a single bad property for all asserts
 
+  -c
+    Output cover properties using 'bad' statements instead of asserts
+
+  -i &lt;filename&gt;
+    Create additional info file with auxiliary information
+
+  -x
+    Output symbols for internal netnames (starting with '$')
+
 </pre>
 @footer@

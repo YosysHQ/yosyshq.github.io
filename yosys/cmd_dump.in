@@ -1,10 +1,10 @@
 @cmd_header dump@
-<h1>dump - print parts of the design in ilang format</h1>
+<h1>dump - print parts of the design in RTLIL format</h1>
 <pre>
     dump [options] [selection]
 
 Write the selected parts of the design to the console or specified file in
-ilang format.
+RTLIL format.
 
     -m
         also dump the module headers, even if only parts of a single

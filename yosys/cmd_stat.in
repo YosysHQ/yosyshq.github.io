@@ -16,7 +16,7 @@ design.
 
     -tech &lt;technology&gt;
         print area estemate for the specified technology. Currently supported
-        values for &lt;technology&gt;: xilinx
+        values for &lt;technology&gt;: xilinx, cmos
 
     -width
         annotate internal cell types with their word width.

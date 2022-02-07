@@ -1,0 +1,237 @@
+@cmd_header write_cxxrtl@
+<h1>write_cxxrtl - convert design to C++ RTL simulation</h1>
+<pre>
+    write_cxxrtl [options] [filename]
+
+Write C++ code that simulates the design. The generated code requires a driver
+that instantiates the design, toggles its clock, and interacts with its ports.
+
+The following driver may be used as an example for a design with a single clock
+driving rising edge triggered flip-flops:
+
+    #include "top.cc"
+
+    int main() {
+      cxxrtl_design::p_top top;
+      top.step();
+      while (1) {
+        /* user logic */
+        top.p_clk.set(false);
+        top.step();
+        top.p_clk.set(true);
+        top.step();
+      }
+    }
+
+Note that CXXRTL simulations, just like the hardware they are simulating, are
+subject to race conditions. If, in the example above, the user logic would run
+simultaneously with the rising edge of the clock, the design would malfunction.
+
+This backend supports replacing parts of the design with black boxes implemented
+in C++. If a module marked as a CXXRTL black box, its implementation is ignored,
+and the generated code consists only of an interface and a factory function.
+The driver must implement the factory function that creates an implementation of
+the black box, taking into account the parameters it is instantiated with.
+
+For example, the following Verilog code defines a CXXRTL black box interface for
+a synchronous debug sink:
+
+    (* cxxrtl_blackbox *)
+    module debug(...);
+      (* cxxrtl_edge = "p" *) input clk;
+      input en;
+      input [7:0] i_data;
+      (* cxxrtl_sync *) output [7:0] o_data;
+    endmodule
+
+For this HDL interface, this backend will generate the following C++ interface:
+
+    struct bb_p_debug : public module {
+      value&lt;1&gt; p_clk;
+      bool posedge_p_clk() const { /* ... */ }
+      value&lt;1&gt; p_en;
+      value&lt;8&gt; p_i_data;
+      wire&lt;8&gt; p_o_data;
+
+      bool eval() override;
+      bool commit() override;
+
+      static std::unique_ptr&lt;bb_p_debug&gt;
+      create(std::string name, metadata_map parameters, metadata_map attributes);
+    };
+
+The `create' function must be implemented by the driver. For example, it could
+always provide an implementation logging the values to standard error stream:
+
+    namespace cxxrtl_design {
+
+    struct stderr_debug : public bb_p_debug {
+      bool eval() override {
+        if (posedge_p_clk() &amp;&amp; p_en)
+          fprintf(stderr, "debug: %02x\n", p_i_data.data[0]);
+        p_o_data.next = p_i_data;
+        return bb_p_debug::eval();
+      }
+    };
+
+    std::unique_ptr&lt;bb_p_debug&gt;
+    bb_p_debug::create(std::string name, cxxrtl::metadata_map parameters,
+                       cxxrtl::metadata_map attributes) {
+      return std::make_unique&lt;stderr_debug&gt;();
+    }
+
+    }
+
+For complex applications of black boxes, it is possible to parameterize their
+port widths. For example, the following Verilog code defines a CXXRTL black box
+interface for a configurable width debug sink:
+
+    (* cxxrtl_blackbox, cxxrtl_template = "WIDTH" *)
+    module debug(...);
+      parameter WIDTH = 8;
+      (* cxxrtl_edge = "p" *) input clk;
+      input en;
+      (* cxxrtl_width = "WIDTH" *) input [WIDTH - 1:0] i_data;
+      (* cxxrtl_width = "WIDTH" *) output [WIDTH - 1:0] o_data;
+    endmodule
+
+For this parametric HDL interface, this backend will generate the following C++
+interface (only the differences are shown):
+
+    template&lt;size_t WIDTH&gt;
+    struct bb_p_debug : public module {
+      // ...
+      value&lt;WIDTH&gt; p_i_data;
+      wire&lt;WIDTH&gt; p_o_data;
+      // ...
+      static std::unique_ptr&lt;bb_p_debug&lt;WIDTH&gt;&gt;
+      create(std::string name, metadata_map parameters, metadata_map attributes);
+    };
+
+The `create' function must be implemented by the driver, specialized for every
+possible combination of template parameters. (Specialization is necessary to
+enable separate compilation of generated code and black box implementations.)
+
+    template&lt;size_t SIZE&gt;
+    struct stderr_debug : public bb_p_debug&lt;SIZE&gt; {
+      // ...
+    };
+
+    template&lt;&gt;
+    std::unique_ptr&lt;bb_p_debug&lt;8&gt;&gt;
+    bb_p_debug&lt;8&gt;::create(std::string name, cxxrtl::metadata_map parameters,
+                          cxxrtl::metadata_map attributes) {
+      return std::make_unique&lt;stderr_debug&lt;8&gt;&gt;();
+    }
+
+The following attributes are recognized by this backend:
+
+    cxxrtl_blackbox
+        only valid on modules. if specified, the module contents are ignored,
+        and the generated code includes only the module interface and a factory
+        function, which will be called to instantiate the module.
+
+    cxxrtl_edge
+        only valid on inputs of black boxes. must be one of "p", "n", "a".
+        if specified on signal `clk`, the generated code includes edge detectors
+        `posedge_p_clk()` (if "p"), `negedge_p_clk()` (if "n"), or both (if
+        "a"), simplifying implementation of clocked black boxes.
+
+    cxxrtl_template
+        only valid on black boxes. must contain a space separated sequence of
+        identifiers that have a corresponding black box parameters. for each
+        of them, the generated code includes a `size_t` template parameter.
+
+    cxxrtl_width
+        only valid on ports of black boxes. must be a constant expression, which
+        is directly inserted into generated code.
+
+    cxxrtl_comb, cxxrtl_sync
+        only valid on outputs of black boxes. if specified, indicates that every
+        bit of the output port is driven, correspondingly, by combinatorial or
+        synchronous logic. this knowledge is used for scheduling optimizations.
+        if neither is specified, the output will be pessimistically treated as
+        driven by both combinatorial and synchronous logic.
+
+The following options are supported by this backend:
+
+    -print-wire-types, -print-debug-wire-types
+        enable additional debug logging, for pass developers.
+
+    -header
+        generate separate interface (.h) and implementation (.cc) files.
+        if specified, the backend must be called with a filename, and filename
+        of the interface is derived from filename of the implementation.
+        otherwise, interface and implementation are generated together.
+
+    -namespace &lt;ns-name&gt;
+        place the generated code into namespace &lt;ns-name&gt;. if not specified,
+        "cxxrtl_design" is used.
+
+    -nohierarchy
+        use design hierarchy as-is. in most designs, a top module should be
+        present as it is exposed through the C API and has unbuffered outputs
+        for improved performance; it will be determined automatically if absent.
+
+    -noflatten
+        don't flatten the design. fully flattened designs can evaluate within
+        one delta cycle if they have no combinatorial feedback.
+        note that the debug interface and waveform dumps use full hierarchical
+        names for all wires even in flattened designs.
+
+    -noproc
+        don't convert processes to netlists. in most designs, converting
+        processes significantly improves evaluation performance at the cost of
+        slight increase in compilation time.
+
+    -O &lt;level&gt;
+        set the optimization level. the default is -O6. higher optimization
+        levels dramatically decrease compile and run time, and highest level
+        possible for a design should be used.
+
+    -O0
+        no optimization.
+
+    -O1
+        unbuffer internal wires if possible.
+
+    -O2
+        like -O1, and localize internal wires if possible.
+
+    -O3
+        like -O2, and inline internal wires if possible.
+
+    -O4
+        like -O3, and unbuffer public wires not marked (*keep*) if possible.
+
+    -O5
+        like -O4, and localize public wires not marked (*keep*) if possible.
+
+    -O6
+        like -O5, and inline public wires not marked (*keep*) if possible.
+
+    -g &lt;level&gt;
+        set the debug level. the default is -g4. higher debug levels provide
+        more visibility and generate more code, but do not pessimize evaluation.
+
+    -g0
+        no debug information. the C API is disabled.
+
+    -g1
+        include bare minimum of debug information necessary to access all design
+        state. the C API is enabled.
+
+    -g2
+        like -g1, but include debug information for all public wires that are
+        directly accessible through the C++ interface.
+
+    -g3
+        like -g2, and include debug information for public wires that are tied
+        to a constant or another public wire.
+
+    -g4
+        like -g3, and compute debug information on demand for all public wires
+        that were optimized out.
+
+</pre>
+@footer@

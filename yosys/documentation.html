@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html><head>
   <title>Yosys Open SYnthesis Suite :: Documentation</title>
   <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="utf-8">
 </head><body>
 
 <div id="container">
@@ -14,7 +16,7 @@
   <a class="nav0" href="screenshots.html">Screenshots</a>
   <a class="nav0" href="download.html">Download</a>
   <a class="nav0" href="links.html">Links</a>
-  <a class="nav0_donate" href="donate.html">Donate</a>
+  <a class="nav0_donate" href="commercial.html">Commercial Support and Development</a>
   <a class="navX" href="https://join.slack.com/t/yosyshq/shared_invite/zt-oe2nxfpv-BJd_9CZpkk_MoTT0s88GcA">YosysHQ Community Slack</a>
   <a class="navX" href="https://web.libera.chat/#yosys">IRC (Libera Chat)</a>
   <a class="navX" href="https://github.com/YosysHQ/yosys">GitHub</a>
@@ -28,15 +30,16 @@
 
 <h1>Documentation</h1>
 
-<p>This page has links to all the documentaton resources
-available for Yosys.</p>
+<p>This page has links to some documentaton resources available for Yosys.</p>
 
 <h2>Yosys Manual</h2>
 
 <p>A quick first-steps tutorial can be found in the <a
-href="https://github.com/YosysHQ/yosys/blob/master/README.md">README file</a>.</p>
+href="https://github.com/YosysHQ/yosys/blob/master/README.md#getting-started">README file</a>.</p>
 
 <p>The Yosys manual can be downloaded <a href="https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/manual.pdf">here</a> (PDF).</p>
+
+<p>The <a href="https://yosyshq.readthedocs.io/en/latest/">YosysHQ ReadTheDocs</a> has links to many resources for Yosys and Yosys-based tools.</p>
 
 <h2>Support</h2>
 
@@ -49,39 +52,44 @@ href="https://github.com/YosysHQ/yosys/issues/new">GitHub</a>.
 
 <h2>Presentation Slides</h2>
 
-<p><a href="https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/presentation.pdf">This presentation slides</a> cover a wide range of topics related to Yosys. (The LaTeX source is part of the Yosys source distribution. Fell free to adapt the slides as needed.)</p>
+<p><a href="https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/presentation.pdf">This presentation slides</a> cover a wide range of topics related to Yosys. (The LaTeX source is part of the Yosys source distribution. Feel free to adapt the slides as needed.)</p>
 
 <h2>Application Notes</h2>
 
 <ul class="list">
-<li><a href="files/yosys_appnote_010_verilog_to_blif.pdf">Yosys AppNote 010<a>: Converting Verilog to BLIF</li>
-<li><a href="files/yosys_appnote_011_design_investigation.pdf">Yosys AppNote 011<a>: Interactive Design Investigation</li>
-<li><a href="files/yosys_appnote_012_verilog_to_btor.pdf">Yosys AppNote 012<a>: Converting Verilog to BTOR</li>
+<li><a href="files/yosys_appnote_010_verilog_to_blif.pdf">Yosys AppNote 010<a>: Converting Verilog to BLIF
+<li><a href="files/yosys_appnote_011_design_investigation.pdf">Yosys AppNote 011<a>: Interactive Design Investigation
+<li><a href="files/yosys_appnote_012_verilog_to_btor.pdf">Yosys AppNote 012<a>: Converting Verilog to BTOR
 </ul>
 
 <h2>Papers and other Publications</h2>
 
-<p><i>This section is under construction.</i></p>
+<p>Yosys is used in many academic projects. Below are a few papers from the
+authors of Yosys. If you would like to use Yosys in your research or teaching,
+but you need VHDL features not implemented in the open source frontend such as
+VHDL or SystemVerilog Assertion support, <a href="https://www.yosyshq.com/contact">contact YosysHQ</a>
+for an academic license!</p>
 
-<ul class="list"><li>
-Clifford Wolf, Johann Glaser. Yosys - A Free Verilog Synthesis Suite.
+<ul class="list">
+<li>C. Wolf, J. Glaser. Yosys - A Free Verilog Synthesis Suite.
 In <i>Proceedings of Austrochip 2013</i>.
 [<a href="files/yosys-austrochip2013.pdf">download pdf</a>]
-</li><li>
-Johann Glaser and Clifford Wolf. Methodology and Example-Driven Interconnect
+<li>J. Glaser and C. Wolf. Methodology and Example-Driven Interconnect
 Synthesis for Designing Heterogeneous Coarse-Grain Reconfigurable
 Architectures. In Jan Haase, editor, <i>Models, Methods, and Tools for
 Complex Chip Design. Lecture Notes in Electrical Engineering. Volume 265,
 2014, pp 201-221. Springer, 2013.</i>
 [<a href="files/intersynth-yosys-springer2013.pdf">download pdf</a>]
-</li></ul>
+<li>D. Shah, E. Hung, C. Wolf, S. Bazanski, D. Gisselquist, and M. Milanovic. Yosys + nextpnr: an Open Source Framework from Verilog to Bitstream for Commercial FPGAs. In <i>2019 IEEE 27th Annual International Symposium on Field-Programmable Custom Computing Machines (FCCM). IEEE, 2019.</i>
+[<a href="https://arxiv.org/abs/1903.10407">arXiv</a>]
+</ul>
 
-In papers and reports, please refer to Yosys as follows: <b>Clifford Wolf.
+In papers and reports, please refer to Yosys as follows: <b>Claire Wolf.
 Yosys Open SYnthesis Suite. https://yosyshq.net/yosys/</b>, e.g. using the
 following BibTeX code:
 
 <pre class="small">@MISC{Yosys,
-	author = {Clifford Wolf},
+	author = {Claire Wolf},
 	title = {Yosys Open SYnthesis Suite},
 	howpublished = "\url{https://yosyshq.net/yosys/}"
 }</pre>
@@ -90,15 +98,19 @@ following BibTeX code:
 
 <ul class="cmds">
 <li><a href="cmd_abc.html"> abc</a> <span>use ABC for technology mapping</span></a>
+<li><a href="cmd_abc9.html"> abc9</a> <span>use ABC9 for technology mapping</span></a>
+<li><a href="cmd_abc9_exe.html"> abc9_exe</a> <span>use ABC9 for technology mapping</span></a>
+<li><a href="cmd_abc9_ops.html"> abc9_ops</a> <span>helper functions for ABC9</span></a>
 <li><a href="cmd_add.html"> add</a> <span>add objects to the design</span></a>
 <li><a href="cmd_aigmap.html"> aigmap</a> <span>map logic to and-inverter-graph circuit</span></a>
 <li><a href="cmd_alumacc.html"> alumacc</a> <span>extract ALU and MACC cells</span></a>
-<li><a href="cmd_anlogic_determine_init.html"> anlogic_determine_init</a> <span>Anlogic: Determine the init value of cells</span></a>
 <li><a href="cmd_anlogic_eqn.html"> anlogic_eqn</a> <span>Anlogic: Calculate equations for luts</span></a>
+<li><a href="cmd_anlogic_fixcarry.html"> anlogic_fixcarry</a> <span>Anlogic: fix carry chain</span></a>
 <li><a href="cmd_assertpmux.html"> assertpmux</a> <span>adds asserts for parallel muxes</span></a>
 <li><a href="cmd_async2sync.html"> async2sync</a> <span>convert async FF inputs to sync circuits</span></a>
 <li><a href="cmd_attrmap.html"> attrmap</a> <span>renaming attributes</span></a>
 <li><a href="cmd_attrmvcp.html"> attrmvcp</a> <span>move or copy attributes from wires to driving cells</span></a>
+<li><a href="cmd_autoname.html"> autoname</a> <span>automatically assign names to objects</span></a>
 <li><a href="cmd_blackbox.html"> blackbox</a> <span>convert modules into blackbox modules</span></a>
 <li><a href="cmd_bugpoint.html"> bugpoint</a> <span>minimize testcases</span></a>
 <li><a href="cmd_cd.html"> cd</a> <span>a shortcut for 'select -module &lt;name&gt;'</span></a>
@@ -107,9 +119,13 @@ following BibTeX code:
 <li><a href="cmd_chparam.html"> chparam</a> <span>re-evaluate modules with new parameters</span></a>
 <li><a href="cmd_chtype.html"> chtype</a> <span>change type of cells in the design</span></a>
 <li><a href="cmd_clean.html"> clean</a> <span>remove unused cells and wires</span></a>
+<li><a href="cmd_clean_zerowidth.html"> clean_zerowidth</a> <span>clean zero-width connections from the design</span></a>
 <li><a href="cmd_clk2fflogic.html"> clk2fflogic</a> <span>convert clocked FFs to generic $ff cells</span></a>
+<li><a href="cmd_clkbufmap.html"> clkbufmap</a> <span>insert clock buffers on clock networks</span></a>
 <li><a href="cmd_connect.html"> connect</a> <span>create or remove connections</span></a>
+<li><a href="cmd_connect_rpc.html"> connect_rpc</a> <span>connect to RPC frontend</span></a>
 <li><a href="cmd_connwrappers.html"> connwrappers</a> <span>match width of input-output port pairs</span></a>
+<li><a href="cmd_coolrunner2_fixup.html"> coolrunner2_fixup</a> <span>insert necessary buffer cells for CoolRunner-II architecture</span></a>
 <li><a href="cmd_coolrunner2_sop.html"> coolrunner2_sop</a> <span>break $sop cells into ANDTERM/ORTERM cells</span></a>
 <li><a href="cmd_copy.html"> copy</a> <span>copy modules in the design</span></a>
 <li><a href="cmd_cover.html"> cover</a> <span>print code coverage counters</span></a>
@@ -118,16 +134,15 @@ following BibTeX code:
 <li><a href="cmd_delete.html"> delete</a> <span>delete objects in the design</span></a>
 <li><a href="cmd_deminout.html"> deminout</a> <span>demote inout ports to input or output</span></a>
 <li><a href="cmd_design.html"> design</a> <span>save, restore and reset current design</span></a>
-<li><a href="cmd_determine_init.html"> determine_init</a> <span>Determine the init value of cells</span></a>
-<li><a href="cmd_dff2dffe.html"> dff2dffe</a> <span>transform $dff cells to $dffe cells</span></a>
-<li><a href="cmd_dff2dffs.html"> dff2dffs</a> <span>process sync set/reset with SR over CE priority</span></a>
 <li><a href="cmd_dffinit.html"> dffinit</a> <span>set INIT param on FF cells</span></a>
+<li><a href="cmd_dfflegalize.html"> dfflegalize</a> <span>convert FFs to types supported by the target</span></a>
 <li><a href="cmd_dfflibmap.html"> dfflibmap</a> <span>technology mapping of flip-flops</span></a>
-<li><a href="cmd_dffsr2dff.html"> dffsr2dff</a> <span>convert DFFSR cells to simpler FF cell types</span></a>
-<li><a href="cmd_dump.html"> dump</a> <span>print parts of the design in ilang format</span></a>
+<li><a href="cmd_dffunmap.html"> dffunmap</a> <span>unmap clock enable and synchronous reset from FFs</span></a>
+<li><a href="cmd_dump.html"> dump</a> <span>print parts of the design in RTLIL format</span></a>
 <li><a href="cmd_echo.html"> echo</a> <span>turning echoing back of commands on and off</span></a>
-<li><a href="cmd_ecp5_ffinit.html"> ecp5_ffinit</a> <span>ECP5: handle FF init values</span></a>
+<li><a href="cmd_ecp5_gsr.html"> ecp5_gsr</a> <span>ECP5: handle GSR</span></a>
 <li><a href="cmd_edgetypes.html"> edgetypes</a> <span>list all types of edges in selection</span></a>
+<li><a href="cmd_efinix_fixcarry.html"> efinix_fixcarry</a> <span>Efinix: fix carry chain</span></a>
 <li><a href="cmd_equiv_add.html"> equiv_add</a> <span>add a $equiv cell</span></a>
 <li><a href="cmd_equiv_induct.html"> equiv_induct</a> <span>proving $equiv cells using temporal induction</span></a>
 <li><a href="cmd_equiv_make.html"> equiv_make</a> <span>prepare a circuit for equivalence checking</span></a>
@@ -140,14 +155,17 @@ following BibTeX code:
 <li><a href="cmd_equiv_status.html"> equiv_status</a> <span>print status of equivalent checking module</span></a>
 <li><a href="cmd_equiv_struct.html"> equiv_struct</a> <span>structural equivalence checking</span></a>
 <li><a href="cmd_eval.html"> eval</a> <span>evaluate the circuit given an input</span></a>
+<li><a href="cmd_exec.html"> exec</a> <span>execute commands in the operating system shell</span></a>
 <li><a href="cmd_expose.html"> expose</a> <span>convert internal signals to module ports</span></a>
 <li><a href="cmd_extract.html"> extract</a> <span>find subcircuits and replace them with cells</span></a>
 <li><a href="cmd_extract_counter.html"> extract_counter</a> <span>Extract GreenPak4 counter cells</span></a>
 <li><a href="cmd_extract_fa.html"> extract_fa</a> <span>find and extract full/half adders</span></a>
 <li><a href="cmd_extract_reduce.html"> extract_reduce</a> <span>converts gate chains into $reduce_* cells</span></a>
+<li><a href="cmd_extractinv.html"> extractinv</a> <span>extract explicit inverter cells for invertible cell pins</span></a>
 <li><a href="cmd_flatten.html"> flatten</a> <span>flatten design</span></a>
 <li><a href="cmd_flowmap.html"> flowmap</a> <span>pack LUTs with FlowMap</span></a>
 <li><a href="cmd_fmcombine.html"> fmcombine</a> <span>combine two instances of a cell into one</span></a>
+<li><a href="cmd_fminit.html"> fminit</a> <span>set init values/sequences for formal</span></a>
 <li><a href="cmd_freduce.html"> freduce</a> <span>perform functional reduction</span></a>
 <li><a href="cmd_fsm.html"> fsm</a> <span>extract and optimize finite state machines</span></a>
 <li><a href="cmd_fsm_detect.html"> fsm_detect</a> <span>finding FSMs in design</span></a>
@@ -165,14 +183,13 @@ following BibTeX code:
 <li><a href="cmd_history.html"> history</a> <span>show last interactive commands</span></a>
 <li><a href="cmd_ice40_braminit.html"> ice40_braminit</a> <span>iCE40: perform SB_RAM40_4K initialization from file</span></a>
 <li><a href="cmd_ice40_dsp.html"> ice40_dsp</a> <span>iCE40: map multipliers</span></a>
-<li><a href="cmd_ice40_ffinit.html"> ice40_ffinit</a> <span>iCE40: handle FF init values</span></a>
-<li><a href="cmd_ice40_ffssr.html"> ice40_ffssr</a> <span>iCE40: merge synchronous set/reset into FF cells</span></a>
 <li><a href="cmd_ice40_opt.html"> ice40_opt</a> <span>iCE40: perform simple optimizations</span></a>
-<li><a href="cmd_ice40_unlut.html"> ice40_unlut</a> <span>iCE40: transform SB_LUT4 cells to $lut cells</span></a>
+<li><a href="cmd_ice40_wrapcarry.html"> ice40_wrapcarry</a> <span>iCE40: wrap carries</span></a>
 <li><a href="cmd_insbuf.html"> insbuf</a> <span>insert buffer cells for connected wires</span></a>
 <li><a href="cmd_iopadmap.html"> iopadmap</a> <span>technology mapping of i/o pads (or buffers)</span></a>
 <li><a href="cmd_json.html"> json</a> <span>write design in JSON format</span></a>
 <li><a href="cmd_log.html"> log</a> <span>print text and log files</span></a>
+<li><a href="cmd_logger.html"> logger</a> <span>set logger properties</span></a>
 <li><a href="cmd_ls.html"> ls</a> <span>list modules or objects in modules</span></a>
 <li><a href="cmd_ltp.html"> ltp</a> <span>print longest topological path</span></a>
 <li><a href="cmd_lut2mux.html"> lut2mux</a> <span>convert $lut to $_MUX_</span></a>
@@ -180,9 +197,10 @@ following BibTeX code:
 <li><a href="cmd_memory.html"> memory</a> <span>translate memories to basic cells</span></a>
 <li><a href="cmd_memory_bram.html"> memory_bram</a> <span>map memories to block rams</span></a>
 <li><a href="cmd_memory_collect.html"> memory_collect</a> <span>creating multi-port memory cells</span></a>
-<li><a href="cmd_memory_dff.html"> memory_dff</a> <span>merge input/output DFFs into memories</span></a>
+<li><a href="cmd_memory_dff.html"> memory_dff</a> <span>merge input/output DFFs into memory read ports</span></a>
 <li><a href="cmd_memory_map.html"> memory_map</a> <span>translate multiport memories to basic cells</span></a>
 <li><a href="cmd_memory_memx.html"> memory_memx</a> <span>emulate vlog sim behavior for mem ports</span></a>
+<li><a href="cmd_memory_narrow.html"> memory_narrow</a> <span>split up wide memory ports</span></a>
 <li><a href="cmd_memory_nordff.html"> memory_nordff</a> <span>extract read port FFs from memories</span></a>
 <li><a href="cmd_memory_share.html"> memory_share</a> <span>consolidate memory ports</span></a>
 <li><a href="cmd_memory_unpack.html"> memory_unpack</a> <span>unpack multi-port memory cells</span></a>
@@ -195,44 +213,57 @@ following BibTeX code:
 <li><a href="cmd_opt.html"> opt</a> <span>perform simple optimizations</span></a>
 <li><a href="cmd_opt_clean.html"> opt_clean</a> <span>remove unused cells and wires</span></a>
 <li><a href="cmd_opt_demorgan.html"> opt_demorgan</a> <span>Optimize reductions with DeMorgan equivalents</span></a>
+<li><a href="cmd_opt_dff.html"> opt_dff</a> <span>perform DFF optimizations</span></a>
 <li><a href="cmd_opt_expr.html"> opt_expr</a> <span>perform const folding and simple expression rewriting</span></a>
 <li><a href="cmd_opt_lut.html"> opt_lut</a> <span>optimize LUT cells</span></a>
+<li><a href="cmd_opt_lut_ins.html"> opt_lut_ins</a> <span>discard unused LUT inputs</span></a>
+<li><a href="cmd_opt_mem.html"> opt_mem</a> <span>optimize memories</span></a>
+<li><a href="cmd_opt_mem_feedback.html"> opt_mem_feedback</a> <span>convert memory read-to-write port feedback paths to write enables</span></a>
+<li><a href="cmd_opt_mem_priority.html"> opt_mem_priority</a> <span>remove priority relations between write ports that can never collide</span></a>
+<li><a href="cmd_opt_mem_widen.html"> opt_mem_widen</a> <span>optimize memories where all ports are wide</span></a>
 <li><a href="cmd_opt_merge.html"> opt_merge</a> <span>consolidate identical cells</span></a>
 <li><a href="cmd_opt_muxtree.html"> opt_muxtree</a> <span>eliminate dead trees in multiplexer trees</span></a>
 <li><a href="cmd_opt_reduce.html"> opt_reduce</a> <span>simplify large MUXes and AND/OR gates</span></a>
-<li><a href="cmd_opt_rmdff.html"> opt_rmdff</a> <span>remove DFFs with constant inputs</span></a>
+<li><a href="cmd_opt_share.html"> opt_share</a> <span>merge mutually exclusive cells of the same type that share an input signal</span></a>
+<li><a href="cmd_paramap.html"> paramap</a> <span>renaming cell parameters</span></a>
 <li><a href="cmd_peepopt.html"> peepopt</a> <span>collection of peephole optimizers</span></a>
 <li><a href="cmd_plugin.html"> plugin</a> <span>load and list loaded plugins</span></a>
 <li><a href="cmd_pmux2shiftx.html"> pmux2shiftx</a> <span>transform $pmux cells to $shiftx cells</span></a>
 <li><a href="cmd_pmuxtree.html"> pmuxtree</a> <span>transform $pmux cells to trees of $mux cells</span></a>
+<li><a href="cmd_portlist.html"> portlist</a> <span>list (top-level) ports</span></a>
 <li><a href="cmd_prep.html"> prep</a> <span>generic synthesis script</span></a>
+<li><a href="cmd_printattrs.html"> printattrs</a> <span>print attributes of selected objects</span></a>
 <li><a href="cmd_proc.html"> proc</a> <span>translate processes to netlists</span></a>
 <li><a href="cmd_proc_arst.html"> proc_arst</a> <span>detect asynchronous resets</span></a>
 <li><a href="cmd_proc_clean.html"> proc_clean</a> <span>remove empty parts of processes</span></a>
 <li><a href="cmd_proc_dff.html"> proc_dff</a> <span>extract flip-flops from processes</span></a>
 <li><a href="cmd_proc_dlatch.html"> proc_dlatch</a> <span>extract latches from processes</span></a>
 <li><a href="cmd_proc_init.html"> proc_init</a> <span>convert initial block to init attributes</span></a>
+<li><a href="cmd_proc_memwr.html"> proc_memwr</a> <span>extract memory writes from processes</span></a>
 <li><a href="cmd_proc_mux.html"> proc_mux</a> <span>convert decision trees to multiplexers</span></a>
+<li><a href="cmd_proc_prune.html"> proc_prune</a> <span>remove redundant assignments</span></a>
 <li><a href="cmd_proc_rmdead.html"> proc_rmdead</a> <span>eliminate dead trees in decision trees</span></a>
+<li><a href="cmd_qbfsat.html"> qbfsat</a> <span>solve a 2QBF-SAT problem in the circuit</span></a>
 <li><a href="cmd_qwp.html"> qwp</a> <span>quadratic wirelength placer</span></a>
 <li><a href="cmd_read.html"> read</a> <span>load HDL designs</span></a>
 <li><a href="cmd_read_aiger.html"> read_aiger</a> <span>read AIGER file</span></a>
 <li><a href="cmd_read_blif.html"> read_blif</a> <span>read BLIF file</span></a>
-<li><a href="cmd_read_ilang.html"> read_ilang</a> <span>read modules from ilang file</span></a>
+<li><a href="cmd_read_ilang.html"> read_ilang</a> <span>(deprecated) alias of read_rtlil</span></a>
 <li><a href="cmd_read_json.html"> read_json</a> <span>read JSON file</span></a>
 <li><a href="cmd_read_liberty.html"> read_liberty</a> <span>read cells from liberty file</span></a>
+<li><a href="cmd_read_rtlil.html"> read_rtlil</a> <span>read modules from RTLIL file</span></a>
 <li><a href="cmd_read_verilog.html"> read_verilog</a> <span>read modules from Verilog file</span></a>
 <li><a href="cmd_rename.html"> rename</a> <span>rename object in the design</span></a>
 <li><a href="cmd_rmports.html"> rmports</a> <span>remove module ports with no connections</span></a>
 <li><a href="cmd_sat.html"> sat</a> <span>solve a SAT problem in the circuit</span></a>
 <li><a href="cmd_scatter.html"> scatter</a> <span>add additional intermediate nets</span></a>
 <li><a href="cmd_scc.html"> scc</a> <span>detect strongly connected components (logic loops)</span></a>
-<li><a href="cmd_script.html"> script</a> <span>execute commands from script file</span></a>
+<li><a href="cmd_scratchpad.html"> scratchpad</a> <span>get/set values in the scratchpad</span></a>
+<li><a href="cmd_script.html"> script</a> <span>execute commands from file or wire</span></a>
 <li><a href="cmd_select.html"> select</a> <span>modify and view the list of selected objects</span></a>
 <li><a href="cmd_setattr.html"> setattr</a> <span>set/unset attributes on objects</span></a>
 <li><a href="cmd_setparam.html"> setparam</a> <span>set/unset parameters on objects</span></a>
 <li><a href="cmd_setundef.html"> setundef</a> <span>replace undef values with defined constants</span></a>
-<li><a href="cmd_sf2_iobs.html"> sf2_iobs</a> <span>SF2: insert IO buffers</span></a>
 <li><a href="cmd_share.html"> share</a> <span>perform sat-based resource sharing</span></a>
 <li><a href="cmd_shell.html"> shell</a> <span>enter interactive command mode</span></a>
 <li><a href="cmd_show.html"> show</a> <span>generate schematics using graphviz</span></a>
@@ -241,6 +272,7 @@ following BibTeX code:
 <li><a href="cmd_simplemap.html"> simplemap</a> <span>mapping simple coarse-grain cells</span></a>
 <li><a href="cmd_splice.html"> splice</a> <span>create explicit splicing cells</span></a>
 <li><a href="cmd_splitnets.html"> splitnets</a> <span>split up multi-bit nets</span></a>
+<li><a href="cmd_sta.html"> sta</a> <span>perform static timing analysis</span></a>
 <li><a href="cmd_stat.html"> stat</a> <span>print some statistics</span></a>
 <li><a href="cmd_submod.html"> submod</a> <span>moving part of a module to a new submodule</span></a>
 <li><a href="cmd_supercover.html"> supercover</a> <span>add hi/lo cover cells for each wire bit</span></a>
@@ -250,10 +282,16 @@ following BibTeX code:
 <li><a href="cmd_synth_coolrunner2.html"> synth_coolrunner2</a> <span>synthesis for Xilinx Coolrunner-II CPLDs</span></a>
 <li><a href="cmd_synth_easic.html"> synth_easic</a> <span>synthesis for eASIC platform</span></a>
 <li><a href="cmd_synth_ecp5.html"> synth_ecp5</a> <span>synthesis for ECP5 FPGAs</span></a>
+<li><a href="cmd_synth_efinix.html"> synth_efinix</a> <span>synthesis for Efinix FPGAs</span></a>
+<li><a href="cmd_synth_gatemate.html"> synth_gatemate</a> <span>synthesis for Cologne Chip GateMate FPGAs</span></a>
 <li><a href="cmd_synth_gowin.html"> synth_gowin</a> <span>synthesis for Gowin FPGAs</span></a>
 <li><a href="cmd_synth_greenpak4.html"> synth_greenpak4</a> <span>synthesis for GreenPAK4 FPGAs</span></a>
 <li><a href="cmd_synth_ice40.html"> synth_ice40</a> <span>synthesis for iCE40 FPGAs</span></a>
 <li><a href="cmd_synth_intel.html"> synth_intel</a> <span>synthesis for Intel (Altera) FPGAs.</span></a>
+<li><a href="cmd_synth_intel_alm.html"> synth_intel_alm</a> <span>synthesis for ALM-based Intel (Altera) FPGAs.</span></a>
+<li><a href="cmd_synth_machxo2.html"> synth_machxo2</a> <span>synthesis for MachXO2 FPGAs. This work is experimental.</span></a>
+<li><a href="cmd_synth_nexus.html"> synth_nexus</a> <span>synthesis for Lattice Nexus FPGAs</span></a>
+<li><a href="cmd_synth_quicklogic.html"> synth_quicklogic</a> <span>Synthesis for QuickLogic FPGAs</span></a>
 <li><a href="cmd_synth_sf2.html"> synth_sf2</a> <span>synthesis for SmartFusion2 and IGLOO2 FPGAs</span></a>
 <li><a href="cmd_synth_xilinx.html"> synth_xilinx</a> <span>synthesis for Xilinx FPGAs</span></a>
 <li><a href="cmd_tcl.html"> tcl</a> <span>execute a TCL script file</span></a>
@@ -262,6 +300,7 @@ following BibTeX code:
 <li><a href="cmd_test_abcloop.html"> test_abcloop</a> <span>automatically test handling of loops in abc command</span></a>
 <li><a href="cmd_test_autotb.html"> test_autotb</a> <span>generate simple test benches</span></a>
 <li><a href="cmd_test_cell.html"> test_cell</a> <span>automatically test the implementation of a cell type</span></a>
+<li><a href="cmd_test_pmgen.html"> test_pmgen</a> <span>test pass for pmgen</span></a>
 <li><a href="cmd_torder.html"> torder</a> <span>print cells in topological order</span></a>
 <li><a href="cmd_trace.html"> trace</a> <span>redirect command output to file</span></a>
 <li><a href="cmd_tribuf.html"> tribuf</a> <span>infer tri-state buffers</span></a>
@@ -274,18 +313,24 @@ following BibTeX code:
 <li><a href="cmd_write_aiger.html"> write_aiger</a> <span>write design to AIGER file</span></a>
 <li><a href="cmd_write_blif.html"> write_blif</a> <span>write design to BLIF file</span></a>
 <li><a href="cmd_write_btor.html"> write_btor</a> <span>write design to BTOR file</span></a>
+<li><a href="cmd_write_cxxrtl.html"> write_cxxrtl</a> <span>convert design to C++ RTL simulation</span></a>
 <li><a href="cmd_write_edif.html"> write_edif</a> <span>write design to EDIF netlist file</span></a>
 <li><a href="cmd_write_file.html"> write_file</a> <span>write a text to a file</span></a>
 <li><a href="cmd_write_firrtl.html"> write_firrtl</a> <span>write design to a FIRRTL file</span></a>
-<li><a href="cmd_write_ilang.html"> write_ilang</a> <span>write design to ilang file</span></a>
+<li><a href="cmd_write_ilang.html"> write_ilang</a> <span>(deprecated) alias of write_rtlil</span></a>
 <li><a href="cmd_write_intersynth.html"> write_intersynth</a> <span>write design to InterSynth netlist file</span></a>
 <li><a href="cmd_write_json.html"> write_json</a> <span>write design to a JSON file</span></a>
+<li><a href="cmd_write_rtlil.html"> write_rtlil</a> <span>write design to RTLIL file</span></a>
 <li><a href="cmd_write_simplec.html"> write_simplec</a> <span>convert design to simple C code</span></a>
 <li><a href="cmd_write_smt2.html"> write_smt2</a> <span>write design to SMT-LIBv2 file</span></a>
 <li><a href="cmd_write_smv.html"> write_smv</a> <span>write design to SMV file</span></a>
 <li><a href="cmd_write_spice.html"> write_spice</a> <span>write design to SPICE netlist file</span></a>
 <li><a href="cmd_write_table.html"> write_table</a> <span>write design as connectivity table</span></a>
 <li><a href="cmd_write_verilog.html"> write_verilog</a> <span>write design to Verilog file</span></a>
+<li><a href="cmd_write_xaiger.html"> write_xaiger</a> <span>write design to XAIGER file</span></a>
+<li><a href="cmd_xilinx_dffopt.html"> xilinx_dffopt</a> <span>Xilinx: optimize FF control signal usage</span></a>
+<li><a href="cmd_xilinx_dsp.html"> xilinx_dsp</a> <span>Xilinx: pack resources into DSPs</span></a>
+<li><a href="cmd_xilinx_srl.html"> xilinx_srl</a> <span>Xilinx shift register extraction</span></a>
 <li><a href="cmd_zinit.html"> zinit</a> <span>add inverters so all FF are zero-initialized</span></a>
 </ul>
 
