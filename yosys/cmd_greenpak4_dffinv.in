@@ -1,9 +1,0 @@
-@cmd_header greenpak4_dffinv@
-<h1>greenpak4_dffinv - merge greenpak4 inverters and DFF/latches</h1>
-<pre>
-    greenpak4_dffinv [options] [selection]
-
-Merge GP_INV cells with GP_DFF* and GP_DLATCH* cells.
-
-</pre>
-@footer@

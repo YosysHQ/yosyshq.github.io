@@ -1,7 +1,0 @@
-@cmd_header write_ilang@
-<h1>write_ilang - (deprecated) alias of write_rtlil</h1>
-<pre>
-See `help write_rtlil`.
-
-</pre>
-@footer@

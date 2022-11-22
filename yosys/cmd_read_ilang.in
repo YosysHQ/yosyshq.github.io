@@ -1,7 +1,0 @@
-@cmd_header read_ilang@
-<h1>read_ilang - (deprecated) alias of read_rtlil</h1>
-<pre>
-See `help read_rtlil`.
-
-</pre>
-@footer@

@@ -1,9 +1,0 @@
-@cmd_header anlogic_eqn@
-<h1>anlogic_eqn - Anlogic: Calculate equations for luts</h1>
-<pre>
-    anlogic_eqn [selection]
-
-Calculate equations for luts since bitstream generator depends on it.
-
-</pre>
-@footer@

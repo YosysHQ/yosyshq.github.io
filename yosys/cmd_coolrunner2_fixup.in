@@ -1,9 +1,0 @@
-@cmd_header coolrunner2_fixup@
-<h1>coolrunner2_fixup - insert necessary buffer cells for CoolRunner-II architecture</h1>
-<pre>
-    coolrunner2_fixup [options] [selection]
-
-Insert necessary buffer cells for CoolRunner-II architecture.
-
-</pre>
-@footer@

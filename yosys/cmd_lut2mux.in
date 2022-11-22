@@ -1,9 +1,0 @@
-@cmd_header lut2mux@
-<h1>lut2mux - convert $lut to $_MUX_</h1>
-<pre>
-    lut2mux [options] [selection]
-
-This pass converts $lut cells to $_MUX_ gates.
-
-</pre>
-@footer@
