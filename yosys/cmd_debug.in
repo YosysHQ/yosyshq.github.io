@@ -1,9 +1,0 @@
-@cmd_header debug@
-<h1>debug - run command with debug log messages enabled</h1>
-<pre>
-    debug cmd
-
-Execute the specified command with debug log messages enabled
-
-</pre>
-@footer@

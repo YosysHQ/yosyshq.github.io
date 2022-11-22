@@ -1,9 +1,0 @@
-@cmd_header fsm_map@
-<h1>fsm_map - mapping FSMs to basic logic</h1>
-<pre>
-    fsm_map [selection]
-
-This pass translates FSM cells to flip-flops and logic.
-
-</pre>
-@footer@

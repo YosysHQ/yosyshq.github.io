@@ -1,9 +1,0 @@
-@cmd_header proc_rmdead@
-<h1>proc_rmdead - eliminate dead trees in decision trees</h1>
-<pre>
-    proc_rmdead [selection]
-
-This pass identifies unreachable branches in decision trees and removes them.
-
-</pre>
-@footer@

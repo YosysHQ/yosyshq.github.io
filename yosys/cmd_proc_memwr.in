@@ -1,9 +1,0 @@
-@cmd_header proc_memwr@
-<h1>proc_memwr - extract memory writes from processes</h1>
-<pre>
-    proc_memwr [selection]
-
-This pass converts memory writes in processes into $memwr cells.
-
-</pre>
-@footer@

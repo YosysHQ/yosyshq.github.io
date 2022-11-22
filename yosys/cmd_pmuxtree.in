@@ -1,9 +1,0 @@
-@cmd_header pmuxtree@
-<h1>pmuxtree - transform $pmux cells to trees of $mux cells</h1>
-<pre>
-    pmuxtree [selection]
-
-This pass transforms $pmux cells to trees of $mux cells.
-
-</pre>
-@footer@

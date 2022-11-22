@@ -1,9 +1,0 @@
-@cmd_header coolrunner2_sop@
-<h1>coolrunner2_sop - break $sop cells into ANDTERM/ORTERM cells</h1>
-<pre>
-    coolrunner2_sop [options] [selection]
-
-Break $sop cells into ANDTERM/ORTERM cells.
-
-</pre>
-@footer@
